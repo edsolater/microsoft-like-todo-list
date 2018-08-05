@@ -6,25 +6,27 @@
       .container
         Profiles.Profiles.flex-auto
         BtnSearch.BtnSearch
-      Tabs.Tabs
-      Repositories.Repositories
+      Tags.Tags(
+        @update:selectedTabID="update_selectedTabID"
+      )
+      Repos.Repos
     .vertical-container.WorkSpace
       .info Virtual-workspace
-      Header.Header
+      Header.Header(
+        :selectedTabID="selectedTabID"
+      )
       Todos.Todos
-      Bar.Bar
 </template>
 
 <script>
 // Panel
 import Profiles from "./components/Profiles";
 import BtnSearch from "./components/BtnSearch";
-import Tabs from "./components/Tabs";
-import Repositories from "./components/Repositories";
+import Tags from "./components/Tags";
+import Repos from "./components/Repos";
 // Workspace
 import Header from "./components/Header";
 import Todos from "./components/Todos";
-import Bar from "./components/Bar";
 
 export default {
   name: "app",
@@ -32,14 +34,22 @@ export default {
     // Panel
     Profiles,
     BtnSearch,
-    Tabs,
-    Repositories,
+    Tags,
+    Repos,
     // Workspace
     Header,
-    Todos,
-    Bar
+    Todos
   },
-
+  data() {
+    return {
+      selectedTabID: 1
+    };
+  },
+  methods: {
+    update_selectedTabID(newSelectedTabID) {
+      this.selectedTabID = newSelectedTabID
+    }
+  }
 };
 </script>
 

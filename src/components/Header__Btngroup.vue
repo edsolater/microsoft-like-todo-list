@@ -1,18 +1,17 @@
 <template lang="pug">
   .container.Btngroup
     .info Btngroup
-    BtnDetail.BtnDetail
-    Dropdown.Dropdown
+    button(
+      v-if="selectedTabID === 0"
+    ) hello
+    button(
+      v-if="selectedTabID === 2"
+    ) world
 </template>
 
 <script>
-import BtnDetail from "./Header__Btngroup__BtnDetail"
-import Dropdown from "./Header__Btngroup__Dropdown"
-
 export default {
-  components: {
-    BtnDetail,
-    Dropdown,
-  },
+  props: ['selectedTabID']
 }
 </script>
+

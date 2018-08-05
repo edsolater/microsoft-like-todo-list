@@ -2,23 +2,41 @@
   .vertical-container.Header
     .info Header
     .container.align-items-end.justify-content-between
-      Title.Title
-      Btngroup.Btngroup
-    SortBar.SortBar
+      Title.Title(
+        :currentTitle="currentTitle"
+      )
+      Btngroup.Btngroup(
+        :selectedTabID="selectedTabID"
+      )
+    SortBar.SortBar(
+      v-if="isSortBarShowed"
+      :currentTitle="currentTitle"
+    )
 </template>
 
 <script>
-import Title from "./Header__Title"
-import Btngroup from "./Header__Btngroup"
-import SortBar from "./Header__SortBar"
+import Title from "./Header__Title";
+import Btngroup from "./Header__Btngroup";
+import SortBar from "./Header__SortBar";
 
 export default {
   components: {
     Title,
     Btngroup,
-    SortBar,
+    SortBar
   },
-}
+  props: ['selectedTabID'],
+  data() {
+    return {
+      todos: this.$root.todos,
+      tabs: this.$root.tabs
+    };
+  },
+  computed: {
+    currentTitle(){return this.tabs[this.selectedTabID].title},
+    isSortBarShowed(){return [0, 2].includes(this.tabs[this.selectedTabID].id)}
+  }
+};
 </script>
 
 
