@@ -1,32 +1,33 @@
 <template lang="pug">
   #app.container
-    .info Virtual-App
+    .info App
     .vertical-container.Panel
-      .info The Panel
+      .info Virtual-Panel
       .container
-        Profiles.Profiles
+        Profiles.Profiles.flex-auto
         BtnSearch.BtnSearch
       Tabs.Tabs
+      Repositories.Repositories
     .vertical-container.WorkSpace
       .info Virtual-workspace
       Header.Header
-      TodoList.TodoList
+      Todos.Todos
       Bar.Bar
 </template>
 
 <script>
 // Panel
-import Profiles from './components/Profiles'
-import BtnSearch from './components/BtnSearch'
-import Tabs from './components/Tabs'
-import Repositories from './components/Repositories'
+import Profiles from "./components/Profiles";
+import BtnSearch from "./components/BtnSearch";
+import Tabs from "./components/Tabs";
+import Repositories from "./components/Repositories";
 // Workspace
-import Header from './components/Header'
-import TodoList from './components/TodoList'
-import Bar from './components/Bar'
+import Header from "./components/Header";
+import Todos from "./components/Todos";
+import Bar from "./components/Bar";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     // Panel
     Profiles,
@@ -35,10 +36,11 @@ export default {
     Repositories,
     // Workspace
     Header,
-    TodoList,
-    Bar,
-  }
-}
+    Todos,
+    Bar
+  },
+
+};
 </script>
 
 <style>
@@ -49,7 +51,7 @@ export default {
 .container,
 .vertical-container {
   position: relative;
-  display: flex; 
+  display: flex;
   background-color: rgba(0, 0, 0, 0.1);
   padding: 0.8rem;
   margin: 0.2rem;
@@ -61,7 +63,7 @@ export default {
 
 /* try not use this */
 /* .container-fluid { */
-  /* width: 100%; */
+/* width: 100%; */
 /* } */
 .info {
   position: absolute;
@@ -82,16 +84,18 @@ export default {
 .align-items-end {
   align-items: end;
 }
+.flex-auto {
+  flex: auto;
+}
 hr {
-    border: none;
-    border-top: 1px solid rgba(0, 0, 0, .3);
-    margin: 1rem .5rem;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  margin: 1rem 0.5rem;
 }
 /* rules above are for easier layout */
 
-
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
