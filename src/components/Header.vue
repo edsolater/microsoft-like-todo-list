@@ -28,8 +28,8 @@ export default {
   props: ['selectedTabID'],
   data() {
     return {
-      todos: this.$root.todos,
-      tabs: this.$root.tabs
+      todos: this.GLOBAL.todos,
+      tabs: this.GLOBAL.tabs
     };
   },
   computed: {

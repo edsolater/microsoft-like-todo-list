@@ -5,6 +5,7 @@
       v-for="tab in tags"
       :key="tab.id"
       :tab="tab"
+      :selectedTabID="selectedTabID"
       @update:selectedTabID="$emit('update:selectedTabID', $event)"
     )
     hr
@@ -12,7 +13,11 @@
       v-for="tab in repos"
       :key="tab.id"
       :tab="tab"
+      :selectedTabID="selectedTabID"
       @update:selectedTabID="$emit('update:selectedTabID', $event)"
+    )
+    BtnAdd.BtnAdd(
+      @create:repo="create_repo"
     )
 </template>
 
@@ -27,11 +32,11 @@ export default {
     Tab,
     BtnAdd
   },
+  props: ["selectedTabID"],
   data() {
     return {
-      todos: this.$root.todos,
-      selectedTabID: this.$root.selectedTabID,
-      tabs: this.$root.tabs,
+      todos: this.GLOBAL.todos,
+      tabs: this.GLOBAL.tabs,
     }
   },
   computed: {
@@ -40,10 +45,14 @@ export default {
   },
   methods: {
     // event 传来的是 tag 对象
-    deleteTag(tag) {
+    delete_repo(tag) {
       const index = this.tabs.indexOf(tag)
       this.tabs.splice(index, 1)
     },
+    create_repo() {
+      // TODO:
+      // console.log('here') => OK
+    }
   }
 };
 </script>

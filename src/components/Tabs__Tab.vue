@@ -1,5 +1,7 @@
 <template lang="pug">
-  .container.Tab
+  .container.Tab(
+    :class="{active: tab.id === selectedTabID}"
+  )
     .info Tab: {{tab.id}}
     .container.icon
       .info icon
@@ -13,6 +15,13 @@
 
 <script>
 export default {
-  props: ["tab"],
+  props: ["tab", "selectedTabID"],
 };
 </script>
+
+<style scoped>
+.active {
+  border-right: 5px solid blue
+}
+</style>
+

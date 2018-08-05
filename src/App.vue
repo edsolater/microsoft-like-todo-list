@@ -7,6 +7,7 @@
         Profiles.Profiles.flex-auto
         BtnSearch.BtnSearch
       Tabs.Tabs(
+        :selectedTabID="selectedTabID"
         @update:selectedTabID="update_selectedTabID"
       )
     .vertical-container.WorkSpace
@@ -14,7 +15,9 @@
       Header.Header(
         :selectedTabID="selectedTabID"
       )
-      Todos.Todos
+      Todos.Todos(
+        :selectedTabID="selectedTabID"
+      )
 </template>
 
 <script>
@@ -39,12 +42,16 @@ export default {
   },
   data() {
     return {
-      selectedTabID: 1
+      selectedTabID: 1,
+      choosedBackground: {
+        color: "blue",
+        image: "car"
+      }
     };
   },
   methods: {
     update_selectedTabID(newSelectedTabID) {
-      this.selectedTabID = newSelectedTabID
+      this.selectedTabID = newSelectedTabID;
     }
   }
 };
