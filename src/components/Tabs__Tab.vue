@@ -1,17 +1,18 @@
 <template lang="pug">
-  .container.Tag
-    .info Tag: {{tag.id}}
+  .container.Tab
+    .info Tab: {{tab.id}}
     .container.icon
       .info icon
     .container.title.flex-auto(
-      @click="$emit('update:selectedTabID', tag.id)"
+      @click="$emit('update:selectedTabID', tab.id)"
     )
       .info title
-      | {{tag.title}}
+      | {{tab.title}}
 </template>
+
 
 <script>
 export default {
-  props: ["tag"],
+  props: ["tab"],
 };
 </script>

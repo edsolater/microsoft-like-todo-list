@@ -6,10 +6,9 @@
       .container
         Profiles.Profiles.flex-auto
         BtnSearch.BtnSearch
-      Tags.Tags(
+      Tabs.Tabs(
         @update:selectedTabID="update_selectedTabID"
       )
-      Repos.Repos
     .vertical-container.WorkSpace
       .info Virtual-workspace
       Header.Header(
@@ -22,8 +21,7 @@
 // Panel
 import Profiles from "./components/Profiles";
 import BtnSearch from "./components/BtnSearch";
-import Tags from "./components/Tags";
-import Repos from "./components/Repos";
+import Tabs from "./components/Tabs";
 // Workspace
 import Header from "./components/Header";
 import Todos from "./components/Todos";
@@ -34,8 +32,7 @@ export default {
     // Panel
     Profiles,
     BtnSearch,
-    Tags,
-    Repos,
+    Tabs,
     // Workspace
     Header,
     Todos
