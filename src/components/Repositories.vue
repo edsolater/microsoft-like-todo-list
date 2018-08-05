@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import List from './Panel__Repositories__List'
-import BtnAdd from './Panel__Repositories__BtnAdd'
+import List from './Repositories__List'
+import BtnAdd from './Repositories__BtnAdd'
 
 export default {
   components: {

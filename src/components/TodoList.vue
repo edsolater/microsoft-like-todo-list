@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Item from "./WorkSpace__TodoList__Item"
+import Item from "./TodoList__Item"
 
 export default {
   components: {

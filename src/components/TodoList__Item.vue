@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Icon from "./WorkSpace__TodoList__Item__Icon"
-import Content from "./WorkSpace__TodoList__Item__Content"
+import Icon from "./TodoList__Item__Icon"
+import Content from "./TodoList__Item__Content"
 
 export default {
   components: {

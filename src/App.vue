@@ -1,32 +1,51 @@
 <template lang="pug">
-  #app
-    img(src="./assets/logo.png")
-    Panel.Panel
-    WorkSpace.WorkSpace
+  #app.container
+    .info Virtual-App
+    .vertical-container.Panel
+      .info The Panel
+      .container
+        Profiles.Profiles
+        BtnSearch.BtnSearch
+      Tabs.Tabs
+    .vertical-container.WorkSpace
+      .info Virtual-workspace
+      Header.Header
+      TodoList.TodoList
+      Bar.Bar
 </template>
 
 <script>
-import Panel from './components/Panel.vue'
-import WorkSpace from './components/WorkSpace.vue'
+// Panel
+import Profiles from './components/Profiles'
+import BtnSearch from './components/BtnSearch'
+import Tabs from './components/Tabs'
+import Repositories from './components/Repositories'
+// Workspace
+import Header from './components/Header'
+import TodoList from './components/TodoList'
+import Bar from './components/Bar'
 
 export default {
   name: 'app',
   components: {
-    Panel,
-    WorkSpace
+    // Panel
+    Profiles,
+    BtnSearch,
+    Tabs,
+    Repositories,
+    // Workspace
+    Header,
+    TodoList,
+    Bar,
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+:root {
+  --vue-blackblue: #2c3e50;
 }
+
 .container,
 .vertical-container {
   position: relative;
@@ -49,7 +68,7 @@ export default {
   left: 0;
   top: 0;
   font-size: 0.8rem;
-  color: black;
+  color: var(--vue-blackblue);
 }
 .justify-content-between {
   justify-content: space-between;
@@ -71,6 +90,14 @@ hr {
 /* rules above are for easier layout */
 
 
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #ddd;
+  margin-top: 60px;
+}
 .Panel {
   flex: 30%;
 }

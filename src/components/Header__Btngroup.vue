@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import BtnDetail from "./WorkSpace__Header__Btngroup__BtnDetail"
-import Dropdown from "./WorkSpace__Header__Btngroup__Dropdown"
+import BtnDetail from "./Header__Btngroup__BtnDetail"
+import Dropdown from "./Header__Btngroup__Dropdown"
 
 export default {
   components: {

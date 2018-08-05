@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Icon from "./WorkSpace__Bar__Icon"
-import InputText from "./WorkSpace__Bar__InputText"
+import Icon from "./Bar__Icon"
+import InputText from "./Bar__InputText"
 
 export default {
   components: {

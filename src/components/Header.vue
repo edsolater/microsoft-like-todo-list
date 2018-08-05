@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import Title from "./WorkSpace__Header__Title"
-import Btngroup from "./WorkSpace__Header__Btngroup"
-import SortBar from "./WorkSpace__Header__SortBar"
+import Title from "./Header__Title"
+import Btngroup from "./Header__Btngroup"
+import SortBar from "./Header__SortBar"
 
 export default {
   components: {
