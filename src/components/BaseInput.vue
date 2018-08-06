@@ -1,5 +1,5 @@
 <template lang="pug">
-  input.BaseInput(
+  input.form-control.BaseInput(
     :value="value"/*对应父级的 v-model*/ 
     v-on="listeners"
   )
@@ -20,9 +20,10 @@ export default {
 </script>
 
 <style scoped>
+/* TODO: 需要有一定的控件的动画效果 */
 .BaseInput {
-  background: transparent;
-  border: 1px solid var(--vue-blackblue)
+  
+  
 }
 </style>
 

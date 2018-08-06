@@ -1,22 +1,19 @@
 <template lang="pug">
-  #app.container
-    .info App
-    .vertical-container.Panel
-      .info Virtual-Panel
+  #app.container.text-center
+    .Panel
       .container
         Profiles.Profiles.flex-auto
         BtnSearch.BtnSearch
       Tabs.Tabs(
-        :selectedTabID="selectedTabID"
-        @update:selectedTabID="update_selectedTabID"
+        :selectedTabIndex="selectedTabIndex"
+        @update:selectedTabIndex="update_selectedTabIndex"
       )
-    .vertical-container.WorkSpace
-      .info Virtual-workspace
+    .WorkSpace
       Header.Header(
-        :selectedTabID="selectedTabID"
+        :selectedTabIndex="selectedTabIndex"
       )
       Todos.Todos(
-        :selectedTabID="selectedTabID"
+        :selectedTabIndex="selectedTabIndex"
       )
 </template>
 
@@ -42,16 +39,13 @@ export default {
   },
   data() {
     return {
-      selectedTabID: 1,
-      choosedBackground: {
-        color: "blue",
-        image: "car"
-      }
+      selectedTabIndex: 0,
+      
     };
   },
   methods: {
-    update_selectedTabID(newSelectedTabID) {
-      this.selectedTabID = newSelectedTabID;
+    update_selectedTabIndex(newSelectedTabID) {
+      this.selectedTabIndex = newSelectedTabID;
     }
   }
 };
@@ -62,41 +56,33 @@ export default {
   --vue-blackblue: #2c3e50;
 }
 
-.container,
-.vertical-container {
+.container {
   position: relative;
   display: flex;
-  background-color: rgba(0, 0, 0, 0.1);
-  padding: 0.8rem;
-  margin: 0.2rem;
+  /* background-color: rgba(0, 0, 0, 0.03); */
+  padding: 0rem;
+  margin: 0rem;
   min-width: 2rem;
+  max-width: unset;
+  width: unset;
+  overflow: hidden;
+  align-content: center;
 }
-.vertical-container {
-  flex-direction: column;
+.container.leaf {
+  justify-content: center;
+  align-items: center;
 }
-
-/* try not use this */
-/* .container-fluid { */
-/* width: 100%; */
-/* } */
+.position-absolute {
+  top: 0;
+  left: 0;
+}
 .info {
+  display: none;
   position: absolute;
   left: 0;
   top: 0;
   font-size: 0.8rem;
   color: var(--vue-blackblue);
-}
-.justify-content-between {
-  justify-content: space-between;
-}
-.justify-content-center {
-  justify-content: center;
-}
-.align-items-center {
-  align-items: center;
-}
-.align-items-end {
-  align-items: end;
 }
 .flex-auto {
   flex: auto;
@@ -104,23 +90,36 @@ export default {
 hr {
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.3);
-  margin: 1rem 0.5rem;
+  margin: 1.5rem 1rem;
+}
+.todo-height {
+  height: 50px;
+}
+.tab-height {
+  height: 40px;
 }
 /* rules above are for easier layout */
-
+* {
+  box-sizing: border-box
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #ddd;
-  margin-top: 60px;
+  color: var(--vue-blackblue);
+  overflow: hidden;
+  height: 40em;
+  max-width: 1000px;
+  margin: 60px auto;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, .1)
 }
 .Panel {
-  flex: 30%;
+  width: 30vw;
 }
 .WorkSpace {
-  flex: 70%;
-  background: lightskyblue;
+  width: 70vw;
+  /* background: snow; */
+  border-left: 1px solid lightgrey;
 }
 </style>

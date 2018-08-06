@@ -1,17 +1,22 @@
 <template lang="pug">
   .container.Btngroup
-    .info Btngroup
-    button(
-      v-if="selectedTabID === 0"
+   
+    Btn.Btn(
+      v-if="selectedTabIndex === 0"
     ) hello
-    button(
-      v-if="selectedTabID === 2"
+    Btn.Btn(
+      v-if="selectedTabIndex === 2"
     ) world
 </template>
 
 <script>
+import Btn from './BaseBtn.vue'
+
 export default {
-  props: ['selectedTabID']
+  components: {
+    Btn,
+  },
+  props: ['selectedTabIndex'],
 }
 </script>
 

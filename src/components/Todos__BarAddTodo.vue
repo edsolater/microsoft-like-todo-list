@@ -1,8 +1,8 @@
 <template lang="pug">
   .container.Bar
-    .info Bar
+   
     .container.icon
-      .info icon
+     
     .container.inputText.flex-auto
       Input.Input(
         placeholder="new todo here"
@@ -18,7 +18,7 @@ export default {
   components: {
     Input
   },
-  props: ["selectedTabID"],
+  props: ["selectedTabIndex"],
   data() {
     return {
       inputText: ""
@@ -31,7 +31,7 @@ export default {
         content: this.inputText,
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [this.selectedTabID]
+        belongToTabIDs: [this.selectedTabIndex]
       };
       this.$emit("create:todo", newTodo);
       // 清空 input 里的数据内容
