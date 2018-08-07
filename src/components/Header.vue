@@ -1,5 +1,5 @@
 <template lang="pug">
-  .container.flex-column#Header
+  .Header.container.flex-column
     Title.Title(
       :currentTitle="currentTitle"
       :selectedTabIndex="selectedTabIndex"
@@ -52,7 +52,7 @@ export default {
 
 
 <style scoped>
-#Header {
+.Header {
   background: linear-gradient(to right, mediumslateblue, dodgerblue);
   justify-content: flex-end;
 }

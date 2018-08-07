@@ -1,4 +1,4 @@
 <template lang="pug">
-  .container#Profiles
-   
+  .Profiles.container
+    .info Profiles
 </template>

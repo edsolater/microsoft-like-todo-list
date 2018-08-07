@@ -1,6 +1,6 @@
 <template lang="pug">
   .container.TabBar(@click="$emit('create:repo')")
-    .icon
+    .Icon
       font-awesome-icon(icon="plus")
     | 新建清单
 </template>
@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .TabBar {
   background:white;
   padding: var(--tab-padding);

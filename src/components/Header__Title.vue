@@ -1,22 +1,22 @@
 <template lang="pug">
-.container.Title
-  .title-text
+.Title.container
+  .Display-Text
     p.mb-0 {{currentTitle}}
     div.date(v-if="currentTitle == '我的一天'") {{now}}
-  .container.btngroup
-    Btn.Btn(
+  .Btngroup.container
+    BaseBtn.TitleBtn(
       v-if="selectedTabIndex === 0"
     ) hello
-    Btn.Btn(
+    BaseBtn.TitleBtn(
       v-if="selectedTabIndex === 2"
     ) world
 </template>
 
 <script>
-import Btn from './BaseBtn.vue'
+import BaseBtn from './BaseBtn.vue'
 export default {
   components: {
-    Btn,
+    BaseBtn,
   },
   props: ['currentTitle', 'selectedTabIndex'],
   computed: {
@@ -47,7 +47,7 @@ export default {
   justify-content: space-between;
   align-items: flex-end;
 }
-.title-text {
+.Display-Text {
   color: #fff;
   font-size: 2.3rem;
   font-weight: bolder;

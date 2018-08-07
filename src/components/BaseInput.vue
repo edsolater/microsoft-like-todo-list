@@ -20,7 +20,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .BaseInput {
   width: 100%;
   border: none;

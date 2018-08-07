@@ -1,9 +1,9 @@
 <template lang="pug">
   .container.Btngroup
-    Btn.Btn(
+    Btn.Btn1(
       v-if="selectedTabIndex === 0"
     ) hello
-    Btn.Btn(
+    Btn.Btn2(
       v-if="selectedTabIndex === 2"
     ) world
 </template>

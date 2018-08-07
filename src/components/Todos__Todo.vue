@@ -1,15 +1,15 @@
 <template lang="pug">
-  .container.Todo
-    .container.check
+  .Todo.container
+    .Check.container
       font-awesome-icon(
         :icon="todo.isFinished ? 'check-circle' : 'circle'"
         :class=" todo.isFinished ? 'checked' : 'notChecked' "
         @click="$emit('toggle:isFinished', todo)"
       )
-    .container.content
+    .Content.container
       span.upper(:class="todo.isFinished ? 'todo-done':''") {{todo.content}}
       small.below(v-if="selectedTabIndex <= 2") To-Do
-    .container.star
+    .Star.container
       font-awesome-icon(
         icon="star"
         :class="todo.isStared ? 'stared' : 'unStared'"
@@ -41,7 +41,7 @@ export default {
 .Todo:hover {
   background: rgba(0, 0, 0, 0.05);
 }
-.check {
+.Check {
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
@@ -53,7 +53,7 @@ export default {
 .notChecked {
   color: var(--disabled-color);
 }
-.content {
+.Content {
   justify-content: center;
   flex-direction: column;
   margin-right: auto;
@@ -65,7 +65,7 @@ small {
   font-size: 0.8em;
   color: lightgrey;
 }
-.star {
+.Star {
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;

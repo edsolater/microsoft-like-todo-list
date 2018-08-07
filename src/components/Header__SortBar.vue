@@ -1,6 +1,6 @@
 <template lang="pug">
-  .container.SortBar
-    small 按创建日期排列
+  .SortBar.container
+    small.DateText 按创建日期排列
     BaseBtn.BaseBtn1
       font-awesome-icon(icon="angle-down")
     BaseBtn.BaseBtn2(
@@ -17,11 +17,6 @@ export default {
     BaseBtn,
   },
   props:['title'],
-  methods:{
-    // say() {
-    //   console.log('hello')
-    // }
-  }
 }
 </script>
 
@@ -32,7 +27,8 @@ export default {
   padding-left: 1.3rem;
   padding-right: 1.3rem;
 }
-.BaseBtn1, .BaseBtn2 {
+.BaseBtn1,
+.BaseBtn2 {
   background:transparent;
 }
 .BaseBtn1 {

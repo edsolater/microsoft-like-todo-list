@@ -1,6 +1,6 @@
 <template lang="pug">
-  #Tabs
-    Tab.Tab.tag(
+  .Tabs
+    Tab.TabTag(
       v-for="tab in tags"
       :key="tab.index"
       :tab="tab"
@@ -8,7 +8,7 @@
       @update:selectedTabIndex="$emit('update:selectedTabIndex', $event)"
     )
     hr
-    Tab.Tab.repos(
+    Tab.TabRepo(
       v-for="tab in repos"
       :key="tab.index"
       :tab="tab"
@@ -65,10 +65,11 @@ export default {
 </script>
 
 <style scoped>
-#Tabs {
+.Tabs {
   position: relative;
 }
-.Tab {
+.TabTag,
+.TabRepo {
   height: var(--tab-height);
 }
 .TabBar {

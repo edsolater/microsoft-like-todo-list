@@ -1,9 +1,9 @@
 <template lang="pug">
-  .container.leaf.Tab(
+  .Tab.container.leaf(
     :class="{active: tab.index === selectedTabIndex}"
     @click="$emit('update:selectedTabIndex', tab.index)"
   )
-    .container.icon
+    .Icon.container
       font-awesome-icon(
         icon="sun"
         v-if="tab.index === 0"
@@ -20,7 +20,7 @@
         icon="list"
         v-if="tab.index >= 3"
       )
-    .title.flex-auto
+    .Title.flex-auto
       | {{tab.title}}
 </template>
 
@@ -55,7 +55,7 @@ export default {
   border-left-color: rgba(35, 112, 228, 0.788);
   background: rgba(32, 32, 68, .06);
 }
-.icon {
+.Icon {
   color: dodgerblue;
   width:var(--icon-width);
   justify-content: center;

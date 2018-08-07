@@ -1,5 +1,5 @@
 <template lang="pug">
-  #Todos
+  .Todos
     Todo.Todo(
       v-for="todo in currentTodos"
       v-bind:key="todo.index"
@@ -17,7 +17,6 @@
 <script>
 import Todo from "./Todos__Todo";
 import TodoBar from "./Todos__TodoBar";
-
 export default {
   components: {
     Todo,

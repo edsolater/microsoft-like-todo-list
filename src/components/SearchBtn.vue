@@ -1,4 +1,4 @@
 <template lang="pug">
-  .container.SearchBtn
+  .SearchBtn.container
     | dsdf
 </template>

@@ -1,5 +1,5 @@
 <template lang="pug">
-  button(
+  button.BaseBtn(
     v-on="listeners"
   )
     slot
@@ -18,8 +18,8 @@ export default {
 };
 </script>
 
-<style scoped>
-button {
+<style>
+.BaseBtn {
   color: inherit;
   background: transparent;
   border: none;
@@ -29,10 +29,10 @@ button {
   height:100%;
   line-height: 100%;
 }
-button:hover {
+.BaseBtn:hover {
   background: rgba(0,0,0,.2)
 }
-button:hover::after {
+.BaseBtn:hover::after {
   content: "";
   position:absolute;
   top: 0;
