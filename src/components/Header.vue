@@ -1,30 +1,24 @@
 <template lang="pug">
-  .container.flex-column.Header
-   
-    .container.head-title.px-3
-      Title.Title(
-        :currentTitle="currentTitle"
-      )
-      Btngroup.Btngroup(
-        :selectedTabIndex="selectedTabIndex"
-      )
-    BarSort.tab-height.BarSort(
-      v-if="isBarSortShowed"
+  .container.flex-column#Header
+    Title.Title(
       :currentTitle="currentTitle"
-      @toggle:hasBarSort="toggle_hasBarSort"
+      :selectedTabIndex="selectedTabIndex"
+    )
+    SortBar.SortBar(
+      v-if="isSortBarShowed"
+      :currentTitle="currentTitle"
+      @toggle:hasSortBar="toggle_hasSortBar"
     )
 </template>
 
 <script>
 import Title from "./Header__Title";
-import Btngroup from "./Header__Btngroup";
-import BarSort from "./Header__BarSort";
+import SortBar from "./Header__SortBar";
 
 export default {
   components: {
     Title,
-    Btngroup,
-    BarSort
+    SortBar
   },
   props: ["selectedTabIndex"],
   data() {
@@ -37,21 +31,20 @@ export default {
     currentTitle() {
       return this.tabs[this.selectedTabIndex].title;
     },
-    isBarSortShowed() {
-      return this.tabs[this.selectedTabIndex].themes.hasBarSort;
+    isSortBarShowed() {
+      return this.tabs[this.selectedTabIndex].themes.hasSortBar;
     }
   },
   methods: {
-    toggle_hasBarSort() {
+    toggle_hasSortBar() {
       /*FIXME: 机制重要！！！*/
       const memory = this.GLOBAL.tabs[this.selectedTabIndex].themes;
-      const targetProperty = "hasBarSort";
+      const targetProperty = "hasSortBar";
       if (memory[targetProperty] === true) {
         this.$set(memory, targetProperty, false);
       } else {
         this.$set(memory, targetProperty, true);
       }
-      // this.$set(this.GLOBAL.tabs[this.selectedTabIndex].themes, "hasBarSort", false)
     }
   }
 };
@@ -59,16 +52,16 @@ export default {
 
 
 <style scoped>
-.Header {
+#Header {
   background: linear-gradient(to right, mediumslateblue, dodgerblue);
+  justify-content: flex-end;
 }
-.head-title {
-  margin-top: 80px;
-  justify-content: space-between;
-  align-items: flex-end;
+.Title {
+  margin-bottom: 10px;
 }
-.BarSort {
+.SortBar {
   background: rgba(0, 0, 0, 0.1);
+  height:calc(var(--tab-height)*.8);
 }
 </style>
 

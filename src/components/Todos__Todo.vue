@@ -1,69 +1,82 @@
 <template lang="pug">
   .container.Todo
-    .container.icon
-      BaseBtn.BaseBtn(
+    .container.check
+      font-awesome-icon(
+        :icon="todo.isFinished ? 'check-circle' : 'circle'"
         :class=" todo.isFinished ? 'checked' : 'notChecked' "
         @click="$emit('toggle:isFinished', todo)"
       )
-        font-awesome-icon(:icon="todo.isFinished ? 'check-circle' : 'circle'")
-    .container.content.mr-auto.flex-column.pl-3
-      span.upper
-      | {{todo.content}}
-      small.below(
-        v-if="selectedTabIndex <= 2"
-      ) To-Do
+    .container.content
+      span.upper(:class="todo.isFinished ? 'todo-done':''") {{todo.content}}
+      small.below(v-if="selectedTabIndex <= 2") To-Do
     .container.star
-      BaseBtn.BaseBtn(
+      font-awesome-icon(
+        icon="star"
         :class="todo.isStared ? 'stared' : 'unStared'"
         @click="$emit('toggle:isStared', todo)"
       )
-        font-awesome-icon(icon="star")
 </template>
 
 <script>
-import BaseBtn from './BaseBtn.vue'
-
+import BaseBtn from "./BaseBtn.vue";
 export default {
-  components:{
-    BaseBtn,
-  },
-  data() {
-    return {
-      // iconClass: {
-      //   checked: todo.isFinished
-      // }
-    }
-  },
-  props: ["todo", "selectedTabIndex"],
+  components: { BaseBtn },
+  props: ["todo", "selectedTabIndex"]
 };
 </script>
 
 <style scoped>
 .Todo {
-  border:1px solid #eee
+  position: relative;
+  padding: var(--todo-padding);
 }
-.BaseBtn {
+.Todo::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  background: var(--line-color);
+}
+.Todo:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.check {
+  justify-content: center;
+  align-items: center;
   font-size: 1.2rem;
-  width:3rem;
+  width: var(--icon-width);
 }
 .checked {
   color: green;
 }
 .notChecked {
-  color: firebrick;
+  color: var(--disabled-color);
 }
 .content {
   justify-content: center;
+  flex-direction: column;
+  margin-right: auto;
+}
+.todo-done {
+  text-decoration: line-through;
 }
 small {
-  font-size: .8em;
+  font-size: 0.8em;
   color: lightgrey;
 }
+.star {
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  width: var(--icon-width)
+}
 .stared {
-  color:green;
+  color: gold;
 }
 .unStared {
-  color:lightgrey;
+  color: var(--disabled-color);
 }
+
 </style>
 

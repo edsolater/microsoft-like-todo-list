@@ -3,9 +3,7 @@
     :class="{active: tab.index === selectedTabIndex}"
     @click="$emit('update:selectedTabIndex', tab.index)"
   )
-   
     .container.icon
-     
       font-awesome-icon(
         icon="sun"
         v-if="tab.index === 0"
@@ -22,8 +20,7 @@
         icon="list"
         v-if="tab.index >= 3"
       )
-    .container.title.flex-auto
-     
+    .title.flex-auto
       | {{tab.title}}
 </template>
 
@@ -35,9 +32,9 @@ export default {
     return {
       icon: {
         sun:  this.tab.index == 0,
-        star: this.tab.index >= 1,
-        // sun:  this.tab.index >= 2, 
-        // "list-ul": this.tab.index >= 3,
+        star: this.tab.index == 1,
+        clipboard:  this.tab.index == 2, 
+        list: this.tab.index >= 3,
       }
     }
   }
@@ -46,10 +43,9 @@ export default {
 
 <style scoped>
 .Tab {
-  cursor: pointer;
   border-left: 5px solid transparent;
   border-radius: 2px;
-  padding:20px;
+  padding: var(--tab-padding);
 }
 .Tab:hover {
   background: rgba(32, 32, 68, .03)
@@ -61,6 +57,9 @@ export default {
 }
 .icon {
   color: dodgerblue;
+  width:var(--icon-width);
+  justify-content: center;
+  align-items: center;
 }
 </style>
 

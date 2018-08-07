@@ -1,11 +1,10 @@
 <template lang="pug">
-  .container.BarSort
-   
-    div 按创建日期排列
+  .container.SortBar
+    small 按创建日期排列
     BaseBtn.BaseBtn1
       font-awesome-icon(icon="angle-down")
     BaseBtn.BaseBtn2(
-      @click="$emit('toggle:hasBarSort')"
+      @click="$emit('toggle:hasSortBar')"
     )
       font-awesome-icon(icon="times")
 </template>
@@ -27,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.BarSort {
+.SortBar {
   color: white;
   align-items: center;
   padding-left: 1.3rem;

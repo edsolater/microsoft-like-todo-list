@@ -1,18 +1,18 @@
 <template lang="pug">
-  #app.container.text-center
+  #app.container
     .Panel
-      .container
-        Profiles.Profiles.flex-auto
-        BtnSearch.BtnSearch
-      Tabs.Tabs(
+      .container.profiles-and-searchBtn
+        Profiles#Profiles.flex-auto
+        SearchBtn.SearchBtn
+      Tabs#Tabs(
         :selectedTabIndex="selectedTabIndex"
         @update:selectedTabIndex="update_selectedTabIndex"
       )
     .WorkSpace
-      Header.Header(
+      Header#Header(
         :selectedTabIndex="selectedTabIndex"
       )
-      Todos.Todos(
+      Todos#Todos(
         :selectedTabIndex="selectedTabIndex"
       )
 </template>
@@ -20,7 +20,7 @@
 <script>
 // Panel
 import Profiles from "./components/Profiles";
-import BtnSearch from "./components/BtnSearch";
+import SearchBtn from "./components/SearchBtn";
 import Tabs from "./components/Tabs";
 // Workspace
 import Header from "./components/Header";
@@ -31,7 +31,7 @@ export default {
   components: {
     // Panel
     Profiles,
-    BtnSearch,
+    SearchBtn,
     Tabs,
     // Workspace
     Header,
@@ -39,8 +39,7 @@ export default {
   },
   data() {
     return {
-      selectedTabIndex: 0,
-      
+      selectedTabIndex: 0
     };
   },
   methods: {
@@ -53,15 +52,27 @@ export default {
 
 <style>
 :root {
-  --vue-blackblue: #2c3e50;
+  --text-color: #2c3e50;
+  --link-color: blue;
+  --line-color: lightgrey;
+  --disabled-color: var(--line-color);
+
+  --profiles-and-searchBtn-height: 60px;
+  --App-height: 550px;
+  --Header-height: 200px;
+  --todo-padding: 0 20px;
+  --todo-height: 50px;
+  --tab-height: 40px;
+  --tab-padding: 0 10px;
+  --icon-width: 48px;
 }
 
 .container {
   position: relative;
   display: flex;
   /* background-color: rgba(0, 0, 0, 0.03); */
-  padding: 0rem;
-  margin: 0rem;
+  padding: unset;
+  margin: unset;
   min-width: 2rem;
   max-width: unset;
   width: unset;
@@ -82,44 +93,61 @@ export default {
   left: 0;
   top: 0;
   font-size: 0.8rem;
-  color: var(--vue-blackblue);
+  color: var(--text-color);
 }
 .flex-auto {
   flex: auto;
 }
-hr {
-  border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
-  margin: 1.5rem 1rem;
-}
-.todo-height {
-  height: 50px;
-}
-.tab-height {
-  height: 40px;
-}
+
 /* rules above are for easier layout */
-* {
-  box-sizing: border-box
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: var(--vue-blackblue);
+  color: var(--text-color);
   overflow: hidden;
-  height: 40em;
+  height: var(--App-height);
   max-width: 1000px;
   margin: 60px auto;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, .1)
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  cursor: default;
 }
 .Panel {
   width: 30vw;
 }
+.profiles-and-searchBtn {
+  height: var(--profiles-and-searchBtn-height);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+}
+#Tabs {
+  height: calc(var(--App-height) - var(--profiles-and-searchBtn-height));
+  overflow-y: scroll;
+}
+hr {
+  border: none;
+  border-top: 1px solid var(--line-color);
+  margin: 1.5rem 1rem;
+}
 .WorkSpace {
+  position: relative;
   width: 70vw;
-  /* background: snow; */
-  border-left: 1px solid lightgrey;
+  height: 100%;
+  border-left: 1px solid var(--line-color);
+}
+#Header {
+  clear: both;
+  height: var(--Header-height);
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+#Todos {
+  overflow-y: scroll;
+  width: 100%;
+  height: calc(var(--App-height) - var(--Header-height));
 }
 </style>

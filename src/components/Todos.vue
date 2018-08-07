@@ -1,7 +1,6 @@
 <template lang="pug">
-.container.outterTodos
-  .container.position-absolute.flex-column.innerTodos
-    Todo.todo-height.Todo(
+  #Todos
+    Todo.Todo(
       v-for="todo in currentTodos"
       v-bind:key="todo.index"
       :todo="todo"
@@ -9,7 +8,7 @@
       @toggle:isFinished="toggle_isFinished"
       @toggle:isStared="toggle_isStared"
     )
-    Bar.todo-height.Bar(
+    TodoBar.TodoBar(
       :selectedTabIndex="selectedTabIndex"
       @create:todo="create_todo"
     )
@@ -17,12 +16,12 @@
 
 <script>
 import Todo from "./Todos__Todo";
-import Bar from "./Todos__BarAddTodo";
+import TodoBar from "./Todos__TodoBar";
 
 export default {
   components: {
     Todo,
-    Bar
+    TodoBar
   },
   props: ["selectedTabIndex"],
   data() {
@@ -62,16 +61,13 @@ export default {
 </script>
 
 <style scoped>
-.outterTodos{
-  background: rgb(65, 34, 34);
-  width:100%;
-  height:3000px;
-}
-.innerTodos {
-  width:100%;
-}
 .Todo {
-  
+  height: var(--todo-height)
+}
+.TodoBar {
+  position:sticky;
+  bottom: 0;
+  height: var(--todo-height)
 }
 </style>
 

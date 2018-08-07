@@ -17,7 +17,8 @@ import {
   faAngleUp,
   faTimes,
   faCheckCircle,
-  faCircle
+  faCircle,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons"
 
 
@@ -33,6 +34,7 @@ library.add([
   faTimes,
   faCheckCircle,
   faCircle,
+  faPlus
 ])
 
 

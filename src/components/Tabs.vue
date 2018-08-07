@@ -1,6 +1,6 @@
 <template lang="pug">
-  .container.flex-column.Tabs
-    Tab.tab-height.tag(
+  #Tabs
+    Tab.Tab.tag(
       v-for="tab in tags"
       :key="tab.index"
       :tab="tab"
@@ -8,27 +8,24 @@
       @update:selectedTabIndex="$emit('update:selectedTabIndex', $event)"
     )
     hr
-    Tab.tab-height.repos(
+    Tab.Tab.repos(
       v-for="tab in repos"
       :key="tab.index"
       :tab="tab"
       :selectedTabIndex="selectedTabIndex"
       @update:selectedTabIndex="$emit('update:selectedTabIndex', $event)"
     )
-    BtnAdd.todo-height.BtnAdd(
+    TabBar.TabBar(
       @create:repo="create_repo"
     )
 </template>
 
 <script>
 import Tab from "./Tabs__Tab.vue";
-import BtnAdd from "./Tabs__BtnAddTab.vue";
+import TabBar from "./Tabs__TabBar.vue";
 
 export default {
-  components: {
-    Tab,
-    BtnAdd
-  },
+  components: { Tab, TabBar },
   props: ["selectedTabIndex"],
   data() {
     return {
@@ -58,7 +55,7 @@ export default {
         themes: {
           color: "blue",
           backgroundImage: "car",
-          hasBarSort: true
+          hasSortBar: true
         }
       };
       this.tabs.push(newTab);
@@ -66,3 +63,17 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+#Tabs {
+  position: relative;
+}
+.Tab {
+  height: var(--tab-height);
+}
+.TabBar {
+  height: var(--tab-height);
+  position: sticky;
+  bottom: 0;
+}
+</style>

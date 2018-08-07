@@ -1,6 +1,5 @@
 <template lang="pug">
   .container.Btngroup
-   
     Btn.Btn(
       v-if="selectedTabIndex === 0"
     ) hello

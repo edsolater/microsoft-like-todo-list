@@ -12,7 +12,7 @@ const Data = {
       themes:{
         color:"blue",
         backgroundImage: "car",
-        hasBarSort: true
+        hasSortBar: true
       },
     },
     {
@@ -22,7 +22,7 @@ const Data = {
       themes:{
         color:"blue",
         backgroundImage: "car",
-        hasBarSort: true
+        hasSortBar: true
       },
     },
     {
@@ -32,7 +32,7 @@ const Data = {
       themes:{
         color:"blue",
         backgroundImage: "car",
-        hasBarSort: true
+        hasSortBar: true
       },
     },
     // 这些是非锁定的普通repos
@@ -43,7 +43,7 @@ const Data = {
       themes:{
         color:"blue",
         backgroundImage: "car",
-        hasBarSort: true
+        hasSortBar: true
       },
     },
   ],

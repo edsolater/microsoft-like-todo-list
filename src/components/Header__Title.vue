@@ -1,16 +1,24 @@
 <template lang="pug">
-.container.flex-column.Title
- 
-  p.mb-1 {{currentTitle}}
-  div.date(
-    v-if="currentTitle == '我的一天'"
-  )
-    | {{now}}
+.container.Title
+  .title-text
+    p.mb-0 {{currentTitle}}
+    div.date(v-if="currentTitle == '我的一天'") {{now}}
+  .container.btngroup
+    Btn.Btn(
+      v-if="selectedTabIndex === 0"
+    ) hello
+    Btn.Btn(
+      v-if="selectedTabIndex === 2"
+    ) world
 </template>
 
 <script>
+import Btn from './BaseBtn.vue'
 export default {
-  props: ['currentTitle'],
+  components: {
+    Btn,
+  },
+  props: ['currentTitle', 'selectedTabIndex'],
   computed: {
     now() {
       const originDate = new Date()
@@ -27,7 +35,6 @@ export default {
       let date = originDate.getDate()  // 获取当前是几号
       let month = originDate.getMonth() + 1  // 获取当前的月份
       // if (month > 0 && month <= 9) month = "0" + month  // 0-9月份前置0
-
       return `${month}月${date}日，星期${day} `
     }
   }
@@ -36,6 +43,11 @@ export default {
 
 <style scoped>
 .Title {
+  padding: 0 20px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.title-text {
   color: #fff;
   font-size: 2.3rem;
   font-weight: bolder;
@@ -43,7 +55,7 @@ export default {
 }
 .date {
   font-weight: initial;
-  font-size: 1rem;
+  font-size: .4em;
 }
 </style>
 
