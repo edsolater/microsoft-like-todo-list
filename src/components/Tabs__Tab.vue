@@ -1,5 +1,5 @@
 <template lang="pug">
-  .Tab.container.leaf(
+  .Tab.container.center(
     :class="{active: tab.index === selectedTabIndex}"
     @click="$emit('update:selectedTabIndex', tab.index)"
   )

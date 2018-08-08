@@ -4,15 +4,15 @@
       .container.profiles-and-searchBtn
         Profiles#Profiles.flex-auto
         SearchBtn.SearchBtn
-      Tabs#Tabs(
+      Tabs.Tabs(
         :selectedTabIndex="selectedTabIndex"
         @update:selectedTabIndex="update_selectedTabIndex"
       )
     .WorkSpace
-      Header#Header(
+      Header.Header(
         :selectedTabIndex="selectedTabIndex"
       )
-      Todos#Todos(
+      Todos.Todos(
         :selectedTabIndex="selectedTabIndex"
       )
 </template>
@@ -79,9 +79,12 @@ export default {
   overflow: hidden;
   align-content: center;
 }
-.container.leaf {
+.container.center {
   justify-content: center;
   align-items: center;
+}
+.container.vertical {
+  flex-direction: column;
 }
 .position-absolute {
   top: 0;
@@ -124,9 +127,8 @@ export default {
   height: var(--profiles-and-searchBtn-height);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 }
-#Tabs {
+.Tabs {
   height: calc(var(--App-height) - var(--profiles-and-searchBtn-height));
-  overflow-y: scroll;
 }
 hr {
   border: none;
@@ -139,14 +141,13 @@ hr {
   height: 100%;
   border-left: 1px solid var(--line-color);
 }
-#Header {
+.Header {
   clear: both;
   height: var(--Header-height);
   width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-#Todos {
-  overflow-y: scroll;
+.Todos {
   width: 100%;
   height: calc(var(--App-height) - var(--Header-height));
 }

@@ -18,11 +18,11 @@
 </template>
 
 <script>
-import BaseBtn from "./BaseBtn.vue";
+import BaseBtn from './BaseBtn.vue'
 export default {
   components: { BaseBtn },
-  props: ["todo", "selectedTabIndex"]
-};
+  props: ['todo', 'selectedTabIndex'],
+}
 </script>
 
 <style scoped>
@@ -31,7 +31,7 @@ export default {
   padding: var(--todo-padding);
 }
 .Todo::after {
-  content: "";
+  content: '';
   width: 100%;
   height: 1px;
   position: absolute;
@@ -69,7 +69,7 @@ small {
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  width: var(--icon-width)
+  width: var(--icon-width);
 }
 .stared {
   color: gold;
@@ -77,6 +77,5 @@ small {
 .unStared {
   color: var(--disabled-color);
 }
-
 </style>
 

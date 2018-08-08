@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Tab from "./Tabs__Tab.vue";
+import Tab from "";
 import TabBar from "./Tabs__TabBar.vue";
 
 export default {
@@ -67,6 +67,7 @@ export default {
 <style scoped>
 .Tabs {
   position: relative;
+  overflow-y: auto;
 }
 .TabTag,
 .TabRepo {

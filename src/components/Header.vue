@@ -1,5 +1,5 @@
 <template lang="pug">
-  .Header.container.flex-column
+  .Header.container.vertical
     Title.Title(
       :currentTitle="currentTitle"
       :selectedTabIndex="selectedTabIndex"
@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import Title from "./Header__Title";
-import SortBar from "./Header__SortBar";
+import Title from "./Header__Title"
+import SortBar from "./Header__SortBar"
 
 export default {
   components: {
@@ -25,29 +25,29 @@ export default {
     return {
       todos: this.GLOBAL.todos,
       tabs: this.GLOBAL.tabs
-    };
+    }
   },
   computed: {
     currentTitle() {
-      return this.tabs[this.selectedTabIndex].title;
+      return this.tabs[this.selectedTabIndex].title
     },
     isSortBarShowed() {
-      return this.tabs[this.selectedTabIndex].themes.hasSortBar;
+      return this.tabs[this.selectedTabIndex].themes.hasSortBar
     }
   },
   methods: {
     toggle_hasSortBar() {
       /*FIXME: 机制重要！！！*/
-      const memory = this.GLOBAL.tabs[this.selectedTabIndex].themes;
-      const targetProperty = "hasSortBar";
+      const memory = this.GLOBAL.tabs[this.selectedTabIndex].themes
+      const targetProperty = "hasSortBar"
       if (memory[targetProperty] === true) {
-        this.$set(memory, targetProperty, false);
+        this.$set(memory, targetProperty, false)
       } else {
-        this.$set(memory, targetProperty, true);
+        this.$set(memory, targetProperty, true)
       }
     }
   }
-};
+}
 </script>
 
 
@@ -61,7 +61,7 @@ export default {
 }
 .SortBar {
   background: rgba(0, 0, 0, 0.1);
-  height:calc(var(--tab-height)*.8);
+  height: calc(var(--tab-height) * 0.8);
 }
 </style>
 
