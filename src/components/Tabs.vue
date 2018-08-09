@@ -70,11 +70,11 @@ export default {
   overflow-y: auto;
 }
 .TabTag,
-.TabRepo {
+.TabRepo,
+.TabBar {
   height: var(--tab-height);
 }
 .TabBar {
-  height: var(--tab-height);
   position: sticky;
   bottom: 0;
 }

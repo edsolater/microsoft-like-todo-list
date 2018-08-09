@@ -20,13 +20,19 @@
         icon="list"
         v-if="tab.index >= 3"
       )
-    .Title.flex-auto
-      | {{tab.title}}
+    .Title.flex-auto(
+      :contenteditable="tab.isEditable"
+      @blur="update_tabTitle($event.target.textContent)"
+    ) {{tab.title}}
 </template>
 
 
 <script>
+import BaseInput from './BaseInput.vue'
 export default {
+  components: {
+    BaseInput
+  },
   props: ['tab', 'selectedTabIndex'],
   data() {
     return {
@@ -36,6 +42,22 @@ export default {
         clipboard: this.tab.index == 2,
         list: this.tab.index >= 3
       }
+    }
+  },
+  mounted() {
+    if (this.tab.index >= 3) {
+      console.log(this.$el.children[1])
+      this.$el.children[1].focus() // contenteditable 的DIV也是有效的
+    }
+  },
+  methods: {
+    update_tabTitle(newName) {
+      // this.$set(this.tab, 'title', newName)// DOM 操作
+      this.tab.title = newName  // 也能生效，神奇. 说明这改变了值的地址 
+      console.log(`update:title`)
+    },
+    say(specified){
+      console.log(specified)
     }
   }
 }
@@ -60,6 +82,10 @@ export default {
   width: var(--icon-width);
   justify-content: center;
   align-items: center;
+}
+.Title {
+  background: transparent;
+  cursor: default;
 }
 </style>
 

@@ -12,15 +12,15 @@
 </template>
 
 <script>
-import Title from "./Header__Title"
-import SortBar from "./Header__SortBar"
+import Title from './Header__Title'
+import SortBar from './Header__SortBar'
 
 export default {
   components: {
     Title,
     SortBar
   },
-  props: ["selectedTabIndex"],
+  props: ['selectedTabIndex'],
   data() {
     return {
       todos: this.GLOBAL.todos,
@@ -39,7 +39,7 @@ export default {
     toggle_hasSortBar() {
       /*FIXME: 机制重要！！！*/
       const memory = this.GLOBAL.tabs[this.selectedTabIndex].themes
-      const targetProperty = "hasSortBar"
+      const targetProperty = 'hasSortBar'
       if (memory[targetProperty] === true) {
         this.$set(memory, targetProperty, false)
       } else {

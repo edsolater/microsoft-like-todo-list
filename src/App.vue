@@ -1,8 +1,8 @@
 <template lang="pug">
   #app.container
     .Panel
-      .container.profiles-and-searchBtn
-        Profiles#Profiles.flex-auto
+      .container.Profiles-and-searchBtn
+        Profiles.Profiles
         SearchBtn.SearchBtn
       Tabs.Tabs(
         :selectedTabIndex="selectedTabIndex"
@@ -19,15 +19,15 @@
 
 <script>
 // Panel
-import Profiles from "./components/Profiles";
-import SearchBtn from "./components/SearchBtn";
-import Tabs from "./components/Tabs";
+import Profiles from './components/Profiles'
+import SearchBtn from './components/SearchBtn'
+import Tabs from './components/Tabs'
 // Workspace
-import Header from "./components/Header";
-import Todos from "./components/Todos";
+import Header from './components/Header'
+import Todos from './components/Todos'
 
 export default {
-  name: "app",
+  name: 'App',
   components: {
     // Panel
     Profiles,
@@ -40,14 +40,14 @@ export default {
   data() {
     return {
       selectedTabIndex: 0
-    };
+    }
   },
   methods: {
     update_selectedTabIndex(newSelectedTabID) {
-      this.selectedTabIndex = newSelectedTabID;
+      this.selectedTabIndex = newSelectedTabID
     }
   }
-};
+}
 </script>
 
 <style>
@@ -103,13 +103,18 @@ export default {
 }
 
 /* rules above are for easier layout */
-*,
+*,,
 *::before,
 *::after {
   box-sizing: border-box;
+  outline: none;
+}
+/* mozilla 去除按钮边框 */
+button::-moz-focus-inner {
+  border:none;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-color);
@@ -117,15 +122,18 @@ export default {
   height: var(--App-height);
   max-width: 1000px;
   margin: 60px auto;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
   cursor: default;
 }
 .Panel {
   width: 30vw;
 }
-.profiles-and-searchBtn {
+.Profiles-and-searchBtn {
   height: var(--profiles-and-searchBtn-height);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--tab-padding);
 }
 .Tabs {
   height: calc(var(--App-height) - var(--profiles-and-searchBtn-height));

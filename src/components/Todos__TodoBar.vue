@@ -77,6 +77,9 @@ export default {
   flex: auto;
   align-items: center;
 }
+.BaseInput {
+  color: var(--link-color);
+}
 .Times {
   justify-content: center;
   align-items: center;

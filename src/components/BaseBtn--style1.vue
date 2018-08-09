@@ -1,7 +1,5 @@
 <template lang="pug">
-  button.BaseBtn(
-    v-on="listeners"
-  )
+  button.BaseBtn
     slot
 </template>
 
@@ -18,7 +16,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .BaseBtn {
   color: inherit;
   background: transparent;
@@ -27,10 +25,9 @@ export default {
   text-align: center;
   vertical-align: center;
   height:100%;
-  line-height: 100%;
 }
 .BaseBtn:hover {
-  background: rgba(0,0,0,.2)
+  background: rgba(0,0,0,.15)
 }
 .BaseBtn:hover::after {
   content: "";
