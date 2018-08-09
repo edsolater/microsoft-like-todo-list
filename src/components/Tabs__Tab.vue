@@ -27,18 +27,18 @@
 
 <script>
 export default {
-  props: ["tab", "selectedTabIndex"],
+  props: ['tab', 'selectedTabIndex'],
   data() {
     return {
       icon: {
-        sun:  this.tab.index == 0,
+        sun: this.tab.index == 0,
         star: this.tab.index == 1,
-        clipboard:  this.tab.index == 2, 
-        list: this.tab.index >= 3,
+        clipboard: this.tab.index == 2,
+        list: this.tab.index >= 3
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -48,16 +48,16 @@ export default {
   padding: var(--tab-padding);
 }
 .Tab:hover {
-  background: rgba(32, 32, 68, .03)
+  background: rgba(32, 32, 68, 0.03);
 }
 .Tab.active {
   font-weight: bold;
   border-left-color: rgba(35, 112, 228, 0.788);
-  background: rgba(32, 32, 68, .06);
+  background: rgba(32, 32, 68, 0.06);
 }
 .Icon {
   color: dodgerblue;
-  width:var(--icon-width);
+  width: var(--icon-width);
   justify-content: center;
   align-items: center;
 }

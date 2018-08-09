@@ -21,7 +21,7 @@
 import BaseBtn from './BaseBtn.vue'
 export default {
   components: { BaseBtn },
-  props: ['todo', 'selectedTabIndex'],
+  props: ['todo', 'selectedTabIndex']
 }
 </script>
 

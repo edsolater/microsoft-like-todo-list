@@ -21,47 +21,47 @@
 </template>
 
 <script>
-import Tab from "";
-import TabBar from "./Tabs__TabBar.vue";
+import Tab from './Tabs__Tab.vue'
+import TabBar from './Tabs__TabBar.vue'
 
 export default {
   components: { Tab, TabBar },
-  props: ["selectedTabIndex"],
+  props: ['selectedTabIndex'],
   data() {
     return {
       todos: this.GLOBAL.todos,
       tabs: this.GLOBAL.tabs
-    };
+    }
   },
   computed: {
     tags() {
-      return this.tabs.slice(0, 3);
+      return this.tabs.slice(0, 3)
     },
     repos() {
-      return this.tabs.slice(3);
+      return this.tabs.slice(3)
     }
   },
   methods: {
     // event 传来的是 tag 对象
     delete_repo(tag) {
-      const index = this.tabs.indexOf(tag);
-      this.tabs.splice(index, 1);
+      const index = this.tabs.indexOf(tag)
+      this.tabs.splice(index, 1)
     },
     create_repo() {
       const newTab = {
         index: this.tabs.length,
-        title: "待输入",
+        title: '待输入',
         isEditable: true,
         themes: {
-          color: "blue",
-          backgroundImage: "car",
+          color: 'blue',
+          backgroundImage: 'car',
           hasSortBar: true
         }
-      };
-      this.tabs.push(newTab);
+      }
+      this.tabs.push(newTab)
     }
   }
-};
+}
 </script>
 
 <style scoped>

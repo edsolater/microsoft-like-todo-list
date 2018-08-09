@@ -10,12 +10,11 @@
 
 <script>
 import Btn from './BaseBtn.vue'
-
 export default {
   components: {
-    Btn,
+    Btn
   },
-  props: ['selectedTabIndex'],
+  props: ['selectedTabIndex']
 }
 </script>
 

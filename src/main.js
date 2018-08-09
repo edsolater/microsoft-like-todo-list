@@ -11,3 +11,4 @@ Vue.prototype.GLOBAL = _global
 new Vue({
   render: h => h(App),
 }).$mount('#app')
+
