@@ -10,10 +10,25 @@
       font-awesome-icon(icon="lightbulb")
     BaseBtn.Users(v-if="selectedTabIndex >= 3")
       font-awesome-icon(icon="users")
-    Dropdown.Dropdown(
-      v-show="hasDropdown"
-      :selectedTabIndex="selectedTabIndex"
+    transition(
+      name="fade"
+      enter-active-class="animated fast fadeIn"
+      leave-active-class="animated fast fadeOut"
     )
+      Dropdown.Dropdown(
+        v-show="hasDropdown"
+        :selectedTabIndex="selectedTabIndex"
+      )
+    //- transition(
+    //-   name="fade"
+    //-   enter-active-class="animated bounceInRight"
+    //-   leave-active-class="animated bounceOutRight"
+    //-   @enter="say"
+    //-   mode="out-in"
+    //- )
+    //-   div(
+    //-     :key="isEditing"
+    //-   ) {{ isEditing ? 'Save' : 'Edit' }}
 </template>
 
 <script>
@@ -31,7 +46,7 @@ export default {
     }
   },
   computed: {
-    hasDropdown(){
+    hasDropdown() {
       return this.global.hasDropdown
     },
     now() {
@@ -73,7 +88,9 @@ export default {
       } else {
         this.global.hasDropdown = true
       }
-      console.log(this.GLOBAL)
+    },
+    say(el) {
+      console.log(el)
     }
   }
 }
@@ -114,5 +131,27 @@ export default {
   z-index: 1;
   box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.1);
 }
+/* .fade-enter-active,
+.fade-leave-active{
+  transition: opacity 400ms;
+}
+.fade-enter,
+.fade-leave-to{
+  opacity: 0;
+} */
+/* .fade-enter-active {
+  animation-duration: 1.5s;
+  transition-duration: 0.4s;
+  color: royalblue;
+}
+.fade-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  from {
+    transform: scale(0);
+    transform-origin: right top;
+  }
+} */
 </style>
 

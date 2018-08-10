@@ -46,18 +46,13 @@ export default {
   },
   mounted() {
     if (this.tab.index >= 3) {
-      console.log(this.$el.children[1])
       this.$el.children[1].focus() // contenteditable 的DIV也是有效的
     }
   },
   methods: {
     update_tabTitle(newName) {
       // this.$set(this.tab, 'title', newName)// DOM 操作
-      this.tab.title = newName  // 也能生效，神奇. 说明这改变了值的地址 
-      console.log(`update:title`)
-    },
-    say(specified){
-      console.log(specified)
+      this.tab.title = newName // 也能生效，神奇. 说明这改变了值的地址
     }
   }
 }

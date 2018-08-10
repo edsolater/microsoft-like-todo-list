@@ -19,7 +19,7 @@ export default {
   props:['title'],
   methods:{
     sayHello(){
-      console.log('hello')
+      
     }
   }
 }

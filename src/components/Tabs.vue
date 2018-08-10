@@ -8,13 +8,18 @@
       @update:selectedTabIndex="$emit('update:selectedTabIndex', $event)"
     )
     hr
-    Tab.TabRepo(
-      v-for="tab in repos"
-      :key="tab.index"
-      :tab="tab"
-      :selectedTabIndex="selectedTabIndex"
-      @update:selectedTabIndex="$emit('update:selectedTabIndex', $event)"
+    transition-group(
+      name="list"
+      move-class="transitive slow transform"
+      enter-active-class="animated fadeIn"
     )
+      Tab.TabRepo(
+        v-for="tab in repos"
+        :key="tab.index"
+        :tab="tab"
+        :selectedTabIndex="selectedTabIndex"
+        @update:selectedTabIndex="$emit('update:selectedTabIndex', $event)"
+      )
     TabBar.TabBar(
       @create:repo="create_repo"
     )
@@ -53,12 +58,13 @@ export default {
         title: '待输入',
         isEditable: true,
         themes: {
-          color: 'blue',
+          colorName: 'springgreen',
           backgroundImage: 'car',
           hasSortBar: true
         }
       }
       this.tabs.push(newTab)
+      this.$emit('update:selectedTabIndex',this.tabs.length-1)
     }
   }
 }

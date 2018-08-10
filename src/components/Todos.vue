@@ -1,13 +1,18 @@
 <template lang="pug">
   .Todos
-    Todo.Todo(
-      v-for="todo in currentTodos"
-      v-bind:key="todo.index"
-      :todo="todo"
-      :selectedTabIndex="selectedTabIndex"
-      @toggle:isFinished="toggle_isFinished"
-      @toggle:isStared="toggle_isStared"
+    transition-group(
+      name="list"
+      move-class="transitive slow transform"
+      enter-active-class="animated fadeIn"
     )
+      Todo.Todo(
+        v-for="todo in currentTodos"
+        :key="todo.dateCreated"
+        :todo="todo"
+        :selectedTabIndex="selectedTabIndex"
+        @toggle:isFinished="toggle_isFinished"
+        @toggle:isStared="toggle_isStared"
+      )
     TodoBar.TodoBar(
       :selectedTabIndex="selectedTabIndex"
       @create:todo="create_todo"
@@ -71,5 +76,6 @@ export default {
   bottom: 0;
   height: var(--todo-height);
 }
+
 </style>
 

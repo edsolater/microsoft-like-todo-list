@@ -50,7 +50,7 @@ export default {
       this.selectedTabIndex = newSelectedTabID
     },
     say(){
-      console.log('hello from APP')
+      
       this.GLOBAL.hasDropdown = false
     }
   }
@@ -58,6 +58,8 @@ export default {
 </script>
 
 <style>
+@import url('./assets/animate.css');
+
 :root {
   --text-color: #2c3e50;
   --link-color: blue;
@@ -139,6 +141,7 @@ button::-moz-focus-inner {
   margin: 60px auto;
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
   cursor: default;
+  user-select: none;
 }
 .Panel {
   width: 30vw;
