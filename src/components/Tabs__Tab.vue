@@ -1,5 +1,5 @@
 <template lang="pug">
-  .Tab.container.center(
+  .Tab.container.hv-center(
     :class="{active: tab.index === selectedTabIndex}"
     @click="$emit('update:selectedTabIndex', tab.index)"
   )
@@ -70,7 +70,7 @@ export default {
   padding: var(--tab-padding);
 }
 .Tab:hover {
-  background: rgba(32, 32, 68, 0.03);
+  background: var(--hover-background);
 }
 .Tab.active {
   font-weight: bold;

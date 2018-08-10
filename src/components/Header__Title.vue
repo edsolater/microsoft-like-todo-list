@@ -4,22 +4,36 @@
     span {{currentTitle}}
     div.date(v-if="currentTitle == '我的一天'") {{now}}
   .Btngroup.container
-    BaseBtn.More
+    BaseBtn.More(@click.stop="toggle_dropdown")
       font-awesome-icon(icon="ellipsis-h")
     BaseBtn.Tips(v-if="selectedTabIndex === 0")
       font-awesome-icon(icon="lightbulb")
     BaseBtn.Users(v-if="selectedTabIndex >= 3")
       font-awesome-icon(icon="users")
+    Dropdown.Dropdown(
+      v-show="hasDropdown"
+      :selectedTabIndex="selectedTabIndex"
+    )
 </template>
 
 <script>
 import BaseBtn from './BaseBtn--style2.vue'
+import Dropdown from './Header__Title__Dropdown.vue'
 export default {
   components: {
-    BaseBtn
+    BaseBtn,
+    Dropdown
   },
   props: ['currentTitle', 'selectedTabIndex'],
+  data() {
+    return {
+      global: this.GLOBAL,
+    }
+  },
   computed: {
+    hasDropdown(){
+      return this.global.hasDropdown
+    },
     now() {
       const originDate = new Date()
       let day = originDate.getDay() // 获取当前的星期
@@ -51,6 +65,16 @@ export default {
       // if (month > 0 && month <= 9) month = "0" + month  // 0-9月份前置0
       return `${month}月${date}日，星期${day} `
     }
+  },
+  methods: {
+    toggle_dropdown() {
+      if (this.hasDropdown) {
+        this.$set(this.GLOBAL, 'hasDropdown', false)
+      } else {
+        this.global.hasDropdown = true
+      }
+      console.log(this.GLOBAL)
+    }
   }
 }
 </script>
@@ -76,11 +100,19 @@ export default {
 .More,
 .Tips,
 .Users {
-  width:3rem;
-  padding: .2rem .6rem;
-  margin: .3rem;
-  background: rgba(0,0,0,.2);
+  width: 3rem;
+  padding: 0.2rem 0.6rem;
+  margin: 0.3rem;
+  background: rgba(0, 0, 0, 0.2);
   color: white;
+}
+.Dropdown {
+  position: absolute;
+  right: 0;
+  margin-right: 1.5rem;
+  margin-top: 2.53rem;
+  z-index: 1;
+  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.1);
 }
 </style>
 

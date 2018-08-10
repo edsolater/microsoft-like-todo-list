@@ -1,5 +1,5 @@
 <template lang="pug">
-  .Profiles.container.center
+  .Profiles.container.hv-center
     img.Portrait(
       src="../assets/whiteEye--small.png"
     )

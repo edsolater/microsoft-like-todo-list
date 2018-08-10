@@ -21,7 +21,8 @@ import {
   faPlus,
   faEllipsisH,
   faLightbulb,
-  faUsers
+  faUsers,
+  faSortAmountDown
 } from "@fortawesome/free-solid-svg-icons"
 
 
@@ -40,7 +41,8 @@ library.add([
   faPlus,
   faEllipsisH,
   faLightbulb,
-  faUsers
+  faUsers,
+  faSortAmountDown
 ])
 
 

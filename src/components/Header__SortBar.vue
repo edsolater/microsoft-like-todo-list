@@ -17,6 +17,11 @@ export default {
     BaseBtn,
   },
   props:['title'],
+  methods:{
+    sayHello(){
+      console.log('hello')
+    }
+  }
 }
 </script>
 

@@ -1,8 +1,24 @@
 const Data = {
   todoIDCounter: 10,
   tabIDCounter: 10,
-
-  // IDGenerator: () => Date.now(),
+  hasDropdown: false,
+  styleLibrary: {
+    blueviolet: {
+      backgroundImage: 'linear-gradient(to right, mediumslateblue, dodgerblue)'
+    },
+    orange: {
+      backgroundImage: 'linear-gradient(to right, #eb6566, #edbf9c)'
+    },
+    orchid: {
+      backgroundImage: 'linear-gradient(to right, darkorchid, orchid)'
+    },
+    springgreen: {
+      backgroundImage: 'linear-gradient(to right, #5da848, #adde69)'
+    },
+    dodgerblue: {
+      backgroundImage: 'linear-gradient(to right, deepskyblue, lightskyblue)'
+    }
+  },
   tabs: [
     // 这些是锁定的特殊tags
     {
@@ -10,7 +26,7 @@ const Data = {
       title: '我的一天',
       isEditable: false,
       themes: {
-        color: 'blue',
+        colorName: 'springgreen',
         backgroundImage: 'car',
         hasSortBar: true
       }
@@ -20,7 +36,7 @@ const Data = {
       title: '重要',
       isEditable: false,
       themes: {
-        color: 'blue',
+        colorName: 'dodgerblue',
         backgroundImage: 'car',
         hasSortBar: true
       }
@@ -30,7 +46,7 @@ const Data = {
       title: 'To-Do',
       isEditable: false,
       themes: {
-        color: 'blue',
+        colorName: 'dodgerblue',
         backgroundImage: 'car',
         hasSortBar: true
       }
@@ -41,7 +57,7 @@ const Data = {
       title: '示例 repo',
       isEditable: true,
       themes: {
-        color: 'blue',
+        colorName: 'dodgerblue',
         backgroundImage: 'car',
         hasSortBar: true
       }

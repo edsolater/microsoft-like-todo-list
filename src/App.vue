@@ -1,5 +1,7 @@
 <template lang="pug">
-  #app.container
+  #app.container(
+    @click="say"
+  )
     .Panel
       .container.Profiles-and-searchBtn
         Profiles.Profiles
@@ -39,12 +41,17 @@ export default {
   },
   data() {
     return {
-      selectedTabIndex: 0
+      selectedTabIndex: 0,
+      hasDropdown: this.GLOBAL.hasDropdown
     }
   },
   methods: {
     update_selectedTabIndex(newSelectedTabID) {
       this.selectedTabIndex = newSelectedTabID
+    },
+    say(){
+      console.log('hello from APP')
+      this.GLOBAL.hasDropdown = false
     }
   }
 }
@@ -55,6 +62,7 @@ export default {
   --text-color: #2c3e50;
   --link-color: blue;
   --line-color: lightgrey;
+  --hover-background: rgba(32, 32, 68, 0.03);
   --disabled-color: var(--line-color);
 
   --profiles-and-searchBtn-height: 60px;
@@ -68,7 +76,6 @@ export default {
 }
 
 .container {
-  position: relative;
   display: flex;
   /* background-color: rgba(0, 0, 0, 0.03); */
   padding: unset;
@@ -79,13 +86,20 @@ export default {
   overflow: hidden;
   align-content: center;
 }
-.container.center {
+.container.hv-center {
   justify-content: center;
+  align-items: center;
+}
+.container.h-center {
+  justify-content: center;
+}
+.container.v-center {
   align-items: center;
 }
 .container.vertical {
   flex-direction: column;
 }
+
 .position-absolute {
   top: 0;
   left: 0;
@@ -103,7 +117,7 @@ export default {
 }
 
 /* rules above are for easier layout */
-*,,
+*,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -111,7 +125,7 @@ export default {
 }
 /* mozilla 去除按钮边框 */
 button::-moz-focus-inner {
-  border:none;
+  border: none;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -119,6 +133,7 @@ button::-moz-focus-inner {
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-color);
   overflow: hidden;
+  position: relative;
   height: var(--App-height);
   max-width: 1000px;
   margin: 60px auto;
@@ -144,7 +159,6 @@ hr {
   margin: 1.5rem 1rem;
 }
 .WorkSpace {
-  position: relative;
   width: 70vw;
   height: 100%;
   border-left: 1px solid var(--line-color);

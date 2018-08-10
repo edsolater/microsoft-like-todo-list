@@ -39,7 +39,7 @@ export default {
   background: var(--line-color);
 }
 .Todo:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--hover-background);
 }
 .Check {
   justify-content: center;

@@ -1,6 +1,6 @@
 <template lang="pug">
-  .TabBar.container.center(@click="$emit('create:repo')")
-    .Icon.container.center
+  .TabBar.container.hv-center(@click="$emit('create:repo')")
+    .Icon.container.hv-center
       font-awesome-icon(icon="plus")
     .Text.flex-auto
       | 新建清单

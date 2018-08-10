@@ -1,5 +1,5 @@
 <template lang="pug">
-  .Header.container.vertical
+  .Header.container.vertical(:style="currentStyle")
     Title.Title(
       :currentTitle="currentTitle"
       :selectedTabIndex="selectedTabIndex"
@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import Title from './Header__Title'
-import SortBar from './Header__SortBar'
+import Title from './Header__Title.vue'
+import SortBar from './Header__SortBar.vue'
 
 export default {
   components: {
@@ -33,18 +33,16 @@ export default {
     },
     isSortBarShowed() {
       return this.tabs[this.selectedTabIndex].themes.hasSortBar
+    },
+    currentStyle() {
+      const currentColorName =  this.tabs[this.selectedTabIndex].themes.colorName
+      return this.GLOBAL.styleLibrary[currentColorName]
     }
   },
   methods: {
     toggle_hasSortBar() {
-      /*FIXME: 机制重要！！！*/
-      const memory = this.GLOBAL.tabs[this.selectedTabIndex].themes
-      const targetProperty = 'hasSortBar'
-      if (memory[targetProperty] === true) {
-        this.$set(memory, targetProperty, false)
-      } else {
-        this.$set(memory, targetProperty, true)
-      }
+      this.GLOBAL.tabs[this.selectedTabIndex].themes.hasSortBar = !this.GLOBAL
+        .tabs[this.selectedTabIndex].themes.hasSortBar // 调用setter，所以有效！
     }
   }
 }
@@ -53,7 +51,6 @@ export default {
 
 <style scoped>
 .Header {
-  background: linear-gradient(to right, mediumslateblue, dodgerblue);
   justify-content: flex-end;
 }
 .Title {
