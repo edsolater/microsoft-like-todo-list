@@ -10,10 +10,6 @@ import store from './store'
 
 Vue.prototype.GLOBAL = _global
 new Vue({
-  data: {
-    hasDropdown: true
-  },
-
   store,
   render: h => h(App)
 }).$mount('#app')

@@ -25,25 +25,27 @@
 import BaseBtn from './BaseBtn--style1.vue'
 export default {
   components: {
-    BaseBtn
+    BaseBtn,
   },
-  props: ['selectedTabIndex'],
+  props: {
+    selectedTabIndex: Number,
+  },
   computed: {
     tab() {
       return this.GLOBAL.tabs[this.selectedTabIndex]
     },
     availableBackgroundNames() {
       return Object.keys(this.GLOBAL.styleLibrary)
-    }
+    },
   },
   methods: {
     update_theme(newColorName) {
       this.GLOBAL.tabs[this.selectedTabIndex].themes.colorName = newColorName
     },
-    show_sortBar(){
+    show_sortBar() {
       this.tab.themes.hasSortBar = true
-    }
-  }
+    },
+  },
 }
 </script>
 

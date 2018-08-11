@@ -18,13 +18,15 @@ import SortBar from './Header__SortBar.vue'
 export default {
   components: {
     Title,
-    SortBar
+    SortBar,
   },
-  props: ['selectedTabIndex'],
+  props: {
+    selectedTabIndex: Number,
+  },
   data() {
     return {
       todos: this.GLOBAL.todos,
-      tabs: this.GLOBAL.tabs
+      tabs: this.GLOBAL.tabs,
     }
   },
   computed: {
@@ -35,16 +37,16 @@ export default {
       return this.tabs[this.selectedTabIndex].themes.hasSortBar
     },
     currentStyle() {
-      const currentColorName =  this.tabs[this.selectedTabIndex].themes.colorName
+      const currentColorName = this.tabs[this.selectedTabIndex].themes.colorName
       return this.GLOBAL.styleLibrary[currentColorName]
-    }
+    },
   },
   methods: {
     toggle_hasSortBar() {
       this.GLOBAL.tabs[this.selectedTabIndex].themes.hasSortBar = !this.GLOBAL
         .tabs[this.selectedTabIndex].themes.hasSortBar // 调用setter，所以有效！
-    }
-  }
+    },
+  },
 }
 </script>
 

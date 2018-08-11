@@ -25,22 +25,24 @@ import TodoBar from './Todos__TodoBar'
 export default {
   components: {
     Todo,
-    TodoBar
+    TodoBar,
   },
-  props: ['selectedTabIndex'],
+  props: {
+    selectedTabIndex: Number,
+  },
   data() {
     return {
       todos: this.GLOBAL.todos,
-      tabs: this.GLOBAL.tabs
+      tabs: this.GLOBAL.tabs,
     }
   },
   computed: {
     currentTodos() {
       // 选出 todos 中属于当前 tab 的 todos
       return this.todos.filter(todo =>
-        todo.belongToTabIDs.includes(this.selectedTabIndex)
+        todo.belongToTabIDs.includes(this.selectedTabIndex),
       )
-    }
+    },
   },
   methods: {
     create_todo(newTodo) {
@@ -59,8 +61,8 @@ export default {
       } else {
         this.$set(todo, 'isStared', true)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -76,6 +78,5 @@ export default {
   bottom: 0;
   height: var(--todo-height);
 }
-
 </style>
 

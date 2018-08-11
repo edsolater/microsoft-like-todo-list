@@ -22,13 +22,15 @@
 import BaseInput from './BaseInput.vue'
 export default {
   components: {
-    BaseInput
+    BaseInput,
   },
-  props: ['selectedTabIndex'],
+  props: {
+    selectedTabIndex: Number,
+  },
   data() {
     return {
       inputText: '',
-      isFocused: false
+      isFocused: false,
     }
   },
   computed: {
@@ -38,7 +40,7 @@ export default {
       } else {
         return false
       }
-    }
+    },
   },
   methods: {
     create_todo() {
@@ -47,13 +49,13 @@ export default {
         content: this.inputText,
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [this.selectedTabIndex]
+        belongToTabIDs: [this.selectedTabIndex],
       }
       this.$emit('create:todo', newTodo)
       // 清空 input 里的数据内容
       this.inputText = ''
-    }
-  }
+    },
+  },
 }
 </script>
 

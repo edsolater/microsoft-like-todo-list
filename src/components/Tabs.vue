@@ -31,11 +31,13 @@ import TabBar from './Tabs__TabBar.vue'
 
 export default {
   components: { Tab, TabBar },
-  props: ['selectedTabIndex'],
+  props: {
+    selectedTabIndex: Number,
+  },
   data() {
     return {
       todos: this.GLOBAL.todos,
-      tabs: this.GLOBAL.tabs
+      tabs: this.GLOBAL.tabs,
     }
   },
   computed: {
@@ -44,7 +46,7 @@ export default {
     },
     repos() {
       return this.tabs.slice(3)
-    }
+    },
   },
   methods: {
     // event 传来的是 tag 对象
@@ -60,13 +62,13 @@ export default {
         themes: {
           colorName: 'springgreen',
           backgroundImage: 'car',
-          hasSortBar: true
-        }
+          hasSortBar: true,
+        },
       }
       this.tabs.push(newTab)
-      this.$emit('update:selectedTabIndex',this.tabs.length-1)
-    }
-  }
+      this.$emit('update:selectedTabIndex', this.tabs.length - 1)
+    },
+  },
 }
 </script>
 

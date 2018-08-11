@@ -37,9 +37,12 @@ import Dropdown from './Header__Title__Dropdown.vue'
 export default {
   components: {
     BaseBtn,
-    Dropdown
+    Dropdown,
   },
-  props: ['currentTitle', 'selectedTabIndex'],
+  props: {
+    currentTitle: String,
+    selectedTabIndex: Number,
+  },
   data() {
     return {
       global: this.GLOBAL,
@@ -79,7 +82,7 @@ export default {
       let month = originDate.getMonth() + 1 // 获取当前的月份
       // if (month > 0 && month <= 9) month = "0" + month  // 0-9月份前置0
       return `${month}月${date}日，星期${day} `
-    }
+    },
   },
   methods: {
     toggle_dropdown() {
@@ -91,8 +94,8 @@ export default {
     },
     say(el) {
       console.log(el)
-    }
-  }
+    },
+  },
 }
 </script>
 

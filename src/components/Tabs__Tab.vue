@@ -31,17 +31,20 @@
 import BaseInput from './BaseInput.vue'
 export default {
   components: {
-    BaseInput
+    BaseInput,
   },
-  props: ['tab', 'selectedTabIndex'],
+  props: {
+    tab: Object,
+    selectedTabIndex: Number,
+  },
   data() {
     return {
       icon: {
         sun: this.tab.index == 0,
         star: this.tab.index == 1,
         clipboard: this.tab.index == 2,
-        list: this.tab.index >= 3
-      }
+        list: this.tab.index >= 3,
+      },
     }
   },
   mounted() {
@@ -53,8 +56,8 @@ export default {
     update_tabTitle(newName) {
       // this.$set(this.tab, 'title', newName)// DOM 操作
       this.tab.title = newName // 也能生效，神奇. 说明这改变了值的地址
-    }
-  }
+    },
+  },
 }
 </script>
 

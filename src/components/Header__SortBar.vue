@@ -16,12 +16,9 @@ export default {
   components: {
     BaseBtn,
   },
-  props:['title'],
-  methods:{
-    sayHello(){
-      
-    }
-  }
+  props: {
+    title: String,
+  },
 }
 </script>
 
@@ -34,7 +31,7 @@ export default {
 }
 .BaseBtn1,
 .BaseBtn2 {
-  background:transparent;
+  background: transparent;
 }
 .BaseBtn1 {
   margin-right: auto;
