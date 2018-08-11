@@ -4,21 +4,18 @@
     span {{currentTitle}}
     div.date(v-if="currentTitle == '我的一天'") {{now}}
   .Btngroup.container
-    BaseBtn.More(@click.stop="toggle_dropdown")
+    BaseBtn.Ellipsis-h(@click.stop="$store.commit('toggle_dropdown')")
       font-awesome-icon(icon="ellipsis-h")
-    BaseBtn.Tips(v-if="selectedTabIndex === 0")
+    BaseBtn.Lightbulb(v-if="$store.state.selectedTabIndex === 0")
       font-awesome-icon(icon="lightbulb")
-    BaseBtn.Users(v-if="selectedTabIndex >= 3")
+    BaseBtn.Users(v-if="$store.state.selectedTabIndex >= 3")
       font-awesome-icon(icon="users")
     transition(
       name="fade"
       enter-active-class="animated fast fadeIn"
       leave-active-class="animated fast fadeOut"
     )
-      Dropdown.Dropdown(
-        v-show="hasDropdown"
-        :selectedTabIndex="selectedTabIndex"
-      )
+      Dropdown.Dropdown(v-show="$store.state.hasDropdown")
     //- transition(
     //-   name="fade"
     //-   enter-active-class="animated bounceInRight"
@@ -41,17 +38,8 @@ export default {
   },
   props: {
     currentTitle: String,
-    selectedTabIndex: Number,
-  },
-  data() {
-    return {
-      global: this.GLOBAL,
-    }
   },
   computed: {
-    hasDropdown() {
-      return this.global.hasDropdown
-    },
     now() {
       const originDate = new Date()
       let day = originDate.getDay() // 获取当前的星期
@@ -84,18 +72,6 @@ export default {
       return `${month}月${date}日，星期${day} `
     },
   },
-  methods: {
-    toggle_dropdown() {
-      if (this.hasDropdown) {
-        this.$set(this.GLOBAL, 'hasDropdown', false)
-      } else {
-        this.global.hasDropdown = true
-      }
-    },
-    say(el) {
-      console.log(el)
-    },
-  },
 }
 </script>
 
@@ -117,8 +93,8 @@ export default {
 .Btngroup {
   flex-direction: row-reverse;
 }
-.More,
-.Tips,
+.Ellipsis-h,
+.Lightbulb,
 .Users {
   width: 3rem;
   padding: 0.2rem 0.6rem;

@@ -1,7 +1,7 @@
 <template lang="pug">
   .Tab.container.hv-center(
-    :class="{active: tab.index === selectedTabIndex}"
-    @click="$emit('update:selectedTabIndex', tab.index)"
+    :class="{active: tab.index === $store.state.selectedTabIndex}"
+    @click="$store.commit('update_selectedTabIndex', { newSelectedTabID :tab.index})"
   )
     .Icon.container
       font-awesome-icon(
@@ -31,20 +31,28 @@
 import BaseInput from './BaseInput.vue'
 export default {
   components: {
-    BaseInput,
+    BaseInput
   },
   props: {
-    tab: Object,
-    selectedTabIndex: Number,
+    tab: {
+      type: Object,
+      default() {
+        return { d: 'hello' }
+      }
+    }
+    // selectedTabIndex: Number,
   },
-  data() {
-    return {
-      icon: {
+  computed: {
+    icon() {
+      return {
         sun: this.tab.index == 0,
         star: this.tab.index == 1,
         clipboard: this.tab.index == 2,
-        list: this.tab.index >= 3,
-      },
+        list: this.tab.index >= 3
+      }
+    },
+    selectedTabIndex() {
+      return this.$store.state.selectedTabIndex
     }
   },
   mounted() {
@@ -54,10 +62,9 @@ export default {
   },
   methods: {
     update_tabTitle(newName) {
-      // this.$set(this.tab, 'title', newName)// DOM 操作
-      this.tab.title = newName // 也能生效，神奇. 说明这改变了值的地址
-    },
-  },
+      this.tab.title = newName
+    }
+  }
 }
 </script>
 

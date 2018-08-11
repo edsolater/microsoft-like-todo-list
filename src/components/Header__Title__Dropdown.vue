@@ -16,7 +16,7 @@
         BaseBtn.Background-color(
           v-for="colorName in availableBackgroundNames"
           :key="colorName"
-          :style="GLOBAL.styleLibrary[colorName]"
+          :style="$store.state.styleLibrary[colorName]"
           @click="update_theme(colorName)"
         )
 </template>
@@ -27,23 +27,17 @@ export default {
   components: {
     BaseBtn,
   },
-  props: {
-    selectedTabIndex: Number,
-  },
   computed: {
-    tab() {
-      return this.GLOBAL.tabs[this.selectedTabIndex]
-    },
     availableBackgroundNames() {
-      return Object.keys(this.GLOBAL.styleLibrary)
+      return Object.keys(this.$store.state.styleLibrary)
     },
   },
   methods: {
     update_theme(newColorName) {
-      this.GLOBAL.tabs[this.selectedTabIndex].themes.colorName = newColorName
+      this.$store.commit('update_theme',{newColorName})
     },
     show_sortBar() {
-      this.tab.themes.hasSortBar = true
+      this.$store.commit('show_sortBar')
     },
   },
 }

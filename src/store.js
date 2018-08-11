@@ -6,26 +6,25 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {},
   state: {
-    todoIDCounter: 10,
-    tabIDCounter: 10,
     hasDropdown: false,
+    selectedTabIndex: 0,
     styleLibrary: {
       blueviolet: {
         backgroundImage:
-          'linear-gradient(to right, mediumslateblue, dodgerblue)',
+          'linear-gradient(to right, mediumslateblue, dodgerblue)'
       },
       orange: {
-        backgroundImage: 'linear-gradient(to right, #eb6566, #edbf9c)',
+        backgroundImage: 'linear-gradient(to right, #eb6566, #edbf9c)'
       },
       orchid: {
-        backgroundImage: 'linear-gradient(to right, darkorchid, orchid)',
+        backgroundImage: 'linear-gradient(to right, darkorchid, orchid)'
       },
       springgreen: {
-        backgroundImage: 'linear-gradient(to right, #5da848, #adde69)',
+        backgroundImage: 'linear-gradient(to right, #5da848, #adde69)'
       },
       dodgerblue: {
-        backgroundImage: 'linear-gradient(to right, deepskyblue, lightskyblue)',
-      },
+        backgroundImage: 'linear-gradient(to right, deepskyblue, lightskyblue)'
+      }
     },
     tabs: [
       // 这些是锁定的特殊tags
@@ -36,8 +35,8 @@ export default new Vuex.Store({
         themes: {
           colorName: 'springgreen',
           backgroundImage: 'car',
-          hasSortBar: true,
-        },
+          hasSortBar: true
+        }
       },
       {
         index: 1,
@@ -46,8 +45,8 @@ export default new Vuex.Store({
         themes: {
           colorName: 'dodgerblue',
           backgroundImage: 'car',
-          hasSortBar: true,
-        },
+          hasSortBar: true
+        }
       },
       {
         index: 2,
@@ -56,8 +55,8 @@ export default new Vuex.Store({
         themes: {
           colorName: 'dodgerblue',
           backgroundImage: 'car',
-          hasSortBar: true,
-        },
+          hasSortBar: true
+        }
       },
       // 这些是非锁定的普通repos
       {
@@ -67,9 +66,9 @@ export default new Vuex.Store({
         themes: {
           colorName: 'dodgerblue',
           backgroundImage: 'car',
-          hasSortBar: true,
-        },
-      },
+          hasSortBar: true
+        }
+      }
     ],
     todos: [
       {
@@ -77,58 +76,89 @@ export default new Vuex.Store({
         content: '一与二',
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [0, 1],
+        belongToTabIDs: [0, 1]
       },
       {
         dateCreated: Math.random(),
         content: '一与二',
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [0, 1],
+        belongToTabIDs: [0, 1]
       },
       {
         dateCreated: Math.random(),
         content: '一与二',
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [0, 1],
+        belongToTabIDs: [0, 1]
       },
       {
         dateCreated: Math.random(),
         content: '二',
         isFinished: true,
         isStared: false,
-        belongToTabIDs: [1],
+        belongToTabIDs: [1]
       },
       {
         dateCreated: Math.random(),
         content: '三',
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [2],
+        belongToTabIDs: [2]
       },
       {
         dateCreated: Math.random(),
         content: '四',
         isFinished: true,
         isStared: false,
-        belongToTabIDs: [1],
+        belongToTabIDs: [1]
       },
       {
         dateCreated: Math.random(),
         content: '五',
         isFinished: true,
         isStared: false,
-        belongToTabIDs: [0, 1],
-      },
+        belongToTabIDs: [0, 1]
+      }
     ],
     prodiles: {
       user: {
-        name: 'edsolater',
-      },
-    },
+        name: 'edsolater'
+      }
+    }
   },
-  getters: {},
-  mutations: {},
-  actions: {},
+  getters: {
+    currentTab(state) {
+      return state.tabs[state.selectedTabIndex]
+    },
+    currentTodos(state) {
+      return state.todos.filter(todo =>
+        todo.belongToTabIDs.includes(state.selectedTabIndex)
+      )
+    }
+  },
+  mutations: {
+    cancel_dropdown(state) {
+      state.hasDropdown = false
+    },
+    create_repo(state, { newRepo }) {
+      state.tabs.push(newRepo)
+    },
+    create_todo(state, { newTodo }) {
+      state.todos.push(newTodo)
+    },
+    show_sortBar(state) {
+      state.tabs[state.selectedTabIndex].themes.hasSortBar = true
+    },
+    toggle_dropdown(state) {
+      state.hasDropdown = !state.hasDropdown
+    },
+    update_selectedTabIndex(state, { newSelectedTabID }) {
+      state.selectedTabIndex = newSelectedTabID
+    },
+    update_theme(state, { newColorName }) {
+      state.tabs[state.selectedTabIndex].themes.colorName = newColorName
+    }
+  },
+  actions: {}
 })

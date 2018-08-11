@@ -9,13 +9,11 @@
         v-for="todo in currentTodos"
         :key="todo.dateCreated"
         :todo="todo"
-        :selectedTabIndex="selectedTabIndex"
         @toggle:isFinished="toggle_isFinished"
         @toggle:isStared="toggle_isStared"
       )
     TodoBar.TodoBar(
-      :selectedTabIndex="selectedTabIndex"
-      @create:todo="create_todo"
+      @create:todo="$store.commit('create_todo',{newTodo:$event})"
     )
 </template>
 
@@ -25,29 +23,24 @@ import TodoBar from './Todos__TodoBar'
 export default {
   components: {
     Todo,
-    TodoBar,
-  },
-  props: {
-    selectedTabIndex: Number,
+    TodoBar
   },
   data() {
     return {
-      todos: this.GLOBAL.todos,
-      tabs: this.GLOBAL.tabs,
+      todos: this.$store.state.todos,
+      tabs: this.$store.state.tabs
     }
   },
   computed: {
-    currentTodos() {
-      // 选出 todos 中属于当前 tab 的 todos
-      return this.todos.filter(todo =>
-        todo.belongToTabIDs.includes(this.selectedTabIndex),
-      )
+    selectedTabIndex(){
+      return this.$store.state.selectedTabIndex
     },
+    // 选出 todos 中属于当前 tab 的 todos
+    currentTodos() {
+      return this.$store.getters.currentTodos
+    }
   },
   methods: {
-    create_todo(newTodo) {
-      this.todos.push(newTodo)
-    },
     toggle_isFinished(todo) {
       if (todo.isFinished) {
         this.$set(todo, 'isFinished', false)
@@ -61,8 +54,8 @@ export default {
       } else {
         this.$set(todo, 'isStared', true)
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

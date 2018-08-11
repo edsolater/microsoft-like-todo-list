@@ -1,22 +1,17 @@
 <template lang="pug">
   #app.container(
-    @click="say"
+    @click="cancel_dropdown"
   )
     .Panel
       .container.Profiles-and-searchBtn
         Profiles.Profiles
         SearchBtn.SearchBtn
       Tabs.Tabs(
-        :selectedTabIndex="selectedTabIndex"
         @update:selectedTabIndex="update_selectedTabIndex"
       )
     .WorkSpace
-      Header.Header(
-        :selectedTabIndex="selectedTabIndex"
-      )
-      Todos.Todos(
-        :selectedTabIndex="selectedTabIndex"
-      )
+      Header.Header
+      Todos.Todos
 </template>
 
 <script>
@@ -39,19 +34,12 @@ export default {
     Header,
     Todos
   },
-  data() {
-    return {
-      selectedTabIndex: 0,
-      hasDropdown: this.GLOBAL.hasDropdown
-    }
-  },
   methods: {
     update_selectedTabIndex(newSelectedTabID) {
-      this.selectedTabIndex = newSelectedTabID
+      this.$store.commit('update_selectedTabIndex',{newSelectedTabID})
     },
-    say(){
-      
-      this.GLOBAL.hasDropdown = false
+    cancel_dropdown(){
+      this.$store.commit('cancel_dropdown')
     }
   }
 }

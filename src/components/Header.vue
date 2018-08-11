@@ -2,7 +2,6 @@
   .Header.container.vertical(:style="currentStyle")
     Title.Title(
       :currentTitle="currentTitle"
-      :selectedTabIndex="selectedTabIndex"
     )
     SortBar.SortBar(
       v-if="isSortBarShowed"
@@ -18,18 +17,18 @@ import SortBar from './Header__SortBar.vue'
 export default {
   components: {
     Title,
-    SortBar,
-  },
-  props: {
-    selectedTabIndex: Number,
+    SortBar
   },
   data() {
     return {
-      todos: this.GLOBAL.todos,
-      tabs: this.GLOBAL.tabs,
+      todos: this.$store.state.todos,
+      tabs: this.$store.state.tabs
     }
   },
   computed: {
+    selectedTabIndex() {
+      return this.$store.state.selectedTabIndex
+    },
     currentTitle() {
       return this.tabs[this.selectedTabIndex].title
     },
@@ -38,15 +37,15 @@ export default {
     },
     currentStyle() {
       const currentColorName = this.tabs[this.selectedTabIndex].themes.colorName
-      return this.GLOBAL.styleLibrary[currentColorName]
-    },
+      return this.$store.state.styleLibrary[currentColorName]
+    }
   },
   methods: {
     toggle_hasSortBar() {
-      this.GLOBAL.tabs[this.selectedTabIndex].themes.hasSortBar = !this.GLOBAL
-        .tabs[this.selectedTabIndex].themes.hasSortBar // 调用setter，所以有效！
-    },
-  },
+      this.$store.state.tabs[this.selectedTabIndex].themes.hasSortBar = !this
+        .$store.state.tabs[this.selectedTabIndex].themes.hasSortBar // 调用setter，所以有效！
+    }
+  }
 }
 </script>
 

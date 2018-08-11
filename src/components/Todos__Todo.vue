@@ -22,9 +22,16 @@ import BaseBtn from './BaseBtn--style1.vue'
 export default {
   components: { BaseBtn },
   props: {
-    todo: Object,
-    selectedTabIndex: Number,
+    todo: {
+      type: Object,
+      default: ()=>({})
+    },
   },
+  data(){
+    return{
+      selectedTabIndex: this.$store.state.selectedTabIndex
+    }
+  }
 }
 </script>
 

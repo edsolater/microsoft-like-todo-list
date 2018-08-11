@@ -7,8 +7,6 @@
         placeholder="添加待办事项"
         v-model="inputText" 
         @keydown.enter="create_todo" /* 会向父级发送一个 create:todo 事件，并附带 inputText 的数据 */
-        @focus="isFocused = true"
-        @blur="isFocused = false"
       )
     .Times.container(v-if="inputText" @click="inputText=''")
       font-awesome-icon(icon="times")
@@ -22,40 +20,34 @@
 import BaseInput from './BaseInput.vue'
 export default {
   components: {
-    BaseInput,
-  },
-  props: {
-    selectedTabIndex: Number,
+    BaseInput
   },
   data() {
     return {
-      inputText: '',
-      isFocused: false,
+      inputText: ''
     }
   },
   computed: {
-    readyToPush() {
-      if (this.inputText || this.isFocused) {
-        return true
-      } else {
-        return false
-      }
-    },
+    selectedTabIndex() {
+      return this.$store.state.selectedTabIndex
+    }
   },
   methods: {
     create_todo() {
+      // 不能接受空值
+      if (!this.inputText.trim()) return
       const newTodo = {
         dateCreated: Date.now(),
         content: this.inputText,
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [this.selectedTabIndex],
+        belongToTabIDs: [this.selectedTabIndex]
       }
       this.$emit('create:todo', newTodo)
       // 清空 input 里的数据内容
       this.inputText = ''
-    },
-  },
+    }
+  }
 }
 </script>
 

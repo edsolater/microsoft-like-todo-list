@@ -1,11 +1,9 @@
 <template lang="pug">
   .Tabs
     Tab.TabTag(
-      v-for="tab in tags"
-      :key="tab.index"
-      :tab="tab"
-      :selectedTabIndex="selectedTabIndex"
-      @update:selectedTabIndex="$emit('update:selectedTabIndex', $event)"
+      v-for="tag in tags"
+      :key="tag.index"
+      :tab="tag"
     )
     hr
     transition-group(
@@ -14,11 +12,9 @@
       enter-active-class="animated fadeIn"
     )
       Tab.TabRepo(
-        v-for="tab in repos"
-        :key="tab.index"
-        :tab="tab"
-        :selectedTabIndex="selectedTabIndex"
-        @update:selectedTabIndex="$emit('update:selectedTabIndex', $event)"
+        v-for="repo in repos"
+        :key="repo.index"
+        :tab="repo"
       )
     TabBar.TabBar(
       @create:repo="create_repo"
@@ -31,13 +27,10 @@ import TabBar from './Tabs__TabBar.vue'
 
 export default {
   components: { Tab, TabBar },
-  props: {
-    selectedTabIndex: Number,
-  },
   data() {
     return {
-      todos: this.GLOBAL.todos,
-      tabs: this.GLOBAL.tabs,
+      todos: this.$store.state.todos,
+      tabs: this.$store.state.tabs,
     }
   },
   computed: {
@@ -49,13 +42,8 @@ export default {
     },
   },
   methods: {
-    // event 传来的是 tag 对象
-    delete_repo(tag) {
-      const index = this.tabs.indexOf(tag)
-      this.tabs.splice(index, 1)
-    },
     create_repo() {
-      const newTab = {
+      const newRepo = {
         index: this.tabs.length,
         title: '待输入',
         isEditable: true,
@@ -65,8 +53,9 @@ export default {
           hasSortBar: true,
         },
       }
-      this.tabs.push(newTab)
-      this.$emit('update:selectedTabIndex', this.tabs.length - 1)
+      // 注意发生的先后顺序，决定了 index 要不要减一
+      this.$store.commit('create_repo', {newRepo})
+      this.$store.commit('update_selectedTabIndex', {newSelectedTabID : this.tabs.length -1})
     },
   },
 }
