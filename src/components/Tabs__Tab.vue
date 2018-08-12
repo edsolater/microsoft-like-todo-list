@@ -16,7 +16,7 @@
 
 
 <script>
-import BaseInput from './BaseInput.vue'
+import BaseInput from './BaseInput'
 
 import { mapState } from 'vuex'
 export default {

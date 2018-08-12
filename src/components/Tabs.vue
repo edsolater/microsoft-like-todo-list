@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import Tab from './Tabs__Tab.vue'
-import TabBar from './Tabs__TabBar.vue'
+import Tab from './Tabs__Tab'
+import TabBar from './Tabs__TabBar'
 import { mapState, mapGetters } from 'vuex'
 
 export default {

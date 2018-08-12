@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import BaseBtn from './BaseBtn--style2.vue'
-import Dropdown from './Header__Title__Dropdown.vue'
+import BaseBtn from './BaseBtn--style2'
+import Dropdown from './Header__Title__Dropdown'
 export default {
   components: {
     BaseBtn,

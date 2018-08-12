@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Title from './Header__Title.vue'
-import SortBar from './Header__SortBar.vue'
+import Title from './Header__Title'
+import SortBar from './Header__SortBar'
 
 export default {
   components: {

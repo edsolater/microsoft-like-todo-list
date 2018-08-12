@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import BaseBtn from './BaseBtn--style1.vue'
+import BaseBtn from './BaseBtn--style1'
 export default {
   components: {
     BaseBtn,

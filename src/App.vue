@@ -36,9 +36,6 @@ export default {
     // Workspace
     Header,
     Todos // @hello 
-    // TODO: sdfsdf $lksjdfasd
-    // $asd as asd  af
-    // @hello if it issdf
   },
   methods: {
     ...mapMutations(['$cancel_dropdown'])

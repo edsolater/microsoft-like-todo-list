@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Btn from './BaseBtn--style1.vue'
+import Btn from './BaseBtn--style1'
 export default {
   components: {
     Btn
