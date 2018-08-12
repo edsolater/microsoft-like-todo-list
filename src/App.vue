@@ -1,6 +1,10 @@
 <template lang="pug">
   #app.container(
-    @click="$cancel_dropdown"
+    @click=`
+      if ($store.state.hasDropdown) {
+        $cancel_dropdown()
+      }
+    `
   )
     .Panel
       .Profiles-and-searchBtn.container
