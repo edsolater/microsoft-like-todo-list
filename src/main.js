@@ -5,10 +5,9 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-import _global from './DataBase.js'
 import store from './store'
 
-Vue.prototype.GLOBAL = _global
+
 new Vue({
   store,
   render: h => h(App)

@@ -26,24 +26,24 @@ export default {
     }
   },
   computed: {
-    selectedTabIndex() {
-      return this.$store.state.selectedTabIndex
+    selectedIndex() {
+      return this.$store.state.selectedIndex
     },
     currentTitle() {
-      return this.tabs[this.selectedTabIndex].title
+      return this.tabs[this.selectedIndex].title
     },
     isSortBarShowed() {
-      return this.tabs[this.selectedTabIndex].themes.hasSortBar
+      return this.tabs[this.selectedIndex].themes.hasSortBar
     },
     currentStyle() {
-      const currentColorName = this.tabs[this.selectedTabIndex].themes.colorName
+      const currentColorName = this.tabs[this.selectedIndex].themes.colorName
       return this.$store.state.styleLibrary[currentColorName]
     }
   },
   methods: {
     toggle_hasSortBar() {
-      this.$store.state.tabs[this.selectedTabIndex].themes.hasSortBar = !this
-        .$store.state.tabs[this.selectedTabIndex].themes.hasSortBar // 调用setter，所以有效！
+      this.$store.state.tabs[this.selectedIndex].themes.hasSortBar = !this
+        .$store.state.tabs[this.selectedIndex].themes.hasSortBar // 调用setter，所以有效！
     }
   }
 }

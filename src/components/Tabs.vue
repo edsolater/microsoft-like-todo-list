@@ -15,49 +15,47 @@
         v-for="repo in repos"
         :key="repo.index"
         :tab="repo"
+        @update:tabTitle="$update_tabTitle"
       )
     TabBar.TabBar(
-      @create:repo="create_repo"
+      @create:repo="$create_repo"
     )
 </template>
 
 <script>
 import Tab from './Tabs__Tab.vue'
 import TabBar from './Tabs__TabBar.vue'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: { Tab, TabBar },
-  data() {
-    return {
-      todos: this.$store.state.todos,
-      tabs: this.$store.state.tabs,
-    }
-  },
   computed: {
-    tags() {
-      return this.tabs.slice(0, 3)
-    },
-    repos() {
-      return this.tabs.slice(3)
-    },
+    ...mapState(['todos', 'tabs']),
+    ...mapGetters(['tags', 'repos'])
   },
   methods: {
-    create_repo() {
+    $create_repo() {
       const newRepo = {
         index: this.tabs.length,
         title: '待输入',
         isEditable: true,
+        iconName:'list',
         themes: {
-          colorName: 'springgreen',
+          colorName: 'dodgerblue',
           backgroundImage: 'car',
-          hasSortBar: true,
-        },
+          hasSortBar: true
+        }
       }
       // 注意发生的先后顺序，决定了 index 要不要减一
-      this.$store.commit('create_repo', {newRepo})
-      this.$store.commit('update_selectedTabIndex', {newSelectedTabID : this.tabs.length -1})
+      this.$store.commit('$create_repo', { newRepo })
+      this.$store.commit('$update_selectedIndex', {
+        index: this.tabs.length - 1
+      })
     },
-  },
+    $update_tabTitle(payload) {
+      this.$store.commit('$update_tabTitle', payload)
+    }
+  }
 }
 </script>
 

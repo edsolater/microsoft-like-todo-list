@@ -13,7 +13,7 @@
         @toggle:isStared="toggle_isStared"
       )
     TodoBar.TodoBar(
-      @create:todo="$store.commit('create_todo',{newTodo:$event})"
+      @create:todo="$store.commit('$create_todo',{newTodo:$event})"
     )
 </template>
 
@@ -32,8 +32,8 @@ export default {
     }
   },
   computed: {
-    selectedTabIndex(){
-      return this.$store.state.selectedTabIndex
+    selectedIndex(){
+      return this.$store.state.selectedIndex
     },
     // 选出 todos 中属于当前 tab 的 todos
     currentTodos() {

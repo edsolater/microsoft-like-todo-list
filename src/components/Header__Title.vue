@@ -4,11 +4,11 @@
     span {{currentTitle}}
     div.date(v-if="currentTitle == '我的一天'") {{now}}
   .Btngroup.container
-    BaseBtn.Ellipsis-h(@click.stop="$store.commit('toggle_dropdown')")
+    BaseBtn.Ellipsis-h(@click.stop="$store.commit('$toggle_dropdown')")
       font-awesome-icon(icon="ellipsis-h")
-    BaseBtn.Lightbulb(v-if="$store.state.selectedTabIndex === 0")
+    BaseBtn.Lightbulb(v-if="$store.state.selectedIndex === 0")
       font-awesome-icon(icon="lightbulb")
-    BaseBtn.Users(v-if="$store.state.selectedTabIndex >= 3")
+    BaseBtn.Users(v-if="$store.state.selectedIndex >= 3")
       font-awesome-icon(icon="users")
     transition(
       name="fade"

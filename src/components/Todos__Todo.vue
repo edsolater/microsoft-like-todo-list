@@ -8,7 +8,7 @@
       )
     .Content.container
       span.upper(:class="todo.isFinished ? 'todo-done':''") {{todo.content}}
-      small.below(v-if="selectedTabIndex <= 2") To-Do
+      small.below(v-if="selectedIndex <= 2") To-Do
     .Star.container
       font-awesome-icon(
         icon="star"
@@ -29,7 +29,7 @@ export default {
   },
   data(){
     return{
-      selectedTabIndex: this.$store.state.selectedTabIndex
+      selectedIndex: this.$store.state.selectedIndex
     }
   }
 }

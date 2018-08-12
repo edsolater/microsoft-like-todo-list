@@ -1,26 +1,14 @@
 <template lang="pug">
   .Tab.container.hv-center(
-    :class="{active: tab.index === $store.state.selectedTabIndex}"
-    @click="$store.commit('update_selectedTabIndex', { newSelectedTabID :tab.index})"
+    :class="{active: tab.index === $store.state.selectedIndex}"
+    @click="$store.commit('$update_selectedIndex', { index :tab.index})"
   )
-    .Icon.container
+    .TabIcon.container
       font-awesome-icon(
-        icon="sun"
-        v-if="tab.index === 0"
+        :icon="tab.iconName"
+        :style="{color:tab.themes.colorName}"
       )
-      font-awesome-icon(
-        icon="star"
-        v-if="tab.index === 1"
-      )
-      font-awesome-icon(
-        icon="clipboard-check"
-        v-if="tab.index === 2"
-      )
-      font-awesome-icon(
-        icon="list"
-        v-if="tab.index >= 3"
-      )
-    .Title.flex-auto(
+    .TabTitle.flex-auto(
       :contenteditable="tab.isEditable"
       @blur="update_tabTitle($event.target.textContent)"
     ) {{tab.title}}
@@ -29,6 +17,8 @@
 
 <script>
 import BaseInput from './BaseInput.vue'
+
+import { mapState } from 'vuex'
 export default {
   components: {
     BaseInput
@@ -37,23 +27,31 @@ export default {
     tab: {
       type: Object,
       default() {
-        return { d: 'hello' }
+        return {
+          index: 0,
+          title: 'Default',
+          isEditable: false,
+          themes: {
+            colorName: 'dodgerblue',
+            backgroundImage: 'car',
+            hasSortBar: true
+          }
+        }
       }
     }
-    // selectedTabIndex: Number,
   },
-  computed: {
-    icon() {
-      return {
+  data() {
+    return {
+      icon: {
         sun: this.tab.index == 0,
         star: this.tab.index == 1,
         clipboard: this.tab.index == 2,
         list: this.tab.index >= 3
       }
-    },
-    selectedTabIndex() {
-      return this.$store.state.selectedTabIndex
     }
+  },
+  computed: {
+    ...mapState(['selectedIndex', 'tabs'])
   },
   mounted() {
     if (this.tab.index >= 3) {
@@ -61,8 +59,12 @@ export default {
     }
   },
   methods: {
-    update_tabTitle(newName) {
-      this.tab.title = newName
+    update_tabTitle(title) {
+      const payload = {
+        index: this.tab.index,
+        title: title
+      }
+      this.$emit('update:tabTitle', payload)
     }
   }
 }
@@ -82,13 +84,12 @@ export default {
   border-left-color: rgba(35, 112, 228, 0.788);
   background: rgba(32, 32, 68, 0.06);
 }
-.Icon {
-  color: dodgerblue;
+.TabIcon {
   width: var(--icon-width);
   justify-content: center;
   align-items: center;
 }
-.Title {
+.TabTitle {
   background: transparent;
   cursor: default;
 }

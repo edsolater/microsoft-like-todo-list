@@ -1,14 +1,12 @@
 <template lang="pug">
   #app.container(
-    @click="cancel_dropdown"
+    @click="$cancel_dropdown"
   )
     .Panel
-      .container.Profiles-and-searchBtn
+      .Profiles-and-searchBtn.container
         Profiles.Profiles
         SearchBtn.SearchBtn
-      Tabs.Tabs(
-        @update:selectedTabIndex="update_selectedTabIndex"
-      )
+      Tabs.Tabs
     .WorkSpace
       Header.Header
       Todos.Todos
@@ -22,6 +20,7 @@ import Tabs from './components/Tabs'
 // Workspace
 import Header from './components/Header'
 import Todos from './components/Todos'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'App',
@@ -35,12 +34,7 @@ export default {
     Todos
   },
   methods: {
-    update_selectedTabIndex(newSelectedTabID) {
-      this.$store.commit('update_selectedTabIndex',{newSelectedTabID})
-    },
-    cancel_dropdown(){
-      this.$store.commit('cancel_dropdown')
-    }
+    ...mapMutations(['$cancel_dropdown'])
   }
 }
 </script>

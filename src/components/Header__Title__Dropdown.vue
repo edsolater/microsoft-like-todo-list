@@ -3,7 +3,7 @@
     @click.stop
   )
     .Item.container(
-      @click="show_sortBar"
+      @click="$show_sortBar"
     )
       .Icon.container.hv-center
         font-awesome-icon(icon="sort-amount-down")
@@ -17,7 +17,7 @@
           v-for="colorName in availableBackgroundNames"
           :key="colorName"
           :style="$store.state.styleLibrary[colorName]"
-          @click="update_theme(colorName)"
+          @click="$update_theme(colorName)"
         )
 </template>
 
@@ -33,11 +33,11 @@ export default {
     },
   },
   methods: {
-    update_theme(newColorName) {
-      this.$store.commit('update_theme',{newColorName})
+    $update_theme(newColorName) {
+      this.$store.commit('$update_theme',{newColorName})
     },
-    show_sortBar() {
-      this.$store.commit('show_sortBar')
+    $show_sortBar() {
+      this.$store.commit('$show_sortBar')
     },
   },
 }

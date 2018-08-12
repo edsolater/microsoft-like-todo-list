@@ -6,13 +6,13 @@
       BaseInput.BaseInput(
         placeholder="添加待办事项"
         v-model="inputText" 
-        @keydown.enter="create_todo" /* 会向父级发送一个 create:todo 事件，并附带 inputText 的数据 */
+        @keydown.enter="$create_todo" /* 会向父级发送一个 create:todo 事件，并附带 inputText 的数据 */
       )
     .Times.container(v-if="inputText" @click="inputText=''")
       font-awesome-icon(icon="times")
     .Text.container(
       v-if="inputText"
-      @click="create_todo"
+      @click="$create_todo"
     ) 添加
 </template>
 
@@ -28,12 +28,12 @@ export default {
     }
   },
   computed: {
-    selectedTabIndex() {
-      return this.$store.state.selectedTabIndex
+    selectedIndex() {
+      return this.$store.state.selectedIndex
     }
   },
   methods: {
-    create_todo() {
+    $create_todo() {
       // 不能接受空值
       if (!this.inputText.trim()) return
       const newTodo = {
@@ -41,7 +41,7 @@ export default {
         content: this.inputText,
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [this.selectedTabIndex]
+        belongToTabIDs: [this.selectedIndex]
       }
       this.$emit('create:todo', newTodo)
       // 清空 input 里的数据内容
