@@ -16,9 +16,6 @@ export default {
   components: {
     BaseBtn,
   },
-  props: {
-    title: String,
-  },
 }
 </script>
 

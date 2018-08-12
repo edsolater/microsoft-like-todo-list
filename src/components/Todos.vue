@@ -8,7 +8,7 @@
       Todo.Todo(
         v-for="todo in currentTodos"
         :key="todo.dateCreated"
-        :todo="todo"
+        :todo="todo"  
         @toggle:isFinished="toggle_isFinished"
         @toggle:isStared="toggle_isStared"
       )
@@ -32,7 +32,7 @@ export default {
     }
   },
   computed: {
-    selectedIndex(){
+    selectedIndex() {
       return this.$store.state.selectedIndex
     },
     // 选出 todos 中属于当前 tab 的 todos

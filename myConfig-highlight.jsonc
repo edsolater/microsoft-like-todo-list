@@ -1,0 +1,59 @@
+{
+  "highlight.regexes": {
+    "(// ?TODO: ?)(.*)": [
+      {
+        "backgroundColor": "#ffcc00",
+        "color": "#1f1f1f",
+        "fontWeight": "bold"
+      },
+      {
+        "backgroundColor": "#d9adee",
+        "color": "#1f1f1f"
+      }
+    ],
+    "(// ?FIXME: ?)(.*)": [
+      {
+        "overviewRulerColor": "#ffff00",
+        "backgroundColor": "#ff0000",
+        "color": "#1f1f1f",
+        "fontWeight": "bold"
+      },
+      {
+        "backgroundColor": "#d90000",
+        "color": "#1f1f1f"
+      }
+    ],
+    // Vue 中以 "$" 开头的 vue属性
+    "(\\$(?:el|store|emit|listeners))": [
+      {
+        "color": "forestgreen",
+        "fontWeight": "bolder"
+      }
+    ],
+    "(vuex|Vuex|vue|Vue)": [
+      {
+        "color": "forestgreen",
+        "fontWeight": "bolder",
+        "fontStyle": "italic"
+      }
+    ],
+    // 交互 Vuex 的事件名
+    "(\\$(?:update|toggle|create)[_][_\\w]+)": [{ "color": "mediumslateblue" }],
+    // 本地 emit事件名
+    "(@?(?:update|toggle|create)[:][_\\w]+)": [{ "color": "lightskyblue" }],
+    // 本地方法名
+    "((?:update|toggle|create)[_][_\\w]+)": [{ "color": "deepskyblue" }],
+    // Vuex map分发 函数
+    "(mapState|mapGetters|mapMutations|mapActions)": [
+      { "color": "dodgerblue" }
+    ],
+    // Vuex store 的方法们
+    "(state|getters|commit|dispatch)": [{ "color": "mediumslateblue" }]
+    // 高亮 v-for 产生的新变量
+    // "( ?\\w+(?= in))": [{
+    //   "backgroundColor":"rgba(255,215,0,.2)",
+    //   "fontWeight":"bolder"
+    // }]
+  },
+  "highlight.regexFlags": "g"
+}

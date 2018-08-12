@@ -15,10 +15,10 @@
         v-for="repo in repos"
         :key="repo.index"
         :tab="repo"
-        @update:tabTitle="$update_tabTitle"
+        @update:tabTitle="update_tabTitle"
       )
     TabBar.TabBar(
-      @create:repo="$create_repo"
+      @create:repo="create_repo"
     )
 </template>
 
@@ -34,12 +34,12 @@ export default {
     ...mapGetters(['tags', 'repos'])
   },
   methods: {
-    $create_repo() {
+    create_repo() {
       const newRepo = {
         index: this.tabs.length,
         title: '待输入',
         isEditable: true,
-        iconName:'list',
+        iconName: 'list',
         themes: {
           colorName: 'dodgerblue',
           backgroundImage: 'car',
@@ -52,7 +52,7 @@ export default {
         index: this.tabs.length - 1
       })
     },
-    $update_tabTitle(payload) {
+    update_tabTitle(payload) {
       this.$store.commit('$update_tabTitle', payload)
     }
   }
