@@ -1,0 +1,174 @@
+{
+  "all": {
+    "hasDropdown": false,
+    "selectedIndex": 4,
+    "backgroundColors": [
+      {
+        "colorName": "dodgerblue",
+        "style": {
+          "backgroundImage": "linear-gradient(to right, mediumslateblue, dodgerblue)"
+        }
+      },
+      {
+        "colorName": "coral",
+        "style": {
+          "backgroundImage": "linear-gradient(to right, #eb6566, #edbf9c)"
+        }
+      },
+      {
+        "colorName": "orchid",
+        "style": {
+          "backgroundImage": "linear-gradient(to right, darkorchid, orchid)"
+        }
+      },
+      {
+        "colorName": "forestgreen",
+        "style": {
+          "backgroundImage": "linear-gradient(to right, #5da848, #adde69)"
+        }
+      },
+      {
+        "colorName": "deepskyblue",
+        "style": {
+          "backgroundImage": "linear-gradient(to right, deepskyblue, lightskyblue)"
+        }
+      }
+    ],
+    "tabs": [
+      {
+        "index": 0,
+        "title": "我的一天",
+        "isEditable": false,
+        "iconName": "sun",
+        "themes": {
+          "colorName": "forestgreen",
+          "backgroundImage": "car",
+          "hasSortBar": true
+        }
+      },
+      {
+        "index": 1,
+        "title": "重要",
+        "isEditable": false,
+        "iconName": "star",
+        "themes": {
+          "colorName": "forestgreen",
+          "backgroundImage": "car",
+          "hasSortBar": true
+        }
+      },
+      {
+        "index": 2,
+        "title": "To-Do",
+        "isEditable": false,
+        "iconName": "clipboard-check",
+        "themes": {
+          "colorName": "dodgerblue",
+          "backgroundImage": "car",
+          "hasSortBar": true
+        }
+      },
+      {
+        "index": 3,
+        "title": "示例 repo",
+        "isEditable": true,
+        "iconName": "list",
+        "themes": {
+          "colorName": "dodgerblue",
+          "backgroundImage": "car",
+          "hasSortBar": true
+        }
+      },
+      {
+        "index": 4,
+        "title": "待输入",
+        "isEditable": true,
+        "iconName": "list",
+        "themes": {
+          "colorName": "dodgerblue",
+          "backgroundImage": "car",
+          "hasSortBar": true
+        }
+      }
+    ],
+    "todos": [
+      {
+        "dateCreated": 0.940344487845407,
+        "content": "一与二",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          0,
+          1
+        ]
+      },
+      {
+        "dateCreated": 0.7354008524229771,
+        "content": "一与二",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          0,
+          1
+        ]
+      },
+      {
+        "dateCreated": 0.9752282291043461,
+        "content": "一与二",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          0,
+          1
+        ]
+      },
+      {
+        "dateCreated": 0.24037873550977862,
+        "content": "二",
+        "isFinished": true,
+        "isStared": false,
+        "belongToTabIDs": [
+          1
+        ]
+      },
+      {
+        "dateCreated": 0.14972908646232397,
+        "content": "三",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          2
+        ]
+      },
+      {
+        "dateCreated": 0.7518536940463485,
+        "content": "四",
+        "isFinished": true,
+        "isStared": false,
+        "belongToTabIDs": [
+          1
+        ]
+      },
+      {
+        "dateCreated": 0.5578225925347657,
+        "content": "五",
+        "isFinished": true,
+        "isStared": false,
+        "belongToTabIDs": [
+          0,
+          1
+        ]
+      },
+      {
+        "dateCreated": 1534238406324,
+        "content": "sdf",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          0
+        ]
+      }
+    ],
+    "profiles": {}
+  }
+}

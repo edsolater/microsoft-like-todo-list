@@ -1,9 +1,9 @@
 <template lang="pug">
   .Tabs
     Tab.TabTag(
-      v-for="this_tag in tags"
-      :key="this_tag.index"
-      :this_tab="this_tag"
+      v-for="vfor_tag in tags"
+      :key="vfor_tag.index"
+      :vfor_tab="vfor_tag"
     )
     hr
     transition-group(
@@ -12,9 +12,9 @@
       enter-active-class="animated fadeIn"
     )
       Tab.TabRepo(
-        v-for="this_repo in repos"
-        :key="this_repo.index"
-        :this_tab="this_repo"
+        v-for="vfor_repo in repos"
+        :key="vfor_repo.index"
+        :vfor_tab="vfor_repo"
         @update:tabTitle="update_tabTitle"
       )
     TabBar.TabBar(

@@ -1,17 +1,17 @@
 <template lang="pug">
   .Tab.container.hv-center(
-    :class="{active: this_tab.index === $store.state.selectedIndex}"
-    @click="$store.commit('UPDATE_SELECTEDINDEX', { index :this_tab.index})"
+    :class="{active: vfor_tab.index === $store.state.selectedIndex}"
+    @click="$store.commit('UPDATE_SELECTEDINDEX', { index :vfor_tab.index})"
   )
     .TabIcon.container
       font-awesome-icon(
-        :icon="this_tab.iconName"
-        :style="{color:this_tab.themes.colorName}"
+        :icon="vfor_tab.iconName"
+        :style="{color:vfor_tab.themes.colorName}"
       )
     .TabTitle.flex-auto(
-      :contenteditable="this_tab.isEditable"
+      :contenteditable="vfor_tab.isEditable"
       @blur="update_tabTitle($event.target.textContent)"
-    ) {{this_tab.title}}
+    ) {{vfor_tab.title}}
 </template>
 
 
@@ -24,7 +24,7 @@ export default {
     BaseInput
   },
   props: {
-    this_tab: {
+    vfor_tab: {
       type: Object,
       default() {
         return {
@@ -43,10 +43,10 @@ export default {
   data() {
     return {
       icon: {
-        sun: this.this_tab.index == 0,
-        star: this.this_tab.index == 1,
-        clipboard: this.this_tab.index == 2,
-        list: this.this_tab.index >= 3
+        sun: this.vfor_tab.index == 0,
+        star: this.vfor_tab.index == 1,
+        clipboard: this.vfor_tab.index == 2,
+        list: this.vfor_tab.index >= 3
       }
     }
   },
@@ -54,14 +54,14 @@ export default {
     ...mapState(['selectedIndex', 'tabs'])
   },
   mounted() {
-    if (this.this_tab.index >= 3) {
+    if (this.vfor_tab.index >= 3) {
       this.$el.children[1].focus() // contenteditable 的DIV也是有效的
     }
   },
   methods: {
     update_tabTitle(title) {
       const payload = {
-        index: this.this_tab.index,
+        index: this.vfor_tab.index,
         title: title
       }
       this.$emit('update:tabTitle', payload)

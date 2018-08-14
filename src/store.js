@@ -12,24 +12,38 @@ export default new Vuex.Store({
   state: {
     hasDropdown: false,
     selectedIndex: 0,
-    styleLibrary: {
-      dodgerblue: {
-        backgroundImage:
-          'linear-gradient(to right, mediumslateblue, dodgerblue)'
+    backgroundColors: [
+      {
+        colorName: 'dodgerblue',
+        style: {
+          backgroundImage: 'linear-gradient(to right, mediumslateblue, dodgerblue)'
+        }
       },
-      coral: {
-        backgroundImage: 'linear-gradient(to right, #eb6566, #edbf9c)'
+      {
+        colorName: 'coral',
+        style: {
+          backgroundImage: 'linear-gradient(to right, #eb6566, #edbf9c)'
+        }
       },
-      orchid: {
-        backgroundImage: 'linear-gradient(to right, darkorchid, orchid)'
+      {
+        colorName: 'orchid',
+        style: {
+          backgroundImage: 'linear-gradient(to right, darkorchid, orchid)'
+        }
       },
-      forestgreen: {
-        backgroundImage: 'linear-gradient(to right, #5da848, #adde69)'
+      {
+        colorName: 'forestgreen',
+        style: {
+          backgroundImage: 'linear-gradient(to right, #5da848, #adde69)'
+        }
       },
-      deepskyblue: {
-        backgroundImage: 'linear-gradient(to right, deepskyblue, lightskyblue)'
+      {
+        colorName: 'deepskyblue',
+        style: {
+          backgroundImage: 'linear-gradient(to right, deepskyblue, lightskyblue)'
+        }
       }
-    },
+    ],
     tabs: [
       // 这些是锁定的特殊tags
       {
@@ -64,94 +78,31 @@ export default new Vuex.Store({
           backgroundImage: 'car',
           hasSortBar: true
         }
-      },
-      // 这些是非锁定的普通repos
-      {
-        index: 3,
-        title: '示例 repo',
-        isEditable: true,
-        iconName: 'list',
-        themes: {
-          colorName: 'dodgerblue',
-          backgroundImage: 'car',
-          hasSortBar: true
-        }
       }
     ],
     todos: [
       {
         dateCreated: Math.random(),
-        content: '一与二',
+        content: `haven't completed yet`,
         isFinished: false,
         isStared: false,
-        belongToTabIDs: [0, 1]
-      },
-      {
-        dateCreated: Math.random(),
-        content: '一与二',
-        isFinished: false,
-        isStared: false,
-        belongToTabIDs: [0, 1]
-      },
-      {
-        dateCreated: Math.random(),
-        content: '一与二',
-        isFinished: false,
-        isStared: false,
-        belongToTabIDs: [0, 1]
-      },
-      {
-        dateCreated: Math.random(),
-        content: '二',
-        isFinished: true,
-        isStared: false,
-        belongToTabIDs: [1]
-      },
-      {
-        dateCreated: Math.random(),
-        content: '三',
-        isFinished: false,
-        isStared: false,
-        belongToTabIDs: [2]
-      },
-      {
-        dateCreated: Math.random(),
-        content: '四',
-        isFinished: true,
-        isStared: false,
-        belongToTabIDs: [1]
-      },
-      {
-        dateCreated: Math.random(),
-        content: '五',
-        isFinished: true,
-        isStared: false,
-        belongToTabIDs: [0, 1]
+        belongToTabIDs: [0, 1, 2]
       }
     ],
-    prodiles: {
+    profiles: {
       user: {
-        name: 'edsolater'
+        name: 'no data'
       }
-    },
-    coins: ['hhjk']
-  },
-  getters: {
-    tags(state) {
-      return state.tabs.slice(0, 3) //前三个是 TAG
-    },
-    repos(state) {
-      return state.tabs.slice(3) // 除了前 3 个，都是 repo
-    },
-    currentTab(state) {
-      return state.tabs[state.selectedIndex]
-    },
-    currentTodos(state) {
-      return state.todos.filter(todo =>
-        todo.belongToTabIDs.includes(state.selectedIndex)
-      )
     }
   },
+
+  getters: {
+    tags: state => state.tabs.slice(0, 3),
+    repos: state => state.tabs.slice(3),
+    currentTab: state => state.tabs[state.selectedIndex],
+    currentTodos: state => state.todos.filter(todo => todo.belongToTabIDs.includes(state.selectedIndex))
+  },
+
   mutations: {
     CANCEL_DROPDOWN(state) {
       state.hasDropdown = false
@@ -177,45 +128,39 @@ export default new Vuex.Store({
     UPDATE_TABTITLE(state, { index, title }) {
       state.tabs[index].title = title
     },
-    SET_COINS(state, coins) {
-      state.coins = coins
+    SET_DATA(state, { property, data }) {
+      state[property] = data
     }
   },
-  actions: {
-    $load_coins({ commit }) {
-      // axios
-      //   .get('//localhost:8080/results')
-      //   // .get('/bd.json')
-      //   .then(res => res.data)
-      //   .then(coins => {
-      //     commit('SET_COINS', coins)
-      //   })
 
-      fetch('//localhost:3000/todoListData')
+  actions: {
+    $load_data({ commit }) {
+      fetch(`//localhost:3000/all`)
         // .get('/bd.json')
         .then(res => res.json())
         .then(data => {
-          commit('SET_COINS', data)
+          for (let property in data) {
+            commit('SET_DATA', {
+              property,
+              data: data[property]
+            })
+          }
         })
     },
-    $update_data(context) {
-      // axios
-      //   .put('//localhost:3000/results/3', {
-      //     hello: new Date().toString()
-      //   })
-      //   .then(res => {
-      //     context.commit('SET_COINS', res.data)
-      //     context.dispatch('$load_coins')
-      //   })
-      const a = { hello: new Date().toString() }
-      fetch('//localhost:3000/results/3', {
+    /**
+     * 暂且使用整体一次替换所有数据
+     */
+    $upload_data({ state }) {
+      fetch('//localhost:3000/all', {
         method: 'PUT',
-        body: JSON.stringify(a),
+        body: JSON.stringify(state), // 因为需要动态改变，property 不能使用 "." 符
         headers: {
-          "content-type": "application/json; chartset=utf-8"
+          'content-type': 'application/json; chartset=utf-8'
         }
       }).then(res => {
-        context.dispatch('$load_coins')
+        console.log(state)
+        console.log(JSON.stringify(state))
+        console.log(res, `uploaded`)
       })
     }
   }

@@ -16,7 +16,7 @@
         BaseBtn.Background-color(
           v-for="colorName in availableBackgroundNames"
           :key="colorName"
-          :style="$store.state.styleLibrary[colorName]"
+          :style="correspondingStyle(colorName)"
           @click="UPDATE_THEME(colorName)"
         )
 </template>
@@ -28,9 +28,7 @@ export default {
     BaseBtn,
   },
   computed: {
-    availableBackgroundNames() {
-      return Object.keys(this.$store.state.styleLibrary)
-    },
+    availableBackgroundNames: vm=> vm.$store.state.backgroundColors.map(colorObj => colorObj.colorName)
   },
   methods: {
     UPDATE_THEME(newColorName) {
@@ -39,6 +37,10 @@ export default {
     SHOW_STORBAR() {
       this.$store.commit('SHOW_STORBAR')
     },
+    correspondingStyle(colorName) {
+      const colorObjectIndex = this.availableBackgroundNames.indexOf(colorName)
+      return this.$store.state.backgroundColors[colorObjectIndex].style
+    }
   },
 }
 </script>

@@ -63,7 +63,7 @@
     ],
 
     // 特殊行为
-    "(:key|:class|:style|this_\\w+)": [{ "color": "yellow" }],
+    "(:key|:class|:style|vfor_\\w+)": [{ "color": "yellow" }],
     // bind(":") 非HTML
     // "(^:\\w+)": [{ "color": "orange" }]
     // 组件名称

@@ -19,25 +19,16 @@ export default {
     Title,
     SortBar
   },
-  data() {
-    return {
-      todos: this.$store.state.todos,
-      tabs: this.$store.state.tabs
-    }
-  },
   computed: {
-    selectedIndex() {
-      return this.$store.state.selectedIndex
-    },
-    currentTitle() {
-      return this.tabs[this.selectedIndex].title
-    },
-    isSortBarShowed() {
-      return this.tabs[this.selectedIndex].themes.hasSortBar
-    },
-    currentStyle() {
-      const currentColorName = this.tabs[this.selectedIndex].themes.colorName
-      return this.$store.state.styleLibrary[currentColorName]
+    todos: vm => vm.$store.state.todos,
+    tabs: vm => vm.$store.state.tabs,
+    selectedIndex: vm => vm.$store.state.selectedIndex,
+    currentTitle: vm => vm.tabs[vm.selectedIndex].title,
+    isSortBarShowed: vm => vm.tabs[vm.selectedIndex].themes.hasSortBar,
+    currentStyle: vm => {
+      const currentColorName = vm.tabs[vm.selectedIndex].themes.colorName
+      const colorObjectIndex = vm.$store.state.backgroundColors.map(colorObj => colorObj.colorName).indexOf(currentColorName)  // 此处应该使用数据库查找
+      return vm.$store.state.backgroundColors[colorObjectIndex].style
     }
   },
   methods: {

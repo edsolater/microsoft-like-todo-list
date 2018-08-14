@@ -5,10 +5,9 @@
         CANCEL_DROPDOWN()
       }
     `
+    @contextmenu.stop="say"
   )
-    div(v-html="$store.state.coins")
-    button(@click="$store.dispatch('$update_data')")
-    //- TODO: 换颜色
+    button.absolute(@click="$store.dispatch('$upload_data')") 上传所有数据
     .Panel
       .Profiles-and-searchBtn.container
         Profiles.Profiles
@@ -20,6 +19,7 @@
 </template>
 
 <script>
+//第一次请求如何让vue在数据来之前不要渲染呢？暂时在一开始就设置默认值解决
 // .Panel
 import Profiles from './components/Profiles'
 import SearchBtn from './components/SearchBtn'
@@ -38,13 +38,16 @@ export default {
     Tabs,
     // .Workspace
     Header,
-    Todos 
+    Todos
   },
   mounted() {
-    this.$store.dispatch('$load_coins')
+    this.$store.dispatch('$load_data')
   },
   methods: {
-    ...mapMutations(['CANCEL_DROPDOWN'])
+    ...mapMutations(['CANCEL_DROPDOWN']),
+    say(){
+      console.log('contextmenu')
+    }
   }
 }
 </script>
@@ -94,9 +97,8 @@ export default {
   flex-direction: column;
 }
 
-.position-absolute {
-  top: 0;
-  left: 0;
+.absolute {
+  position: absolute;
 }
 .info {
   display: none;
