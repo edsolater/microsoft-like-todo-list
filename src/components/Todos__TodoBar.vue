@@ -6,13 +6,13 @@
       BaseInput.BaseInput(
         placeholder="添加待办事项"
         v-model="inputText" 
-        @keydown.enter="$create_todo" /* 会向父级发送一个 create:todo 事件，并附带 inputText 的数据 */
+        @keydown.enter="CREATE_TODO" /* 会向父级发送一个 create:todo 事件，并附带 inputText 的数据 */
       )
     .Times.container(v-if="inputText" @click="inputText=''")
       font-awesome-icon(icon="times")
     .Text.container(
       v-if="inputText"
-      @click="$create_todo"
+      @click="CREATE_TODO"
     ) 添加
 </template>
 
@@ -33,7 +33,7 @@ export default {
     }
   },
   methods: {
-    $create_todo() {
+    CREATE_TODO() {
       // 不能接受空值
       if (!this.inputText.trim()) return
       const newTodo = {

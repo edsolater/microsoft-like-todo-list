@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(Vuex)
+Vue.use(VueAxios, axios)
 
 export default new Vuex.Store({
   strict: true,
@@ -130,7 +133,8 @@ export default new Vuex.Store({
       user: {
         name: 'edsolater'
       }
-    }
+    },
+    coins: ['hhjk']
   },
   getters: {
     tags(state) {
@@ -149,30 +153,70 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    $cancel_dropdown(state) {
+    CANCEL_DROPDOWN(state) {
       state.hasDropdown = false
     },
-    $create_repo(state, { newRepo }) {
+    CREATE_REPO(state, { newRepo }) {
       state.tabs.push(newRepo)
     },
-    $create_todo(state, { newTodo }) {
+    CREATE_TODO(state, { newTodo }) {
       state.todos.push(newTodo)
     },
-    $show_sortBar(state) {
+    SHOW_STORBAR(state) {
       state.tabs[state.selectedIndex].themes.hasSortBar = true
     },
-    $toggle_dropdown(state) {
+    TOGGLE_DROPDOWN(state) {
       state.hasDropdown = !state.hasDropdown
     },
-    $update_selectedIndex(state, { index }) {
+    UPDATE_SELECTEDINDEX(state, { index }) {
       state.selectedIndex = index
     },
-    $update_theme(state, { newColorName }) {
+    UPDATE_THEME(state, { newColorName }) {
       state.tabs[state.selectedIndex].themes.colorName = newColorName
     },
-    $update_tabTitle(state, { index, title }) {
+    UPDATE_TABTITLE(state, { index, title }) {
       state.tabs[index].title = title
+    },
+    SET_COINS(state, coins) {
+      state.coins = coins
     }
   },
-  actions: {}
+  actions: {
+    $load_coins({ commit }) {
+      // axios
+      //   .get('//localhost:8080/results')
+      //   // .get('/bd.json')
+      //   .then(res => res.data)
+      //   .then(coins => {
+      //     commit('SET_COINS', coins)
+      //   })
+
+      fetch('//localhost:3000/todoListData')
+        // .get('/bd.json')
+        .then(res => res.json())
+        .then(data => {
+          commit('SET_COINS', data)
+        })
+    },
+    $update_data(context) {
+      // axios
+      //   .put('//localhost:3000/results/3', {
+      //     hello: new Date().toString()
+      //   })
+      //   .then(res => {
+      //     context.commit('SET_COINS', res.data)
+      //     context.dispatch('$load_coins')
+      //   })
+      const a = { hello: new Date().toString() }
+      fetch('//localhost:3000/results/3', {
+        method: 'PUT',
+        body: JSON.stringify(a),
+        headers: {
+          "content-type": "application/json; chartset=utf-8"
+        }
+      }).then(res => {
+        context.dispatch('$load_coins')
+      })
+    }
+  }
 })

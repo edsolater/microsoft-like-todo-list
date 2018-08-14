@@ -4,7 +4,7 @@
     span {{currentTitle}}
     div.date(v-if="currentTitle == '我的一天'") {{now}}
   .Btngroup.container
-    BaseBtn.Ellipsis-h(@click.stop="$store.commit('$toggle_dropdown')")
+    BaseBtn.Ellipsis-h(@click.stop="$store.commit('TOGGLE_DROPDOWN')")
       font-awesome-icon(icon="ellipsis-h")
     BaseBtn.Lightbulb(v-if="$store.state.selectedIndex === 0")
       font-awesome-icon(icon="lightbulb")

@@ -13,7 +13,7 @@
         @toggle:isStared="toggle_isStared"
       )
     TodoBar.TodoBar(
-      @create:todo="$store.commit('$create_todo',{newTodo:$event})"
+      @create:todo="$store.commit('CREATE_TODO',{newTodo:$event})"
     )
 </template>
 

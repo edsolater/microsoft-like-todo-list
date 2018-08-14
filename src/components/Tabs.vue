@@ -1,9 +1,9 @@
 <template lang="pug">
   .Tabs
     Tab.TabTag(
-      v-for="tag in tags"
-      :key="tag.index"
-      :tab="tag"
+      v-for="this_tag in tags"
+      :key="this_tag.index"
+      :this_tab="this_tag"
     )
     hr
     transition-group(
@@ -12,9 +12,9 @@
       enter-active-class="animated fadeIn"
     )
       Tab.TabRepo(
-        v-for="repo in repos"
-        :key="repo.index"
-        :tab="repo"
+        v-for="this_repo in repos"
+        :key="this_repo.index"
+        :this_tab="this_repo"
         @update:tabTitle="update_tabTitle"
       )
     TabBar.TabBar(
@@ -47,13 +47,13 @@ export default {
         }
       }
       // 注意发生的先后顺序，决定了 index 要不要减一
-      this.$store.commit('$create_repo', { newRepo })
-      this.$store.commit('$update_selectedIndex', {
+      this.$store.commit('CREATE_REPO', { newRepo })
+      this.$store.commit('UPDATE_SELECTEDINDEX', {
         index: this.tabs.length - 1
       })
     },
     update_tabTitle(payload) {
-      this.$store.commit('$update_tabTitle', payload)
+      this.$store.commit('UPDATE_TABTITLE', payload)
     }
   }
 }

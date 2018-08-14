@@ -26,13 +26,13 @@
     // Vue 中以 "$" 开头的 vue属性
     "(\\$(?:el|store|emit|listeners))": [
       {
-        "color": "forestgreen",
+        "color": "lawngreen",
         "fontWeight": "bolder"
       }
     ],
     "(vuex|Vuex|vue|Vue)": [
       {
-        "color": "forestgreen",
+        "color": "lawngreen",
         "fontWeight": "bolder",
         "fontStyle": "italic"
       }
@@ -48,12 +48,29 @@
       { "color": "dodgerblue" }
     ],
     // Vuex store 的方法们
-    "(state|getters|commit|dispatch)": [{ "color": "mediumslateblue" }]
+    "(state|getters|commit|dispatch)": [{ "color": "mediumslateblue" }],
     // 高亮 v-for 产生的新变量
     // "( ?\\w+(?= in))": [{
     //   "backgroundColor":"rgba(255,215,0,.2)",
     //   "fontWeight":"bolder"
     // }]
+    // mustache 语法
+    "(\\{\\{)": [{ "color": "lawngreen" }],
+    "(\\}\\})": [{ "color": "lawngreen" }],
+    // v-XXX 命令
+    "(v-for|v-if|v-else|v-html|v-show|v-model|v-bind|v-on)": [
+      { "color": "lawngreen" }
+    ],
+
+    // 特殊行为
+    "(:key|:class|:style|this_\\w+)": [{ "color": "yellow" }],
+    // bind(":") 非HTML
+    // "(^:\\w+)": [{ "color": "orange" }]
+    // 组件名称
+    "(\\s+[A-Z]\\w+)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "chocolate", "fontWeight": "bolder" }]
+    }
   },
   "highlight.regexFlags": "g"
 }

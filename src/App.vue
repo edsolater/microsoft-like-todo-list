@@ -2,10 +2,13 @@
   #app.container(
     @click=`
       if ($store.state.hasDropdown) {
-        $cancel_dropdown()
+        CANCEL_DROPDOWN()
       }
     `
   )
+    div(v-html="$store.state.coins")
+    button(@click="$store.dispatch('$update_data')")
+    //- TODO: 换颜色
     .Panel
       .Profiles-and-searchBtn.container
         Profiles.Profiles
@@ -17,11 +20,11 @@
 </template>
 
 <script>
-// Panel
+// .Panel
 import Profiles from './components/Profiles'
 import SearchBtn from './components/SearchBtn'
 import Tabs from './components/Tabs'
-// Workspace
+// .Workspace
 import Header from './components/Header'
 import Todos from './components/Todos'
 import { mapMutations } from 'vuex'
@@ -29,16 +32,19 @@ import { mapMutations } from 'vuex'
 export default {
   name: 'App',
   components: {
-    // Panel
+    // .Panel
     Profiles,
     SearchBtn,
     Tabs,
-    // Workspace
+    // .Workspace
     Header,
-    Todos // @hello 
+    Todos 
+  },
+  mounted() {
+    this.$store.dispatch('$load_coins')
   },
   methods: {
-    ...mapMutations(['$cancel_dropdown'])
+    ...mapMutations(['CANCEL_DROPDOWN'])
   }
 }
 </script>
