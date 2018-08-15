@@ -2,7 +2,8 @@
   button.BaseBtn(
     v-on="listeners"
   )
-    slot
+    div.text 上传所有数据
+    font-awesome-icon(icon="upload")
 </template>
 
 <script>
@@ -16,16 +17,19 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .BaseBtn {
-  color: inherit;
-  background: rgba(0,0,0,.2);
-  border:.2rem solid transparent;
-  text-align: center;
-  vertical-align: center;
+  position:absolute;
+  margin-top: auto;
+  width:100%;
+  bottom:0.2rem;
+  color: white;
+  background: transparent;
+  border: none;
 }
-.BaseBtn:hover {
-  border: .2rem solid rgba(0,0,0,.4);
+.text {
+  margin-bottom: .4rem;
 }
 
 </style>

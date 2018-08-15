@@ -6,11 +6,12 @@
       enter-active-class="animated fadeIn"
     )
       Todo.Todo(
-        v-for="todo in currentTodos"
+        v-for="todo in todosBelongToThisTab"
         :key="todo.dateCreated"
         :todo="todo"  
         @toggle:isFinished="toggle_isFinished"
         @toggle:isStared="toggle_isStared"
+        @delete:todoItem="delete_todoItem"
       )
     TodoBar.TodoBar(
       @create:todo="$store.commit('CREATE_TODO',{newTodo:$event})"
@@ -25,35 +26,21 @@ export default {
     Todo,
     TodoBar
   },
-  data() {
-    return {
-      todos: this.$store.state.todos,
-      tabs: this.$store.state.tabs
-    }
-  },
   computed: {
-    selectedIndex() {
-      return this.$store.state.selectedIndex
-    },
-    // 选出 todos 中属于当前 tab 的 todos
-    currentTodos() {
-      return this.$store.getters.currentTodos
-    }
+    todos: vm => vm.$store.state.todos,
+    tabs: vm => vm.$store.state.tabs,
+    selectedIndex: vm => vm.$store.state.selectedIndex,
+    todosBelongToThisTab: vm => vm.$store.getters.todosBelongToThisTab
   },
   methods: {
     toggle_isFinished(todo) {
-      if (todo.isFinished) {
-        this.$set(todo, 'isFinished', false)
-      } else {
-        this.$set(todo, 'isFinished', true)
-      }
+      this.$store.commit('TOGGLE_isFinished', {todo})
     },
     toggle_isStared(todo) {
-      if (todo.isStared) {
-        this.$set(todo, 'isStared', false)
-      } else {
-        this.$set(todo, 'isStared', true)
-      }
+      this.$store.commit('TOGGLE_isStared', {todo})
+    },
+    delete_todoItem(todo) {
+      this.$store.commit('DELETE_TODO', {todo})
     }
   }
 }

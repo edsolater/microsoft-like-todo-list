@@ -1,7 +1,7 @@
 <template lang="pug">
   .Dropdown(
     @click.stop
-  )
+  ) 
     .Item.container(
       @click="SHOW_STORBAR"
     )

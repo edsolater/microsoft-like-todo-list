@@ -27,9 +27,6 @@ export default {
   vertical-align: center;
   height: 100%;
 }
-.BaseBtn:hover {
-  background: rgba(0, 0, 0, 0.15);
-}
 .BaseBtn:hover::after {
   content: '';
   position: absolute;
@@ -37,7 +34,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   background-blend-mode: multiply;
 }
 </style>

@@ -1,14 +1,18 @@
 <template lang="pug">
-  .Todo.container
+  .Todo.container.v-center
     .Check.container
       font-awesome-icon(
         :icon="todo.isFinished ? 'check-circle' : 'circle'"
-        :class=" todo.isFinished ? 'checked' : 'notChecked' "
+        :class=" todo.isFinished ? 'finished' : 'unFinished' "
         @click="$emit('toggle:isFinished', todo)"
       )
     .Content.container
       span.upper(:class="todo.isFinished ? 'todo-done':''") {{todo.content}}
       small.below(v-if="selectedIndex <= 2") To-Do
+    .Delete
+      font-awesome-icon(icon="times"
+        @click="$emit('delete:todoItem', todo)"
+      )
     .Star.container
       font-awesome-icon(
         icon="star"
@@ -24,7 +28,13 @@ export default {
   props: {
     todo: {
       type: Object,
-      default: ()=>({})
+      default: ()=>({
+        dateCreated: Math.random(),
+        content: `haven't completed yet`,
+        isFinished: false,
+        isStared: false,
+        belongToTabIDs: [0, 1, 2]
+      })
     },
   },
   data(){
@@ -57,10 +67,10 @@ export default {
   font-size: 1.2rem;
   width: var(--icon-width);
 }
-.checked {
+.finished {
   color: green;
 }
-.notChecked {
+.unFinished {
   color: var(--disabled-color);
 }
 .Content {
@@ -74,6 +84,14 @@ export default {
 small {
   font-size: 0.8em;
   color: lightgrey;
+}
+.Delete {
+  margin-right:1rem;
+  color: var(--disabled-color);
+  transition: color .2s;
+}
+.Delete:hover {
+  color: crimson;
 }
 .Star {
   justify-content: center;

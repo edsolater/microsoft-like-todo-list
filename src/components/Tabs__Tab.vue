@@ -1,17 +1,23 @@
 <template lang="pug">
   .Tab.container.hv-center(
     :class="{active: vfor_tab.index === $store.state.selectedIndex}"
-    @click="$store.commit('UPDATE_SELECTEDINDEX', { index :vfor_tab.index})"
+    @click="update_selectedIndex"
   )
-    .TabIcon.container
+    .TabIcon.container.center
       font-awesome-icon(
         :icon="vfor_tab.iconName"
         :style="{color:vfor_tab.themes.colorName}"
       )
-    .TabTitle.flex-auto(
+    .TabTitle(
       :contenteditable="vfor_tab.isEditable"
       @blur="update_tabTitle($event.target.textContent)"
+      @keydown.enter.prevent="update_tabTitle($event.target.textContent)"
     ) {{vfor_tab.title}}
+    .TabClose(
+      v-if="vfor_tab.isEditable"
+      @click.stop='delete_tab'
+    )
+      font-awesome-icon(icon="times")
 </template>
 
 
@@ -65,6 +71,12 @@ export default {
         title: title
       }
       this.$emit('update:tabTitle', payload)
+    },
+    update_selectedIndex() {
+      this.$store.commit('UPDATE_SELECTEDINDEX', { index: this.vfor_tab.index })
+    },
+    delete_tab() {
+      this.$store.dispatch('delete_tab', { tab: this.vfor_tab })
     }
   }
 }
@@ -90,8 +102,20 @@ export default {
   align-items: center;
 }
 .TabTitle {
+  flex: auto;
   background: transparent;
   cursor: default;
+}
+.TabClose {
+  margin-right: 1.5rem;
+  display: none;
+  color: var(--disabled-color);
+}
+.TabClose:hover {
+  color: crimson;
+}
+.Tab:hover > .TabClose {
+  display: block;
 }
 </style>
 

@@ -1,14 +1,18 @@
 <template lang="pug">
+  //- 阻止右键菜单
   #app.container(
     @click=`
       if ($store.state.hasDropdown) {
         CANCEL_DROPDOWN()
       }
     `
-    @contextmenu.stop="say"
+    @contextmenu.prevent
   )
-    button.absolute(@click="$store.dispatch('$upload_data')") 上传所有数据
     .Panel
+      .UploadPanel
+        BaseBtn.Uploadbutton(
+          @click="upload_data"
+        )
       .Profiles-and-searchBtn.container
         Profiles.Profiles
         SearchBtn.SearchBtn
@@ -20,6 +24,7 @@
 
 <script>
 //第一次请求如何让vue在数据来之前不要渲染呢？暂时在一开始就设置默认值解决
+import BaseBtn from './components/BaseBtn--upload'
 // .Panel
 import Profiles from './components/Profiles'
 import SearchBtn from './components/SearchBtn'
@@ -32,6 +37,7 @@ import { mapMutations } from 'vuex'
 export default {
   name: 'App',
   components: {
+    BaseBtn,
     // .Panel
     Profiles,
     SearchBtn,
@@ -41,12 +47,15 @@ export default {
     Todos
   },
   mounted() {
-    this.$store.dispatch('$load_data')
+    this.$store.dispatch('$download_data')
   },
   methods: {
     ...mapMutations(['CANCEL_DROPDOWN']),
-    say(){
-      console.log('contextmenu')
+    upload_data() {
+      this.$store.dispatch('$upload_data')
+    },
+    switch_hasIcon() {
+      this.hasIcon = !this.hasIcon
     }
   }
 }
@@ -61,6 +70,7 @@ export default {
   --line-color: lightgrey;
   --hover-background: rgba(32, 32, 68, 0.03);
   --disabled-color: var(--line-color);
+  --shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
 
   --profiles-and-searchBtn-height: 60px;
   --App-height: 550px;
@@ -80,7 +90,6 @@ export default {
   min-width: 2rem;
   max-width: unset;
   width: unset;
-  overflow: hidden;
   align-content: center;
 }
 .container.hv-center {
@@ -97,8 +106,8 @@ export default {
   flex-direction: column;
 }
 
-.absolute {
-  position: absolute;
+.relative {
+  position: relative;
 }
 .info {
   display: none;
@@ -128,21 +137,39 @@ button::-moz-focus-inner {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-color);
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
   height: var(--App-height);
   max-width: 1000px;
   margin: 60px auto;
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
   cursor: default;
   user-select: none;
+}
+.UploadPanel {
+  position: absolute;
+  left: 10%;
+  top: -2.8rem;
+  width: 7rem;
+  height: 4rem;
+  overflow: hidden;
+  z-index: 1;
+
+  transition: top 0.2s, background-color 0.5s;
+  background: rgba(11, 167, 11, 0.267);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+}
+.UploadPanel:hover {
+  top: -2%;
+  background-color: rgba(9, 82, 9, 0.322);
 }
 .Panel {
   width: 30vw;
 }
 .Profiles-and-searchBtn {
   height: var(--profiles-and-searchBtn-height);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow);
   justify-content: space-between;
   align-items: center;
   padding: var(--tab-padding);
@@ -164,7 +191,7 @@ hr {
   clear: both;
   height: var(--Header-height);
   width: 100%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
 }
 .Todos {
   width: 100%;

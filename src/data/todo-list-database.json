@@ -1,7 +1,7 @@
 {
   "all": {
     "hasDropdown": false,
-    "selectedIndex": 4,
+    "selectedIndex": 6,
     "backgroundColors": [
       {
         "colorName": "dodgerblue",
@@ -70,7 +70,7 @@
       },
       {
         "index": 3,
-        "title": "示例 repo",
+        "title": "第一次用数据库",
         "isEditable": true,
         "iconName": "list",
         "themes": {
@@ -81,6 +81,39 @@
       },
       {
         "index": 4,
+        "title": "待输入",
+        "isEditable": true,
+        "iconName": "list",
+        "themes": {
+          "colorName": "dodgerblue",
+          "backgroundImage": "car",
+          "hasSortBar": true
+        }
+      },
+      {
+        "index": 5,
+        "title": "塞夫待输入",
+        "isEditable": true,
+        "iconName": "list",
+        "themes": {
+          "colorName": "dodgerblue",
+          "backgroundImage": "car",
+          "hasSortBar": true
+        }
+      },
+      {
+        "index": 6,
+        "title": "塞夫待输入",
+        "isEditable": true,
+        "iconName": "list",
+        "themes": {
+          "colorName": "dodgerblue",
+          "backgroundImage": "car",
+          "hasSortBar": true
+        }
+      },
+      {
+        "index": 7,
         "title": "待输入",
         "isEditable": true,
         "iconName": "list",

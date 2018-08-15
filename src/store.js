@@ -6,6 +6,8 @@ import VueAxios from 'vue-axios'
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 
+import _fn from './myFunctions'
+
 export default new Vuex.Store({
   strict: true,
   modules: {},
@@ -100,7 +102,7 @@ export default new Vuex.Store({
     tags: state => state.tabs.slice(0, 3),
     repos: state => state.tabs.slice(3),
     currentTab: state => state.tabs[state.selectedIndex],
-    currentTodos: state => state.todos.filter(todo => todo.belongToTabIDs.includes(state.selectedIndex))
+    todosBelongToThisTab: state => state.todos.filter(todo => todo.belongToTabIDs.includes(state.selectedIndex))
   },
 
   mutations: {
@@ -113,11 +115,29 @@ export default new Vuex.Store({
     CREATE_TODO(state, { newTodo }) {
       state.todos.push(newTodo)
     },
+    DELETE_TAB(state, { index }) {
+      state.tabs.splice(index, 1)
+    },
+    DELETE_TODO(state, { todo }) {
+      const index = _fn.showIndex(state.todos, todo)
+      _fn.deleteItem(state.todos, index)
+    },
+    TOGGLE_isStared(state, { todo }) {
+      const index = _fn.showIndex(state.todos, todo)
+      state.todos[index].isStared = !state.todos[index].isStared
+    },
+    TOGGLE_isFinished(state, { todo }) {
+      const index = _fn.showIndex(state.todos, todo)
+      state.todos[index].isFinished = !state.todos[index].isFinished
+    },
     SHOW_STORBAR(state) {
       state.tabs[state.selectedIndex].themes.hasSortBar = true
     },
     TOGGLE_DROPDOWN(state) {
       state.hasDropdown = !state.hasDropdown
+    },
+    TOGGLE_HASSORTBAR(state) {
+      state.tabs[state.selectedIndex].themes.hasSortBar = !state.tabs[state.selectedIndex].themes.hasSortBar
     },
     UPDATE_SELECTEDINDEX(state, { index }) {
       state.selectedIndex = index
@@ -134,7 +154,10 @@ export default new Vuex.Store({
   },
 
   actions: {
-    $load_data({ commit }) {
+    /**
+     *  一次加载所有数据
+     */
+    $download_data({ commit }) {
       fetch(`//localhost:3000/all`)
         // .get('/bd.json')
         .then(res => res.json())
@@ -157,11 +180,23 @@ export default new Vuex.Store({
         headers: {
           'content-type': 'application/json; chartset=utf-8'
         }
-      }).then(res => {
-        console.log(state)
-        console.log(JSON.stringify(state))
-        console.log(res, `uploaded`)
       })
+      // .then(res => {
+      //   console.log(state)
+      //   console.log(JSON.stringify(state))
+      //   console.log(res, `uploaded`)
+      // })
+    },
+    // $delete_todoItem(context, {todoItem}) {
+    //   console.log('$delete_todoItem')
+    //   _fn.
+    // },
+    delete_tab({ state, commit }, { tab }) {
+      const index = _fn.showIndex(state.tabs, tab)
+      if (index <= state.selectedIndex) {
+        commit('UPDATE_SELECTEDINDEX', { index})
+      }
+      commit('DELETE_TAB', { index })
     }
   }
 })

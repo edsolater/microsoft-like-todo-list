@@ -16,16 +16,6 @@
       leave-active-class="animated fast fadeOut"
     )
       Dropdown.Dropdown(v-show="$store.state.hasDropdown")
-    //- transition(
-    //-   name="fade"
-    //-   enter-active-class="animated bounceInRight"
-    //-   leave-active-class="animated bounceOutRight"
-    //-   @enter="say"
-    //-   mode="out-in"
-    //- )
-    //-   div(
-    //-     :key="isEditing"
-    //-   ) {{ isEditing ? 'Save' : 'Edit' }}
 </template>
 
 <script>
@@ -108,7 +98,7 @@ export default {
   margin-right: 1.5rem;
   margin-top: 2.53rem;
   z-index: 1;
-  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow)
 }
 /* .fade-enter-active,
 .fade-leave-active{
