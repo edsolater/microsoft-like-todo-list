@@ -47,12 +47,12 @@ export default {
     Todos
   },
   mounted() {
-    this.$store.dispatch('$download_data')
+    this.$store.dispatch('download_data')
   },
   methods: {
     ...mapMutations(['CANCEL_DROPDOWN']),
     upload_data() {
-      this.$store.dispatch('$upload_data')
+      this.$store.dispatch('upload_data')
     },
     switch_hasIcon() {
       this.hasIcon = !this.hasIcon
@@ -63,24 +63,6 @@ export default {
 
 <style>
 @import url('./assets/animate.css');
-
-:root {
-  --text-color: #2c3e50;
-  --link-color: blue;
-  --line-color: lightgrey;
-  --hover-background: rgba(32, 32, 68, 0.03);
-  --disabled-color: var(--line-color);
-  --shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
-
-  --profiles-and-searchBtn-height: 60px;
-  --App-height: 550px;
-  --Header-height: 200px;
-  --todo-padding: 0 20px;
-  --todo-height: 50px;
-  --tab-height: 40px;
-  --tab-padding: 0 10px;
-  --icon-width: 48px;
-}
 
 .container {
   display: flex;
@@ -131,6 +113,25 @@ export default {
 /* mozilla 去除按钮边框 */
 button::-moz-focus-inner {
   border: none;
+}
+
+
+:root {
+  --text-color: #2c3e50;
+  --link-color: blue;
+  --line-color: lightgrey;
+  --hover-background: rgba(32, 32, 68, 0.03);
+  --disabled-color: var(--line-color);
+  --shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
+
+  --profiles-and-searchBtn-height: 60px;
+  --App-height: 550px;
+  --Header-height: 200px;
+  --todo-padding: 0 20px;
+  --todo-height: 50px;
+  --tab-height: 40px;
+  --tab-padding: 0 10px;
+  --icon-width: 48px;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

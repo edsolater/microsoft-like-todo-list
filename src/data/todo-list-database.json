@@ -1,7 +1,7 @@
 {
   "all": {
     "hasDropdown": false,
-    "selectedIndex": 6,
+    "selectedIndex": 3,
     "backgroundColors": [
       {
         "colorName": "dodgerblue",
@@ -36,7 +36,7 @@
     ],
     "tabs": [
       {
-        "index": 0,
+        "id": 0,
         "title": "我的一天",
         "isEditable": false,
         "iconName": "sun",
@@ -47,7 +47,7 @@
         }
       },
       {
-        "index": 1,
+        "id": 1,
         "title": "重要",
         "isEditable": false,
         "iconName": "star",
@@ -58,63 +58,19 @@
         }
       },
       {
-        "index": 2,
+        "id": 2,
         "title": "To-Do",
         "isEditable": false,
         "iconName": "clipboard-check",
         "themes": {
-          "colorName": "dodgerblue",
+          "colorName": "coral",
           "backgroundImage": "car",
           "hasSortBar": true
         }
       },
       {
-        "index": 3,
-        "title": "第一次用数据库",
-        "isEditable": true,
-        "iconName": "list",
-        "themes": {
-          "colorName": "dodgerblue",
-          "backgroundImage": "car",
-          "hasSortBar": true
-        }
-      },
-      {
-        "index": 4,
-        "title": "待输入",
-        "isEditable": true,
-        "iconName": "list",
-        "themes": {
-          "colorName": "dodgerblue",
-          "backgroundImage": "car",
-          "hasSortBar": true
-        }
-      },
-      {
-        "index": 5,
-        "title": "塞夫待输入",
-        "isEditable": true,
-        "iconName": "list",
-        "themes": {
-          "colorName": "dodgerblue",
-          "backgroundImage": "car",
-          "hasSortBar": true
-        }
-      },
-      {
-        "index": 6,
-        "title": "塞夫待输入",
-        "isEditable": true,
-        "iconName": "list",
-        "themes": {
-          "colorName": "dodgerblue",
-          "backgroundImage": "car",
-          "hasSortBar": true
-        }
-      },
-      {
-        "index": 7,
-        "title": "待输入",
+        "id": 5,
+        "title": "待做：",
         "isEditable": true,
         "iconName": "list",
         "themes": {
@@ -185,7 +141,7 @@
       {
         "dateCreated": 0.5578225925347657,
         "content": "五",
-        "isFinished": true,
+        "isFinished": false,
         "isStared": false,
         "belongToTabIDs": [
           0,
@@ -199,6 +155,105 @@
         "isStared": false,
         "belongToTabIDs": [
           0
+        ]
+      },
+      {
+        "dateCreated": 1534323368310,
+        "content": "萨登",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          4
+        ]
+      },
+      {
+        "dateCreated": 1534323370164,
+        "content": "赛",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          4
+        ]
+      },
+      {
+        "dateCreated": 1534323373837,
+        "content": "asdf",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          4
+        ]
+      },
+      {
+        "dateCreated": 1534323377889,
+        "content": "asdf",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          4
+        ]
+      },
+      {
+        "dateCreated": 1534323386789,
+        "content": "asdf",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          1
+        ]
+      },
+      {
+        "dateCreated": 1534323822798,
+        "content": "切换Tab的效果",
+        "isFinished": true,
+        "isStared": false,
+        "belongToTabIDs": [
+          3
+        ]
+      },
+      {
+        "dateCreated": 1534323954333,
+        "content": "按了上传按钮，需要一些回应性的动画",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          3
+        ]
+      },
+      {
+        "dateCreated": 1534323991837,
+        "content": "切换toggle需要短声音",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          3
+        ]
+      },
+      {
+        "dateCreated": 1534324594157,
+        "content": "Tab按钮点击效果",
+        "isFinished": true,
+        "isStared": false,
+        "belongToTabIDs": [
+          3
+        ]
+      },
+      {
+        "dateCreated": 1534324669582,
+        "content": "todo排列",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          3
+        ]
+      },
+      {
+        "dateCreated": 1534324879238,
+        "content": "todo 拖动重拍",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          3
         ]
       }
     ],

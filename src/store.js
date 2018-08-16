@@ -12,6 +12,8 @@ export default new Vuex.Store({
   strict: true,
   modules: {},
   state: {
+    uploadComplete: false,
+    downloadComplete:false,
     hasDropdown: false,
     selectedIndex: 0,
     backgroundColors: [
@@ -49,7 +51,7 @@ export default new Vuex.Store({
     tabs: [
       // 这些是锁定的特殊tags
       {
-        index: 0,
+        id: 0,
         title: '我的一天',
         isEditable: false,
         iconName: 'sun',
@@ -60,7 +62,7 @@ export default new Vuex.Store({
         }
       },
       {
-        index: 1,
+        id: 1,
         title: '重要',
         isEditable: false,
         iconName: 'star',
@@ -71,7 +73,7 @@ export default new Vuex.Store({
         }
       },
       {
-        index: 2,
+        id: 2,
         title: 'To-Do',
         isEditable: false,
         iconName: 'clipboard-check',
@@ -109,8 +111,8 @@ export default new Vuex.Store({
     CANCEL_DROPDOWN(state) {
       state.hasDropdown = false
     },
-    CREATE_REPO(state, { newRepo }) {
-      state.tabs.push(newRepo)
+    CREATE_TAB(state, { newTab }) {
+      state.tabs.push(newTab)
     },
     CREATE_TODO(state, { newTodo }) {
       state.todos.push(newTodo)
@@ -122,6 +124,9 @@ export default new Vuex.Store({
       const index = _fn.showIndex(state.todos, todo)
       _fn.deleteItem(state.todos, index)
     },
+    SHOW_STORBAR(state) {
+      state.tabs[state.selectedIndex].themes.hasSortBar = true
+    },
     TOGGLE_isStared(state, { todo }) {
       const index = _fn.showIndex(state.todos, todo)
       state.todos[index].isStared = !state.todos[index].isStared
@@ -129,9 +134,6 @@ export default new Vuex.Store({
     TOGGLE_isFinished(state, { todo }) {
       const index = _fn.showIndex(state.todos, todo)
       state.todos[index].isFinished = !state.todos[index].isFinished
-    },
-    SHOW_STORBAR(state) {
-      state.tabs[state.selectedIndex].themes.hasSortBar = true
     },
     TOGGLE_DROPDOWN(state) {
       state.hasDropdown = !state.hasDropdown
@@ -145,7 +147,8 @@ export default new Vuex.Store({
     UPDATE_THEME(state, { newColorName }) {
       state.tabs[state.selectedIndex].themes.colorName = newColorName
     },
-    UPDATE_TABTITLE(state, { index, title }) {
+    UPDATE_TABTITLE(state, { id, title }) {
+      const index = _fn.showIndexById(state.tabs, id)
       state.tabs[index].title = title
     },
     SET_DATA(state, { property, data }) {
@@ -157,7 +160,7 @@ export default new Vuex.Store({
     /**
      *  一次加载所有数据
      */
-    $download_data({ commit }) {
+    download_data({ commit }) {
       fetch(`//localhost:3000/all`)
         // .get('/bd.json')
         .then(res => res.json())
@@ -168,12 +171,14 @@ export default new Vuex.Store({
               data: data[property]
             })
           }
+          return data
         })
+        .then(() => alert('download_data complete'))
     },
     /**
      * 暂且使用整体一次替换所有数据
      */
-    $upload_data({ state }) {
+    upload_data({ state }) {
       fetch('//localhost:3000/all', {
         method: 'PUT',
         body: JSON.stringify(state), // 因为需要动态改变，property 不能使用 "." 符
@@ -181,22 +186,25 @@ export default new Vuex.Store({
           'content-type': 'application/json; chartset=utf-8'
         }
       })
-      // .then(res => {
-      //   console.log(state)
-      //   console.log(JSON.stringify(state))
-      //   console.log(res, `uploaded`)
-      // })
+        .then(() => alert('success'))
+        .catch(error => alert('wrong', error))
     },
-    // $delete_todoItem(context, {todoItem}) {
-    //   console.log('$delete_todoItem')
-    //   _fn.
-    // },
-    delete_tab({ state, commit }, { tab }) {
+    /**
+     * 
+     * @param {*} param0 
+     * @param {*} param1 
+     */
+    delete_tab({ state, commit }, { tab, isEditable }) {
+      if (!isEditable) return
       const index = _fn.showIndex(state.tabs, tab)
       if (index <= state.selectedIndex) {
-        commit('UPDATE_SELECTEDINDEX', { index})
+        commit('UPDATE_SELECTEDINDEX', { index: state.selectedIndex - 1 })
       }
       commit('DELETE_TAB', { index })
+    },
+    update_selectedIndexById({ state, commit }, { id }) {
+      const index = _fn.showIndexById(state.tabs, id)
+      commit('UPDATE_SELECTEDINDEX', { index })
     }
   }
 })

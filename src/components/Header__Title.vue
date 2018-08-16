@@ -27,7 +27,10 @@ export default {
     Dropdown,
   },
   props: {
-    currentTitle: String,
+    currentTitle: {
+      type: String,
+      default: 'Default Worning~~'
+    }
   },
   computed: {
     now() {

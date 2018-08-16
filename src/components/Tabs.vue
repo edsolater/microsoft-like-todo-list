@@ -2,7 +2,7 @@
   .Tabs
     Tab.TabTag(
       v-for="vfor_tag in tags"
-      :key="vfor_tag.index"
+      :key="vfor_tag.id"
       :vfor_tab="vfor_tag"
     )
     hr
@@ -13,9 +13,8 @@
     )
       Tab.TabRepo(
         v-for="vfor_repo in repos"
-        :key="vfor_repo.index"
+        :key="vfor_repo.id"
         :vfor_tab="vfor_repo"
-        @update:tabTitle="update_tabTitle"
       )
     TabBar.TabBar(
       @create:repo="create_repo"
@@ -35,9 +34,9 @@ export default {
   },
   methods: {
     create_repo() {
-      const newRepo = {
-        index: this.tabs.length,
-        title: '待输入',
+      const newTab = {
+        id: Math.random(),
+        title: '',
         isEditable: true,
         iconName: 'list',
         themes: {
@@ -47,14 +46,11 @@ export default {
         }
       }
       // 注意发生的先后顺序，决定了 index 要不要减一
-      this.$store.commit('CREATE_REPO', { newRepo })
+      this.$store.commit('CREATE_TAB', { newTab })
       this.$store.commit('UPDATE_SELECTEDINDEX', {
         index: this.tabs.length - 1
       })
     },
-    update_tabTitle(payload) {
-      this.$store.commit('UPDATE_TABTITLE', payload)
-    }
   }
 }
 </script>

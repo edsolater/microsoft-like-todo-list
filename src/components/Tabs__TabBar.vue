@@ -24,7 +24,7 @@ export default {
   border-radius: 2px;
 }
 .TabBar:hover {
-  background: rgba(32, 32, 68, 0.03);
+  background: rgb(240, 240, 240);
 }
 .Icon {
   width: var(--icon-width);

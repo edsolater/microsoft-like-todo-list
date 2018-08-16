@@ -1,7 +1,5 @@
 <template lang="pug">
-  button.BaseBtn(
-    v-on="listeners"
-  )
+  button.BaseBtn(v-on="listeners")
     slot
 </template>
 

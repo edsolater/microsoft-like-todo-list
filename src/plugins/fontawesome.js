@@ -23,7 +23,8 @@ import {
   faLightbulb,
   faUsers,
   faSortAmountDown,
-  faUpload
+  faUpload,
+  faEdit
 } from "@fortawesome/free-solid-svg-icons"
 
 
@@ -44,7 +45,8 @@ library.add([
   faLightbulb,
   faUsers,
   faSortAmountDown,
-  faUpload
+  faUpload,
+  faEdit
 ])
 
 
