@@ -1,7 +1,7 @@
 <template lang="pug">
   .Profiles.container.hv-center
     img.Portrait(
-      src="../assets/whiteEye--small.png"
+      src="/whiteEye.png"
     )
 </template>
 
