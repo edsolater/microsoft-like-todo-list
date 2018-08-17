@@ -1,17 +1,20 @@
 <template lang="pug">
-  input.TabName(v-on="listeners"
+  input.TabName(
+    v-on="listeners"
+    :readonly="!isEditable"
   )
 </template>
 
 <script>
 export default {
-  props:{
-    isEditable: {type:Boolean, default:false }
+  props: {
+    isEditable: { type: Boolean, default: false }
   },
   computed: {
     listeners() {
       return {
-        ...this.$listeners
+        ...this.$listeners,
+        input: event => this.$emit('input-value', event.target.value)
       }
     }
   },
@@ -35,8 +38,11 @@ export default {
   font-weight: inherit;
 }
 :read-only {
-  color: blue;
   caret-color: transparent;
   user-select: none;
+}
+::placeholder {
+  color: slategray;
+  font-style: italic;
 }
 </style>

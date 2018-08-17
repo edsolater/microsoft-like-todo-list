@@ -1,8 +1,8 @@
 <template lang="pug">
 .Title.container
   .Display-Text
-    span {{currentTitle}}
-    div.date(v-if="currentTitle == '我的一天'") {{now}}
+    span {{computedTitle}}
+    div.date(v-if="computedTitle == '我的一天'") {{now}}
   .Btngroup.container
     BaseBtn.Ellipsis-h(@click.stop="$store.commit('TOGGLE_DROPDOWN')")
       font-awesome-icon(icon="ellipsis-h")
@@ -27,7 +27,7 @@ export default {
     Dropdown,
   },
   props: {
-    currentTitle: {
+    computedTitle: {
       type: String,
       default: 'Default Worning~~'
     }

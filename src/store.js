@@ -9,7 +9,7 @@ Vue.use(VueAxios, axios)
 import _fn from './myFunctions'
 
 export default new Vuex.Store({
-  strict: true,
+  // strict: true,
   modules: {},
   state: {
     uploadComplete: false,
@@ -194,8 +194,7 @@ export default new Vuex.Store({
      * @param {*} param0 
      * @param {*} param1 
      */
-    delete_tab({ state, commit }, { tab, isEditable }) {
-      if (!isEditable) return
+    delete_tab({ state, commit }, { tab }) {
       const index = _fn.showIndex(state.tabs, tab)
       if (index <= state.selectedIndex) {
         commit('UPDATE_SELECTEDINDEX', { index: state.selectedIndex - 1 })

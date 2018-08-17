@@ -21,8 +21,8 @@
       leave-active-class="animated fast fadeOut"
     )
       Title.Title(
-        :currentTitle="currentTitle"
-        :key="currentTitle"
+        :computedTitle="computedTitle"
+        :key="computedTitle"
       )
       //- 相似的两组 key 是确保他们切换是独一无二的
       
@@ -42,7 +42,14 @@ export default {
     tabs: vm => vm.$store.state.tabs,
     selectedIndex: vm => vm.$store.state.selectedIndex,
     isSortBarShowed: vm => vm.tabs[vm.selectedIndex].themes.hasSortBar,
-    currentTitle: vm => vm.tabs[vm.selectedIndex].title,
+    computedTitle: vm => {
+      const currentTitle = vm.tabs[vm.selectedIndex].title
+      if (!currentTitle) {
+        return '未命名'
+      } else {
+        return currentTitle
+      }
+    },
     currentColorName: vm => vm.tabs[vm.selectedIndex].themes.colorName,
     currentStyle: vm => {
       const currentColorName = vm.tabs[vm.selectedIndex].themes.colorName

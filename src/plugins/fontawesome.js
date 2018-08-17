@@ -8,45 +8,47 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 
 
 import {
-  faSearch,
-  faList,
-  faSun,
-  faStar,
-  faClipboardCheck,
   faAngleDown,
   faAngleUp,
-  faTimes,
   faCheckCircle,
   faCircle,
-  faPlus,
+  faClipboardCheck,
+  faTrashAlt,
+  faEdit,
   faEllipsisH,
   faLightbulb,
-  faUsers,
+  faList,
+  faPlus,
+  faSearch,
   faSortAmountDown,
+  faStar,
+  faSun,
+  faTimes,
   faUpload,
-  faEdit
+  faUsers
 } from "@fortawesome/free-solid-svg-icons"
 
 
 
 library.add([
-  faSearch,
-  faList,
-  faSun,
-  faStar,
-  faClipboardCheck,
   faAngleDown,
   faAngleUp,
-  faTimes,
   faCheckCircle,
   faCircle,
-  faPlus,
+  faClipboardCheck,
+  faTrashAlt,
+  faEdit,
   faEllipsisH,
   faLightbulb,
-  faUsers,
+  faList,
+  faPlus,
+  faSearch,
   faSortAmountDown,
+  faStar,
+  faSun,
+  faTimes,
   faUpload,
-  faEdit
+  faUsers
 ])
 
 

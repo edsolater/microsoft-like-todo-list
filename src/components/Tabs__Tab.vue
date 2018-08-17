@@ -1,8 +1,7 @@
 <template lang="pug">
   .Tab.container.hv-center(
     :class="{active: vfor_tab === $store.getters.currentTab}"
-    @click="update_selectedIndex"
-    @dblclick="delete_tab"
+    @click="update_selectedIndexById"
   )
     .TabIcon.container.hv-center
       font-awesome-icon(
@@ -10,18 +9,23 @@
         :style="{color:vfor_tab.themes.colorName}"
       )
     TabName(
-      :isEditable="isEditable"
+      :isEditable="vfor_tab.isEditable"
       :value="vfor_tab.title"
-      :placeholder="'wuwu'"
-      :readonly="readonly"
-      @input="update_tabTitle($event.target.value)"
-      @keydown.enter.prevent="update_tabTitle($event.target.value)"
+      :placeholder="'未命名'"
+      @input-value="update_tabTitle"
+      @keydown.enter.prevent="cancel_editing"
+      @blur="vfor_tab.isEditable=false"
     )
-    .TabDelete.container.hv-center(
-      v-if="vfor_tab.isEditable"
-      @click="isEditable=!isEditable;readonly=!readonly"
+    .IconEdit.container.hv-center(
+      v-if="![0,1,2].includes(vfor_tab.id)"
+      @click.stop="vfor_tab.isEditable=true"
     )
       font-awesome-icon(icon="edit")
+    .IconEdit.container.hv-center.temp-margin(
+      v-if="![0,1,2].includes(vfor_tab.id)"
+      @click.stop="delete_tab"
+    )
+      font-awesome-icon(icon="trash-alt")
 </template>
 
 
@@ -42,7 +46,7 @@ export default {
         return {
           id: 0,
           title: 'Default',
-          isEditable: false,
+          isEditable: true,
           themes: {
             colorName: 'dodgerblue',
             backgroundImage: 'car',
@@ -51,12 +55,6 @@ export default {
         }
       }
     },
-  },
-  data() {
-    return {
-      isEditable: false,
-      readonly: true
-    }
   },
   computed: {
     ...mapState(['selectedIndex', 'tabs'])
@@ -75,13 +73,17 @@ export default {
       this.$store.commit('UPDATE_TABTITLE', payload)
     },
     cancel_editing(){
-      this.isEditable = false
+      this.vfor_tab.isEditable = false
     },
-    update_selectedIndex() {
+    update_selectedIndexById() {
       this.$store.dispatch('update_selectedIndexById', { id: this.vfor_tab.id })
     },
     delete_tab() {
+      console.log('hehe')
       this.$store.dispatch('delete_tab', { tab: this.vfor_tab, isEditable: this.vfor_tab.isEditable })
+    },
+    editAction() {
+      this.vfor_tab.isEditable = true;
     }
   }
 }
@@ -113,7 +115,7 @@ export default {
   width: var(--icon-width);
 }
 
-.TabDelete {
+.IconEdit {
   position: absolute;
   height: 100%;
   width: var(--icon-width);
@@ -121,11 +123,14 @@ export default {
   display: none;
   color: var(--disabled-color);
 }
-.TabDelete:hover {
+.IconEdit:hover {
   color: crimson;
 }
-.Tab:hover > .TabDelete {
+.Tab:hover > .IconEdit {
   display: flex;
+}
+.temp-margin {
+  margin-left: 3rem;
 }
 </style>
 

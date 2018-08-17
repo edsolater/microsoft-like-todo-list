@@ -15,55 +15,95 @@
       {
         "overviewRulerColor": "#ffff00",
         "backgroundColor": "#ff0000",
-        "color": "#1f1f1f",
+        "color": "#eeeeee",
         "fontWeight": "bold"
       },
       {
         "backgroundColor": "#d90000",
-        "color": "#1f1f1f"
+        "color": "#ddd"
       }
     ],
     // Vue 中以 "$" 开头的 vue属性
-    "(\\$(?:el|store|emit|listeners))": [
-      {
-        "color": "lawngreen",
-        "fontWeight": "bolder"
-      }
-    ],
-    "(vuex|Vuex|vue|Vue)": [
-      {
-        "color": "lawngreen",
-        "fontWeight": "bolder",
-        "fontStyle": "italic"
-      }
-    ],
-    // 交互 Vuex 的事件名
-    "(\\$(?:update|toggle|create)[_][_\\w]+)": [{ "color": "mediumslateblue" }],
+    "(\\$(?:el|emit|listeners|store\\.state|store\\.getters|store\\.commit|store\\.dispatch))": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [
+        {
+          "color": "lightgreen",
+          "fontWeight": "bolder",
+          "fontStyle": "italic"
+        }
+      ]
+    },
+
+    "(vuex|Vuex|vue|Vue)": {
+      // "filterFileRegex": ".*\\.vue",
+      "decorations": [
+        {
+          "color": "lawngreen",
+          "fontWeight": "bolder",
+          "fontStyle": "italic"
+        }
+      ]
+    },
+    "(vm)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "chocolate" }]
+    },
+    // 交互 dispatch 的事件名
+    "(\\$(?:update|toggle|create|load)_[_\\w]+)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "mediumslateblue" }]
+    },
     // 本地 emit事件名
-    "(@?(?:update|toggle|create)[:][_\\w]+)": [{ "color": "lightskyblue" }],
+    "(@?(?:update|toggle|create|delete)[:][_\\w]+)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "lightskyblue" }]
+    },
     // 本地方法名
-    "((?:update|toggle|create)[_][_\\w]+)": [{ "color": "deepskyblue" }],
+    "((?:update|toggle|create|delete)[_][_\\w]+)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "deepskyblue", "fontWeight": "bolder" }]
+    },
     // Vuex map分发 函数
-    "(mapState|mapGetters|mapMutations|mapActions)": [
-      { "color": "dodgerblue" }
-    ],
-    // Vuex store 的方法们
-    "(state|getters|commit|dispatch)": [{ "color": "mediumslateblue" }],
-    // 高亮 v-for 产生的新变量
-    // "( ?\\w+(?= in))": [{
-    //   "backgroundColor":"rgba(255,215,0,.2)",
-    //   "fontWeight":"bolder"
-    // }]
+    "(mapState|mapGetters|mapMutations|mapActions)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "dodgerblue" }]
+    },
+
     // mustache 语法
-    "(\\{\\{)": [{ "color": "lawngreen" }],
-    "(\\}\\})": [{ "color": "lawngreen" }],
+    "(\\{\\{)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "lightgreen" }]
+    },
+    "(\\}\\})": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "lightgreen" }]
+    },
+
     // v-XXX 命令
-    "(v-for|v-if|v-else|v-html|v-show|v-model|v-bind|v-on)": [
-      { "color": "lawngreen" }
-    ],
+    "(v-text|v-html|v-show|v-if|v-else|v-else-if|v-on|v-bind|v-model|v-pre|v-cloak|v-once)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "lightgreen", "fontWeight": "bolder", "fontStyle": "italic" }]
+    },
+    // // vue 内置组件
+    // "(component|transition-group|transition|keep-alive|slot)": {
+    //   "filterFileRegex": ".*\\.vue",
+    //   "decorations": [
+    //     { "color": "lightgreen", "fontWeight": "bolder", "fontStyle": "italic" }
+    //   ]
+    // },
+
+    // v-for in
+    "(v-for| in (?=\\w+\"))": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "lightgreen", "fontWeight": "bolder", "fontStyle": "italic" }]
+    },
 
     // 特殊行为
-    "(:key|:class|:style|vfor_\\w+)": [{ "color": "yellow" }],
+    "(:key|:class|:style)": {
+      "filterFileRegex": ".*\\.vue",
+      "decorations": [{ "color": "yellow" }]
+    },
     // bind(":") 非HTML
     // "(^:\\w+)": [{ "color": "orange" }]
     // 组件名称
@@ -71,6 +111,11 @@
       "filterFileRegex": ".*\\.vue",
       "decorations": [{ "color": "chocolate", "fontWeight": "bolder" }]
     }
+    // mutation 的事件名
+    // "(\\s*[A-Z]+_[A-Z_]+)": {
+    //   "filterFileRegex": ".*\\.vue",
+    //   "decorations": [{ "color": "orange", "fontWeight": "bolder" }]
+    // }
   },
   "highlight.regexFlags": "g"
 }
