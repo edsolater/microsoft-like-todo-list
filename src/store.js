@@ -13,14 +13,15 @@ export default new Vuex.Store({
   modules: {},
   state: {
     uploadComplete: false,
-    downloadComplete:false,
+    downloadComplete: false,
     hasDropdown: false,
     selectedIndex: 0,
     backgroundColors: [
       {
         colorName: 'dodgerblue',
         style: {
-          backgroundImage: 'linear-gradient(to right, mediumslateblue, dodgerblue)'
+          backgroundImage:
+            'linear-gradient(to right, mediumslateblue, dodgerblue)'
         }
       },
       {
@@ -44,7 +45,8 @@ export default new Vuex.Store({
       {
         colorName: 'deepskyblue',
         style: {
-          backgroundImage: 'linear-gradient(to right, deepskyblue, lightskyblue)'
+          backgroundImage:
+            'linear-gradient(to right, deepskyblue, lightskyblue)'
         }
       }
     ],
@@ -104,7 +106,10 @@ export default new Vuex.Store({
     tags: state => state.tabs.slice(0, 3),
     repos: state => state.tabs.slice(3),
     currentTab: state => state.tabs[state.selectedIndex],
-    todosBelongToThisTab: state => state.todos.filter(todo => todo.belongToTabIDs.includes(state.selectedIndex))
+    todosBelongToThisTab: state =>
+      state.todos.filter(todo =>
+        todo.belongToTabIDs.includes(state.selectedIndex)
+      )
   },
 
   mutations: {
@@ -139,7 +144,9 @@ export default new Vuex.Store({
       state.hasDropdown = !state.hasDropdown
     },
     TOGGLE_HASSORTBAR(state) {
-      state.tabs[state.selectedIndex].themes.hasSortBar = !state.tabs[state.selectedIndex].themes.hasSortBar
+      state.tabs[state.selectedIndex].themes.hasSortBar = !state.tabs[
+        state.selectedIndex
+      ].themes.hasSortBar
     },
     UPDATE_SELECTEDINDEX(state, { index }) {
       state.selectedIndex = index
@@ -190,9 +197,9 @@ export default new Vuex.Store({
         .catch(error => alert('wrong', error))
     },
     /**
-     * 
-     * @param {*} param0 
-     * @param {*} param1 
+     *
+     * @param {*} param0
+     * @param {*} param1
      */
     delete_tab({ state, commit }, { tab }) {
       const index = _fn.showIndex(state.tabs, tab)
@@ -204,6 +211,22 @@ export default new Vuex.Store({
     update_selectedIndexById({ state, commit }, { id }) {
       const index = _fn.showIndexById(state.tabs, id)
       commit('UPDATE_SELECTEDINDEX', { index })
+    },
+
+
+    download_image() {
+      // 抓取图片
+      fetch(`/whiteEye.png`)
+        .then(res => res.blob())
+        .then(imageBlob => {
+          // 创建图片便签，src载入生成的虚拟URL，并贴到DOM上
+          const image = document.createElement('img')
+          image.onload = function() {
+            URL.revokeObjectURL(image.src)
+          }
+          image.src = URL.createObjectURL(imageBlob)
+          document.body.appendChild(image)
+        })
     }
   }
 })

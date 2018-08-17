@@ -8,7 +8,10 @@
 <script>
 export default {
   props: {
-    value: String,
+    value: {
+      type:String,
+      default: 'value displayError'
+    }
   } /*传承父级的 v-model*/,
   computed: {
     listeners() {
