@@ -6,7 +6,7 @@ import VueAxios from 'vue-axios'
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 
-import _fn from './myFunctions'
+import _fn from '@/assets/myFunctions.js'
 
 export default new Vuex.Store({
   // strict: true,
@@ -15,13 +15,13 @@ export default new Vuex.Store({
     uploadComplete: false,
     downloadComplete: false,
     hasDropdown: false,
+    hasDropdown2: false,
     selectedIndex: 0,
     backgroundColors: [
       {
         colorName: 'dodgerblue',
         style: {
-          backgroundImage:
-            'linear-gradient(to right, mediumslateblue, dodgerblue)'
+          backgroundImage: 'linear-gradient(to right, mediumslateblue, dodgerblue)'
         }
       },
       {
@@ -45,8 +45,7 @@ export default new Vuex.Store({
       {
         colorName: 'deepskyblue',
         style: {
-          backgroundImage:
-            'linear-gradient(to right, deepskyblue, lightskyblue)'
+          backgroundImage: 'linear-gradient(to right, deepskyblue, lightskyblue)'
         }
       }
     ],
@@ -106,15 +105,15 @@ export default new Vuex.Store({
     tags: state => state.tabs.slice(0, 3),
     repos: state => state.tabs.slice(3),
     currentTab: state => state.tabs[state.selectedIndex],
-    todosBelongToThisTab: state =>
-      state.todos.filter(todo =>
-        todo.belongToTabIDs.includes(state.selectedIndex)
-      )
+    todosBelongToThisTab: state => state.todos.filter(todo => todo.belongToTabIDs.includes(state.selectedIndex))
   },
 
   mutations: {
-    CANCEL_DROPDOWN(state) {
+    HIDE_DROPDOWN(state) {
       state.hasDropdown = false
+    },
+    HIDE_DROPDOWN2(state) {
+      state.hasDropdown2 = false
     },
     CREATE_TAB(state, { newTab }) {
       state.tabs.push(newTab)
@@ -129,8 +128,14 @@ export default new Vuex.Store({
       const index = _fn.showIndex(state.todos, todo)
       _fn.deleteItem(state.todos, index)
     },
-    SHOW_STORBAR(state) {
+    SHOW_SORTBAR(state) {
       state.tabs[state.selectedIndex].themes.hasSortBar = true
+    },
+    TOGGLE_DROPDOWN(state) {
+      state.hasDropdown = !state.hasDropdown
+    },
+    SHOW_DROPDOWN2(state) {
+      state.hasDropdown2 = true
     },
     TOGGLE_isStared(state, { todo }) {
       const index = _fn.showIndex(state.todos, todo)
@@ -140,13 +145,8 @@ export default new Vuex.Store({
       const index = _fn.showIndex(state.todos, todo)
       state.todos[index].isFinished = !state.todos[index].isFinished
     },
-    TOGGLE_DROPDOWN(state) {
-      state.hasDropdown = !state.hasDropdown
-    },
     TOGGLE_HASSORTBAR(state) {
-      state.tabs[state.selectedIndex].themes.hasSortBar = !state.tabs[
-        state.selectedIndex
-      ].themes.hasSortBar
+      state.tabs[state.selectedIndex].themes.hasSortBar = !state.tabs[state.selectedIndex].themes.hasSortBar
     },
     UPDATE_SELECTEDINDEX(state, { index }) {
       state.selectedIndex = index
@@ -212,7 +212,6 @@ export default new Vuex.Store({
       const index = _fn.showIndexById(state.tabs, id)
       commit('UPDATE_SELECTEDINDEX', { index })
     },
-
 
     download_image() {
       // 抓取图片

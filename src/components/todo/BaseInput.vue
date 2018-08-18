@@ -29,6 +29,7 @@ export default {
 .BaseInput {
   width: 100%;
   border: none;
+  background-color: transparent;
 }
 </style>
 

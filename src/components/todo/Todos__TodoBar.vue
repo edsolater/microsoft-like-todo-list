@@ -53,7 +53,7 @@ export default {
 
 <style scoped>
 .Bar {
-  background: white;
+  background:transparent;
   color: var(--link-color);
   border-top: 1px solid var(--line-color);
   padding: var(--todo-padding);

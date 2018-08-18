@@ -25,7 +25,8 @@ import {
   faSun,
   faTimes,
   faUpload,
-  faUsers
+  faUsers,
+  faAngleLeft
 } from "@fortawesome/free-solid-svg-icons"
 
 
@@ -48,7 +49,8 @@ library.add([
   faSun,
   faTimes,
   faUpload,
-  faUsers
+  faUsers,
+  faAngleLeft
 ])
 
 

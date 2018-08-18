@@ -4,7 +4,7 @@
         enter-active-class="animated  fadeIn"
         leave-active-class="animated  fadeOut"
       )
-      img.backgroundColor(
+      img.Background(
         :style="currentStyle"
         :key="currentColorName"
       )
@@ -70,11 +70,12 @@ export default {
 .Header {
   justify-content: flex-end;
 }
-.backgroundColor {
+.Background {
   position: absolute;
   height: 100%;
   width: 100%;
   left:0;
+  mix-blend-mode: multiply;
 }
 .Title {
   margin-bottom: 10px;

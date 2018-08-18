@@ -11,20 +11,26 @@
     BaseBtn.Users(v-if="$store.state.selectedIndex >= 3")
       font-awesome-icon(icon="users")
     transition(
-      name="fade"
       enter-active-class="animated fast fadeIn"
       leave-active-class="animated fast fadeOut"
     )
       Dropdown.Dropdown(v-show="$store.state.hasDropdown")
+    transition(
+      enter-active-class="animated fast fadeIn"
+      leave-active-class="animated fast fadeOut"
+    )
+      Dropdown2.Dropdown2(v-show="$store.state.hasDropdown2")
 </template>
 
 <script>
 import BaseBtn from './BaseBtn--style2'
 import Dropdown from './Header__Title__Dropdown'
+import Dropdown2 from './Header__Title__Dropdown2'
 export default {
   components: {
     BaseBtn,
     Dropdown,
+    Dropdown2
   },
   props: {
     computedTitle: {
@@ -63,8 +69,8 @@ export default {
       let month = originDate.getMonth() + 1 // 获取当前的月份
       // if (month > 0 && month <= 9) month = "0" + month  // 0-9月份前置0
       return `${month}月${date}日，星期${day} `
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -78,7 +84,7 @@ export default {
   color: #fff;
   font-size: 2.3rem;
   font-weight: bolder;
-  text-align:left;
+  text-align: left;
 }
 .date {
   font-weight: initial;
@@ -96,35 +102,7 @@ export default {
   background: rgba(0, 0, 0, 0.2);
   color: white;
 }
-.Dropdown {
-  position: absolute;
-  right: 0;
-  margin-right: 1.5rem;
-  margin-top: 2.53rem;
-  z-index: 1;
-  box-shadow: var(--shadow)
-}
-/* .fade-enter-active,
-.fade-leave-active{
-  transition: opacity 400ms;
-}
-.fade-enter,
-.fade-leave-to{
-  opacity: 0;
-} */
-/* .fade-enter-active {
-  animation-duration: 1.5s;
-  transition-duration: 0.4s;
-  color: royalblue;
-}
-.fade-leave-active {
-  animation: bounce-in 0.5s reverse;
-}
-@keyframes bounce-in {
-  from {
-    transform: scale(0);
-    transform-origin: right top;
-  }
-} */
+
+
 </style>
 

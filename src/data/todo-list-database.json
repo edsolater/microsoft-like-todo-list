@@ -1,6 +1,9 @@
 {
   "all": {
-    "hasDropdown": false,
+    "uploadComplete": false,
+    "downloadComplete": false,
+    "hasDropdown": true,
+    "hasDropdown2": true,
     "selectedIndex": 3,
     "backgroundColors": [
       {
@@ -71,7 +74,7 @@
       {
         "id": 5,
         "title": "待做：",
-        "isEditable": true,
+        "isEditable": false,
         "iconName": "list",
         "themes": {
           "colorName": "dodgerblue",
@@ -250,6 +253,15 @@
       {
         "dateCreated": 1534324879238,
         "content": "todo 拖动重拍",
+        "isFinished": false,
+        "isStared": false,
+        "belongToTabIDs": [
+          3
+        ]
+      },
+      {
+        "dateCreated": 1534597637384,
+        "content": "json请求排序",
         "isFinished": false,
         "isStared": false,
         "belongToTabIDs": [

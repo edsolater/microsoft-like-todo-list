@@ -3,8 +3,12 @@
     @click.stop
   ) 
     .Item.container(
-      @click="SHOW_STORBAR"
+      @click="SHOW_SORTBAR"
+      @mouseenter="countSeconds"
+      @mouseleave="cancelCounting"
     )
+      .Icon.container.hv-center
+        font-awesome-icon(icon="angle-left")
       .Icon.container.hv-center
         font-awesome-icon(icon="sort-amount-down")
       .Text.container.v-center
@@ -27,6 +31,11 @@ export default {
   components: {
     BaseBtn,
   },
+  data(){
+    return {
+      timeoutId: null
+    }
+  },
   computed: {
     availableBackgroundNames: vm=> vm.$store.state.backgroundColors.map(colorObj => colorObj.colorName)
   },
@@ -34,12 +43,23 @@ export default {
     UPDATE_THEME(newColorName) {
       this.$store.commit('UPDATE_THEME',{newColorName})
     },
-    SHOW_STORBAR() {
-      this.$store.commit('SHOW_STORBAR')
+    SHOW_SORTBAR() {
+      this.$store.commit('SHOW_SORTBAR')
     },
     correspondingStyle(colorName) {
       const colorObjectIndex = this.availableBackgroundNames.indexOf(colorName)
       return this.$store.state.backgroundColors[colorObjectIndex].style
+    },
+    countSeconds(){
+      const setTimeoutId = setTimeout(() => {
+        this.$store.commit('SHOW_DROPDOWN2')
+      }, 200);
+      this.timeoutId = setTimeoutId
+    },
+    cancelCounting(){
+      if(this.$store.hasDropDown2 = false){
+        clearTimeout(this.timeoutId)
+      }
     }
   },
 }
@@ -48,21 +68,24 @@ export default {
 
 <style scoped>
 .Dropdown {
-  background: white;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  margin-top: 2.53rem;
+  margin-right: 1.5rem;
   padding: 0.5rem;
+
+  background: rgba(255, 255, 255, 0.877);
+  box-shadow: var(--shadow);
 }
 .Item {
   height: var(--tab-height);
-  background: white;
 }
 .Item:hover {
   background: var(--hover-background);
 }
 .Item .Icon {
   width: var(--icon-width);
-}
-.Theme {
-  background: white;
 }
 .Theme .Text {
   height: var(--tab-height);

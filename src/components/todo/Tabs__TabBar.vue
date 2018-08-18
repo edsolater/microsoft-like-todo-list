@@ -18,13 +18,13 @@ export default {
 <style scoped>
 .TabBar {
   padding: var(--tab-padding);
-  background:white;
+  background:transparent;
   color: var(--link-color);
   border-left: 5px solid transparent;
   border-radius: 2px;
 }
 .TabBar:hover {
-  background: rgb(240, 240, 240);
+  background: var(--hover-background);
 }
 .Icon {
   width: var(--icon-width);

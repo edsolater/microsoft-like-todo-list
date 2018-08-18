@@ -79,7 +79,6 @@ export default {
       this.$store.dispatch('update_selectedIndexById', { id: this.vfor_tab.id })
     },
     delete_tab() {
-      console.log('hehe')
       this.$store.dispatch('delete_tab', { tab: this.vfor_tab, isEditable: this.vfor_tab.isEditable })
     },
     editAction() {
