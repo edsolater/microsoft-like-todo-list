@@ -21,6 +21,7 @@ export default {
 <style scoped>
 .BaseBtn {
   position:absolute;
+  left:0;
   margin-top: auto;
   width:100%;
   bottom:0.2rem;

@@ -74,6 +74,7 @@ export default {
   position: absolute;
   height: 100%;
   width: 100%;
+  left:0;
 }
 .Title {
   margin-bottom: 10px;

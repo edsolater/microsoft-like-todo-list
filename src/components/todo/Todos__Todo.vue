@@ -6,8 +6,8 @@
         :class=" todo.isFinished ? 'finished' : 'unFinished' "
         @click="$emit('toggle:isFinished', todo)"
       )
-    .Content.container
-      span.upper(:class="todo.isFinished ? 'todo-done':''") {{todo.content}}
+    .Content
+      div.upper(:class="todo.isFinished ? 'todo-done':''") {{todo.content}}
       small.below(v-if="selectedIndex <= 2") To-Do
     .Delete
       font-awesome-icon(icon="times"
@@ -55,8 +55,10 @@ export default {
   width: 100%;
   height: 1px;
   position: absolute;
+  left:0;
   bottom: 0;
   background: var(--line-color);
+  transform: scale(.9);
 }
 .Todo:hover {
   background: var(--hover-background);
@@ -74,9 +76,8 @@ export default {
   color: var(--disabled-color);
 }
 .Content {
-  justify-content: center;
-  flex-direction: column;
   margin-right: auto;
+  text-align: initial;
 }
 .todo-done {
   text-decoration: line-through;
