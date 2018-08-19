@@ -5,8 +5,8 @@
       | | 
       router-link(to="/todo")  Todo 
       p htllo
-    FontsBackground
     router-view
+    FontsBackground(style="z-index:-1;")
 </template>
 
 <script>

@@ -82,7 +82,13 @@ button::-moz-focus-inner {
   --text-color: #2c3e50;
   --link-color: blue;
   --line-color: lightgrey;
-  --hover-background: rgba(32, 32, 68, 0.03);
+  --hover-background-color: rgba(32, 32, 68, 0.03);
+  --active-background-color: rgba(0, 0, 0, 0.103);
+  --iscurrent-background-color: rgba(0, 0, 0, 0.103);
+  --primary-color-1: rgb(27, 115, 173);
+  --primary-color-2: rgb(175, 175, 175);
+  --secondary-color-1: rgb(175, 175, 175);
+  --secondary-color-2: rgb(175, 175, 175);
   --disabled-color: var(--line-color);
   --shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
 
@@ -93,7 +99,7 @@ button::-moz-focus-inner {
   --todo-height: 50px;
   --tab-height: 40px;
   --tab-padding: 0 10px;
-  --icon-width: 48px;
+  --icon-width: 2.5rem;
 }
 #Todo {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

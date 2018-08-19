@@ -4,12 +4,15 @@
   .Tab(
     @click="update_selectedIndexById"
   )
-    BaseEditableTab.container.hv-center(
-      :class="{active: vfor_tab === $store.getters.currentTab}"
+    BaseEditableTab.BaseEditableTab.container.hv-center(
+      :class="{iscurrent: vfor_tab === $store.getters.currentTab}"
       :item="vfor_tab"
       @input:value="update_tabTitle"
-      @cancel:editting="cancel_editting"
     )
+      div(
+        slot="tailer-icon"
+        v-if="[0, 1, 2].includes(vfor_tab.id)"
+      )
       .IconEdit.container.hv-center(
         v-if="![0,1,2].includes(vfor_tab.id)"
         @click.stop="vfor_tab.isEditable=true"
@@ -29,7 +32,7 @@ import BaseEditableTab from './BaseTab--editable'
 import { mapState } from 'vuex'
 export default {
   components: {
-    BaseEditableTab,
+    BaseEditableTab
   },
   props: {
     vfor_tab: {
@@ -46,7 +49,7 @@ export default {
           }
         }
       }
-    },
+    }
   },
   computed: {
     ...mapState(['selectedIndex', 'tabs'])
@@ -55,17 +58,19 @@ export default {
     if (![0, 1, 2].includes(this.vfor_tab.id)) {
       this.$el.children[0].children[1].focus() // contenteditable 的DIV也是有效的
     }
+    // this.$el.addEventListener('click', () => console.log('hw'))
   },
   methods: {
+    showlocate(e) {
+      console.log(e)
+      this.update_selectedIndexById()
+    },
     update_tabTitle(title) {
       const payload = {
         id: this.vfor_tab.id,
         title: title
       }
       this.$store.commit('UPDATE_TABTITLE', payload)
-    },
-    cancel_editting(){
-      this.vfor_tab.isEditable = false
     },
     update_selectedIndexById() {
       this.$store.dispatch('update_selectedIndexById', { id: this.vfor_tab.id })
@@ -74,16 +79,16 @@ export default {
       this.$store.dispatch('delete_tab', { tab: this.vfor_tab, isEditable: this.vfor_tab.isEditable })
     },
     editAction() {
-      this.vfor_tab.isEditable = true;
+      this.vfor_tab.isEditable = true
     }
   }
 }
 </script>
 
 <style scoped>
-
-
-
+.BaseEditableTab {
+  padding: var(--tab-padding);
+}
 :hover > .IconEdit {
   /* 显示条件 */
   display: flex;
