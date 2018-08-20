@@ -39,7 +39,7 @@ export default {
   },
   data(){
     return{
-      selectedIndex: this.$store.state.selectedIndex
+      selectedIndex: this.$store.state.Todo.selectedIndex
     }
   }
 }

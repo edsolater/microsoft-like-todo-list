@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     selectedIndex() {
-      return this.$store.state.selectedIndex
+      return this.$store.state.Todo.selectedIndex
     }
   },
   methods: {

@@ -29,7 +29,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   components: { Tab, TabBar },
   computed: {
-    ...mapState(['todos', 'tabs']),
+    
     ...mapGetters(['tags', 'repos'])
   },
   methods: {
@@ -48,9 +48,9 @@ export default {
       // 注意发生的先后顺序，决定了 index 要不要减一
       this.$store.commit('CREATE_TAB', { newTab })
       this.$store.commit('UPDATE_SELECTEDINDEX', {
-        index: this.tabs.length - 1
+        index: this.$store.state.Todo.tabs.length - 1
       })
-    },
+    }
   }
 }
 </script>

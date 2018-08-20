@@ -63,8 +63,8 @@ export default {
         this.isopen = !this.isopen;
       }
       console.log(this.isopen);
-      console.log(`current path: `, this.$store.state.currentPath);
-      console.log(this.$store.state.currentPath.includes(this.model.id));
+      console.log(`current path: `, this.$store.state.FileTree.currentPath);
+      console.log(this.$store.state.FileTree.currentPath.includes(this.model.id));
     },
     changeType: function() {
       if (!this.isFolder) {

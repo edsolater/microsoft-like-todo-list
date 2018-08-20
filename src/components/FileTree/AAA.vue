@@ -10,6 +10,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 // @ is an alias to /src
 import item from "./item";
 
@@ -20,10 +21,10 @@ export default {
   },
   computed: {
     treeData() {
-      return this.$store.state.treeData;
+      return this.$store.state.FileTree.treeData;
     },
     currentPath() {
-      return this.$store.state.currentPath;
+      return this.$store.state.FileTree.currentPath;
     }
   }
 };

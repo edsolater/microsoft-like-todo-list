@@ -2,13 +2,12 @@
   //- 阻止右键菜单
   #Todo.container(
     @click=`
-      if ($store.state.hasDropdown) {
+      if ($store.state.Todo.hasDropdown) {
         HIDE_DROPDOWN()
       }
-      if ($store.state.hasDropdown2) {
+      if ($store.state.Todo.hasDropdown2) {
         HIDE_DROPDOWN2()
-      }
-    `
+      }`
     @contextmenu.prevent
   )
     .Panel
@@ -26,7 +25,6 @@
 </template>
 
 <script>
-//第一次请求如何让vue在数据来之前不要渲染呢？暂时在一开始就设置默认值解决
 import BaseBtn from './BaseBtn--upload'
 // .Panel
 import Profiles from './Profiles'

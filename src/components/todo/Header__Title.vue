@@ -6,20 +6,20 @@
   .Btngroup.container
     BaseBtn.Ellipsis-h(@click.stop="$store.commit('TOGGLE_DROPDOWN')")
       font-awesome-icon(icon="ellipsis-h")
-    BaseBtn.Lightbulb(v-if="$store.state.selectedIndex === 0")
+    BaseBtn.Lightbulb(v-if="$store.state.Todo.selectedIndex === 0")
       font-awesome-icon(icon="lightbulb")
-    BaseBtn.Users(v-if="$store.state.selectedIndex >= 3")
+    BaseBtn.Users(v-if="$store.state.Todo.selectedIndex >= 3")
       font-awesome-icon(icon="users")
     transition(
       enter-active-class="animated fast fadeIn"
       leave-active-class="animated fast fadeOut"
     )
-      Dropdown.Dropdown(v-show="$store.state.hasDropdown")
+      Dropdown.Dropdown(v-show="$store.state.Todo.hasDropdown")
     transition(
       enter-active-class="animated fast fadeIn"
       leave-active-class="animated fast fadeOut"
     )
-      Dropdown2.Dropdown2(v-show="$store.state.hasDropdown2")
+      Dropdown2.Dropdown2(v-show="$store.state.Todo.hasDropdown2")
 </template>
 
 <script>

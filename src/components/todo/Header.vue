@@ -38,9 +38,9 @@ export default {
     SortBar
   },
   computed: {
-    todos: vm => vm.$store.state.todos,
-    tabs: vm => vm.$store.state.tabs,
-    selectedIndex: vm => vm.$store.state.selectedIndex,
+    todos: vm => vm.$store.state.Todo.todos,
+    tabs: vm => vm.$store.state.Todo.tabs,
+    selectedIndex: vm => vm.$store.state.Todo.selectedIndex,
     isSortBarShowed: vm => vm.tabs[vm.selectedIndex].themes.hasSortBar,
     computedTitle: vm => {
       const currentTitle = vm.tabs[vm.selectedIndex].title
@@ -53,13 +53,13 @@ export default {
     currentColorName: vm => vm.tabs[vm.selectedIndex].themes.colorName,
     currentStyle: vm => {
       const currentColorName = vm.tabs[vm.selectedIndex].themes.colorName
-      const colorObjectIndex = vm.$store.state.backgroundColors.map(colorObj => colorObj.colorName).indexOf(currentColorName) // 此处应该使用数据库查找
-      return vm.$store.state.backgroundColors[colorObjectIndex].style
+      const colorObjectIndex = vm.$store.state.Todo.backgroundColors.map(colorObj => colorObj.colorName).indexOf(currentColorName) // 此处应该使用数据库查找
+      return vm.$store.state.Todo.backgroundColors[colorObjectIndex].style
     }
     // currentStyle: vm => {
     //   const currentColorName = vm.tabs[vm.selectedIndex].themes.colorName
-    //   const colorObjectIndex = vm.$store.state.backgroundColors.map(colorObj => colorObj.colorName).indexOf(currentColorName)  // 此处应该使用数据库查找
-    //   return vm.$store.state.backgroundColors[colorObjectIndex].style
+    //   const colorObjectIndex = vm.$store.state.Todo.backgroundColors.map(colorObj => colorObj.colorName).indexOf(currentColorName)  // 此处应该使用数据库查找
+    //   return vm.$store.state.Todo.backgroundColors[colorObjectIndex].style
     // }
   }
 }

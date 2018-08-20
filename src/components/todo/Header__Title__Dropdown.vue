@@ -37,7 +37,7 @@ export default {
     }
   },
   computed: {
-    availableBackgroundNames: vm=> vm.$store.state.backgroundColors.map(colorObj => colorObj.colorName)
+    availableBackgroundNames: vm=> vm.$store.state.Todo.backgroundColors.map(colorObj => colorObj.colorName)
   },
   methods: {
     UPDATE_THEME(newColorName) {
@@ -48,7 +48,7 @@ export default {
     },
     correspondingStyle(colorName) {
       const colorObjectIndex = this.availableBackgroundNames.indexOf(colorName)
-      return this.$store.state.backgroundColors[colorObjectIndex].style
+      return this.$store.state.Todo.backgroundColors[colorObjectIndex].style
     },
     countSeconds(){
       const setTimeoutId = setTimeout(() => {

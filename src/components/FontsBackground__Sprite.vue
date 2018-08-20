@@ -18,7 +18,7 @@ export default {
           hue: 'green',
           format: 'rgba'
         }),
-        transform: `rotate(${this._.random(90)}deg) translate(${this._.random(-1,1)}rem, ${this._.random(-1,1)}rem)`
+        transform: `rotate(${this._.random(90)}deg) translate(${this._.random(-2,2)}rem, ${this._.random(-2,2)}rem)`
       },
       contents: ['≈', '≡', '＝', '≒']
     }

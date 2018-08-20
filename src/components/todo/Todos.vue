@@ -27,9 +27,9 @@ export default {
     TodoBar
   },
   computed: {
-    todos: vm => vm.$store.state.todos,
-    tabs: vm => vm.$store.state.tabs,
-    selectedIndex: vm => vm.$store.state.selectedIndex,
+    todos: vm => vm.$store.state.Todo.todos,
+    tabs: vm => vm.$store.state.Todo.tabs,
+    selectedIndex: vm => vm.$store.state.Todo.selectedIndex,
     todosBelongToThisTab: vm => vm.$store.getters.todosBelongToThisTab
   },
   methods: {
