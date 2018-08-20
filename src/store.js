@@ -9,7 +9,13 @@ Vue.use(VueAxios, axios)
 import _fn from '@/assets/myFunctions.js'
 
 export default new Vuex.Store({
-  modules: {},
+  modules: {
+    a:{
+      state:{
+        foo: "yeah!"
+      }
+    }
+  },
   state: {
     uploadComplete: false,
     downloadComplete: false,

@@ -4,8 +4,10 @@
       router-link(to="/")  Home 
       | | 
       router-link(to="/todo")  Todo 
-      p htllo
+      | |
+      router-link(to="/file-tree") FileTree
     router-view
+    div {{$store.state.a}}
     FontsBackground(style="z-index:-1;")
 </template>
 

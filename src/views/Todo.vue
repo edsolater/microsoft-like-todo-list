@@ -5,7 +5,7 @@
 
  <script>
 
- import Todo from '../components/todo/APP.vue'
+ import Todo from '../components/Todo/AAA.vue'
  export default {
    components: {
      Todo

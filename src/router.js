@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from './views/Home.vue'
 import Todo from './views/Todo.vue'
+import FileTree from './views/FileTree.vue'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/todo',
       name: 'todo',
       component: Todo
-    }
+    },
+    {
+      path: '/file-tree',
+      name: 'file-tree',
+      component: FileTree
+    },
   ]
 })
