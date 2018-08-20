@@ -78,7 +78,23 @@ button::-moz-focus-inner {
 }
 
 
-:root {
+
+#Todo {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+  position: relative;
+  overflow: hidden;
+  height: var(--App-height);
+  max-width: 1000px;
+  margin: 60px auto;
+  box-shadow: var(--shadow);
+  cursor: default;
+  user-select: none;
+  background:rgba(223, 225, 226, 0.534);
+  background-blend-mode: multiply;
+
   --text-color: #2c3e50;
   --link-color: blue;
   --line-color: lightgrey;
@@ -100,22 +116,6 @@ button::-moz-focus-inner {
   --tab-height: 40px;
   --tab-padding: 0 10px;
   --icon-width: 2.5rem;
-}
-#Todo {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--text-color);
-  position: relative;
-  overflow: hidden;
-  height: var(--App-height);
-  max-width: 1000px;
-  margin: 60px auto;
-  box-shadow: var(--shadow);
-  cursor: default;
-  user-select: none;
-  background:rgba(223, 225, 226, 0.534);
-  background-blend-mode: multiply;
 }
 .UploadPanel {
   position: absolute;

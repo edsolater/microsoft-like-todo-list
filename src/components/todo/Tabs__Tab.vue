@@ -9,20 +9,24 @@
       :item="vfor_tab"
       @input:value="update_tabTitle"
     )
-      div(
-        slot="tailer-icon"
-        v-if="[0, 1, 2].includes(vfor_tab.id)"
+      template(slot="leader-icon")
+        font-awesome-icon(
+          :icon="vfor_tab.iconName"
+          :style="{color:vfor_tab.themes.colorName}"
+        )
+      template(slot="tailer-icon"
       )
+        div(
+          v-if="![0, 1, 2].includes(vfor_tab.id)"
+          @click.stop="delete_tab"
+        )
+          font-awesome-icon(icon="trash-alt")
+        div(v-else)
       .IconEdit.container.hv-center(
         v-if="![0,1,2].includes(vfor_tab.id)"
         @click.stop="vfor_tab.isEditable=true"
       )
         font-awesome-icon(icon="edit")
-      .IconEdit.container.hv-center.temp-margin(
-        v-if="![0,1,2].includes(vfor_tab.id)"
-        @click.stop="delete_tab"
-      )
-        font-awesome-icon(icon="trash-alt")
 </template>
 
 

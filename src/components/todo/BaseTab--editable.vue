@@ -12,12 +12,8 @@
 
     # 需要传参props:  1个
       item:{
-        iconName: '<font-awesome-icon-name>',  // 关系到图标Icon
         title: 'some title',  // 关系到一行文字title
         isEditable: true,  // 关系到一行文字是否处于可编辑状态
-        themes:{
-          colorName: '<CSS-colorName>'  // 关系到图标Icon的color
-        }
       }
 
     # named slot： 2个
@@ -29,21 +25,19 @@
       :active   ————3d 按下去的交互
       .active   ————左侧一条粗border、更重的透明黑色背景
 
-    # CSS变量： 4个
+    # CSS变量： 5个(可缺省)
       --hover-background-color
+      --active-background-color
       --iscurrent-background-color
+      --primary-color-1
       --secondary-color-1
 
   .BaseEditableTab
-    //- .ActiveBlack 加了这个，子组件本身不能为target，why？
-    //- 不让它消失，而是让它透明化能解决问题
+    //- 让它有普通CSS过渡就不能突然出现，而是透明化处理
     .ActiveBlack
     .LeaderIcon.container.hv-center
       slot(name="leader-icon")
-        font-awesome-icon(
-          :icon="item.iconName"
-          :style="{color:item.themes.colorName}"
-        )
+        | ▶
     input.Title(
       :readonly="!item.isEditable"
       :placeholder="'未命名'"
@@ -54,9 +48,7 @@
     )
     .TailerIcon.container.hv-center
       slot(name="tailer-icon")
-        font-awesome-icon(
-          :icon="'times'"
-        )
+        div(style="font-size: 2rem") ×
     slot
 </template>
 
@@ -66,12 +58,8 @@ export default {
     item: {
       type: Object,
       default: () => ({
-        iconName: '<font-awesome-icon-name>', // 关系到图标Icon
         title: 'some title', // 关系到一行文字title
-        isEditable: true, // 关系到一行文字是否处于可编辑状态
-        themes: {
-          colorName: '<CSS-colorName>' // 关系到图标Icon的color
-        }
+        isEditable: true // 关系到一行文字是否处于可编辑状态
       })
     }
   },
@@ -81,10 +69,13 @@ export default {
   watch: {
     isEditable(newVel) {
       if (newVel) {
-        this.$el.children[1].focus()
+        this.$el.querySelector('input').focus()
       }
     }
   },
+  mounted() {
+    this.$el.querySelector('input').focus()
+  }
 }
 </script>
 
@@ -98,49 +89,43 @@ export default {
   transform: perspective(8rem) translateZ(0rem);
 }
 .BaseEditableTab > .ActiveBlack {
-  width:100%;
-  height:100%;
-  position:absolute;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
   background-color: transparent;
-  z-index: 2;
-  transition: background-color .2s ease;
+  transition: background-color 0.2s ease;
+  z-index: -1;
 }
 .BaseEditableTab::before {
-  content:"";
+  content: '';
   opacity: 0;
-  position:absolute;
-  left:0;
-  height:0;
-  width:.3rem;
-  background-color: var(--primary-color-1);
-  transition: all .1s ease;
+  position: absolute;
+  left: 0;
+  height: 0;
+  width: 0.3rem;
+  background-color: var(--primary-color-1, dodgerblue);
+  transition: all 0.1s ease;
 }
 .BaseEditableTab:hover {
-  background-color: var(--hover-background-color);
+  background-color: var(--hover-background-color, rgba(32, 32, 68, 0.03));
   transition: all 0.2s ease, background-color 0;
 }
 .BaseEditableTab:active {
-  transform: perspective(8rem) translateZ(-0.5rem);
-  background-color: var(--active-background-color);
+  transform: perspective(8rem) translateZ(-0.2rem);
 }
 .BaseEditableTab:active > .ActiveBlack {
-  display:block;
-  background-color: rgba(0, 0, 0, 0.274);
+  display: block;
+  background-color: var(--active-background-color, rgba(0, 0, 0, 0.274));
 }
 .BaseEditableTab.iscurrent {
   font-weight: bold;
-  background:var(--iscurrent-background-color);
+  background-color: var(--iscurrent-background-color, rgba(0, 0, 0, 0.103));
 }
 .BaseEditableTab.iscurrent::before {
-  content:"";
+  height: 100%;
   opacity: 1;
-  position:absolute;
-  left:0;
-  height:100%;
-  width:.3rem;
-  background-color: var(--primary-color-1);
 }
 
 /* 标签title */
@@ -158,7 +143,7 @@ input.Title {
   margin-left: 0.5rem;
 }
 input.Title::placeholder {
-  color: slategray;
+  color: darkslategray;
   font-style: italic;
 }
 input.Title:read-only {
@@ -169,18 +154,19 @@ input.Title:read-only {
 /* leader-icon */
 .LeaderIcon {
   width: 2.5rem;
-  opacity: .5;
-  transition: all .2s;
+  opacity: 0.5;
+  transition: all 0.2s;
   pointer-events: none;
 }
-.BaseEditableTab:hover > .LeaderIcon {
+.BaseEditableTab:hover .LeaderIcon,
+.BaseEditableTab.iscurrent .LeaderIcon {
   opacity: 1;
 }
 
 /* tailer-icon */
 .TailerIcon {
   width: 2.5rem;
-  color: var(--secondary-color-1);
+  color: var(--secondary-color-1, rgb(175, 175, 175));
   position: absolute;
   right: 0;
   display: none;

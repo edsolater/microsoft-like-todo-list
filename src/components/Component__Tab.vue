@@ -1,17 +1,12 @@
 <template lang="pug">
   //-
-    BaseTab--editable (无依赖) 自身需要在包裹器上附加 ".iscurrent" 以显示激活样式效果
+    BaseTab--editable (无依赖)
     # 组成：
       一直显示的图标LeaderIcon(slot) + 一行文字Title + hover显示的图标TailerIcon(slot)
 
     #需要传参props: 
-      item:{
-        iconName: '<font-awesome-icon-name>',  // 关系到图标Icon
-        title: 'some title',  // 关系到一行文字title
-        themes:{
-          colorName: '<CSS-colorName>'  // 关系到图标Icon的color
-        }
-      }
+      title: 'some title',  // 关系到一行文字title
+      iscurent: false  // 关系到是否激活 ".iscurrent"
 
     # named slot：
       leader-icon(代表本条目) ———— default: <font-awesome-icon> 绑定item中的iconName
@@ -20,95 +15,83 @@
     # 效果：
       :hover   ————透明黑色背景
       :active   ————3d 按下去的交互
-      .active   ————左侧一条粗border、更重的透明黑色背景
+      .iscurrent   ————左侧一条粗border、更重的透明黑色背景
 
-    # CSS变量：
+    # CSS变量： 5个(可缺省)
       --hover-background-color
       --active-background-color
       --iscurrent-background-color
+      --primary-color-1
       --secondary-color-1
 
-  .BaseEditableTab
-    .LeaderIcon.container.hv-center
+  .BaseEditableTab(:class="{iscurrent}")
+    .LeaderIcon
       slot(name="leader-icon")
-        font-awesome-icon(
-          :icon="item.iconName"
-          :style="{color:item.themes.colorName}"
-        )
-    .Title {{item.title}}
-    .TailerIcon.container.hv-center
+        | ▶
+    .Title {{title}}
+    .TailerIcon
       slot(name="tailer-icon")
-        font-awesome-icon(
-          :icon="'times'"
-        )
+        div(style="font-size: 1.3rem") ×
     slot
 </template>
 
 <script>
 export default {
   props: {
-    item: {
-      type: Object,
-      default: () => ({
-        iconName: '<font-awesome-icon-name>', // 关系到图标Icon
-        title: 'some title', // 关系到一行文字title
-        themes: {
-          colorName: '<CSS-colorName>' // 关系到图标Icon的color
-        }
-      })
+    title: {
+      type: String,
+      default: `haven't title`
+    },
+    iscurrent: {
+      type: String,
+      default: false
     }
   }
-}
+};
 </script>
 
 <style scoped>
 /* 本体 */
 .BaseEditableTab {
-  height: 100%;
   border-radius: 2px;
   overflow: hidden;
   transition: all 0.2s ease, background-color 1s ease;
   transform: perspective(8rem) translateZ(0rem);
+  display: flex;
 }
 .BaseEditableTab::before {
-  content: '';
+  content: "";
   opacity: 0;
   position: absolute;
   left: 0;
   height: 0;
   width: 0.3rem;
-  background-color: var(--primary-color-1);
+  background-color: var(--primary-color-1, dodgerblue);
   transition: all 0.1s ease;
 }
 .BaseEditableTab:hover {
-  background-color: var(--hover-background-color);
+  background-color: var(--hover-background-color, rgba(32, 32, 68, 0.03));
   transition: all 0.2s ease, background-color 0;
 }
 .BaseEditableTab:active {
-  transform: perspective(8rem) translateZ(-0.5rem);
+  transform: perspective(20rem) translateZ(-0.1rem);
 }
 .BaseEditableTab:active::after {
-  content: '';
+  content: "";
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  display: none;
-  background-color: var(--active-background-color);
+  background-color: var(--active-background-color, rgba(0, 0, 0, 0.274));
 }
 .BaseEditableTab.iscurrent {
   font-weight: bold;
-  background: var(--iscurrent-background-color);
+  background: var(--iscurrent-background-color, rgba(0, 0, 0, 0.103));
 }
 .BaseEditableTab.iscurrent::before {
-  content: '';
-  opacity: 1;
-  position: absolute;
-  left: 0;
   height: 100%;
-  width: 0.3rem;
-  background-color: var(--primary-color-1);
+  opacity: 1;
 }
 
 /* 标签title */
@@ -128,19 +111,21 @@ export default {
 
 /* leader-icon */
 .LeaderIcon {
-  width: 2.5rem;
   opacity: 0.5;
   transition: all 0.2s;
   pointer-events: none;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
-.BaseEditableTab:hover > .LeaderIcon {
+.BaseEditableTab:hover .LeaderIcon,
+.BaseEditableTab.iscurrent .LeaderIcon {
   opacity: 1;
 }
 
 /* tailer-icon */
 .TailerIcon {
   width: 2.5rem;
-  color: var(--secondary-color-1);
+  color: var(--secondary-color-1, rgb(175, 175, 175));
   position: absolute;
   right: 0;
   display: none;

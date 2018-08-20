@@ -45,7 +45,7 @@ export default {
     computedTitle: vm => {
       const currentTitle = vm.tabs[vm.selectedIndex].title
       if (!currentTitle) {
-        return '未命名'
+        return 'Default Title'
       } else {
         return currentTitle
       }
