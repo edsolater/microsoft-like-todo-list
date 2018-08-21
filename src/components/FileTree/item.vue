@@ -1,85 +1,125 @@
 <template lang="pug">
   li
     div(:class='{bold: isFolder}'
-      @click='toggle'
-      @dblclick='changeType')
+      @click='clickAction()'
+      @dblclick='changeToFolder()')
       BaseTab(style="width:16rem;"
-        :title='model.name'
-        :isopen="isopen"
-        :iscurrent="iscurrent")
+        v-bind=`{
+          title: model.name,
+          isOpen: isOpen,
+          isActive: isActive,
+        }`)
         template(slot="tailer-icon")
-          span(v-if='isFolder') [{{ isopen ? '-' : '+' }}]
+          span(v-if='isFolder') [{{ isOpen ? '-' : '+' }}]
           div(v-else)
-    ul(v-show='isopen', v-if='isFolder')
+    ul(v-if='isOpen && isFolder')
+      //- 递归自身
       item.item(v-for='(newModel, index) in model.children'
         :key='index'
         :model='newModel'
         :currentPath="currentPath")
-      li.add(@click='addChild') +
+      //- li.add(@click='_addChild()') +
 </template>
 
 <script>
 /* eslint-disable */
-import BaseTab from "./BaseTab";
+import _ from 'lodash'
+
+import BaseTab from './BaseTab'
 export default {
-  name: "item",
+  name: 'item',
   components: {
     BaseTab
   },
   props: {
     model: Object,
-    currentPath: String
+    currentPath: Array
   },
-  data: function() {
+  data() {
     return {
-      isopen: false
-    };
+      isOpen: false,
+      level: this.currentPath.length,
+      abovePath: [...this.currentPath] // 因为这个集合本体是一串地址，所以应该拓印下来。
+    }
   },
   computed: {
-    isFolder: function() {
-      return this.model.children && this.model.children.length;
+    isFolder() {
+      if (this.model.children && this.model.children.length) return true
+      else return false
     },
-    iscurrent() {
-      // FIXME:
-      if (this.currentPath.includes(this.model.id)) return true;
+    isActive() {
+      if (this.currentPath.includes(this.model.id)) return true
       else return false
     }
   },
+
   methods: {
-    toggle: function() {
-      // FIXME:
-      if (this.iscurrent === true) {
-        this.$store.commit("UPDATE_PATH", {
-          mode: "remove",
-          id: this.model.id
-        });
-      } else if (this.iscurrent === false) {
-        this.$store.commit("UPDATE_PATH", {
-          mode: "add",
-          id: this.model.id
-        });
-      }
-      if (this.isFolder) {
-        this.isopen = !this.isopen;
-      }
-      console.log(this.isopen);
-      console.log(`current path: `, this.$store.state.FileTree.currentPath);
-      console.log(this.$store.state.FileTree.currentPath.includes(this.model.id));
+    _add() {
+      this.$store.commit('UPDATE_PATH', {
+        mode: 'add',
+        id: this.model.id,
+        level: this.level,
+        abovePath: this.abovePath
+      })
     },
-    changeType: function() {
-      if (!this.isFolder) {
-        this.$set(this.model, "children", []);
-        this.addChild();
-        this.isopen = true;
-      }
+    _remove() {
+      this.$store.commit('UPDATE_PATH', {
+        mode: 'remove',
+        id: this.model.id,
+        level: this.level,
+        abovePath: this.abovePath
+      })
     },
-    addChild: function() {
+    _fileToFolder() {
+      this.$set(this.model, 'children', [])
+    },
+    _openTheFolder() {
+      this.isOpen = true
+    },
+    _closeTheFolder() {
+      this.isOpen = false
+    },
+    _toggleTheFolder() {
+      this.isOpen = !this.isOpen
+    },
+    _addChild: function() {
       this.model.children.push({
-        name: "new stuff"
-      });
+        name: 'new stuff',
+        id: Date.now()
+      })
+    },
+    clickAction() {
+      if (this.isFolder) {
+        if (!this.isOpen) {
+          this._openTheFolder()
+          this._add()
+        } else {
+          if (this.isActive) {
+            this._closeTheFolder()
+            this._remove()
+          } else {
+            this._closeTheFolder()
+          }
+        }
+      } else {
+        if (this.isActive) {
+          this._remove()
+        } else {
+          this._add()
+        }
+      }
+    },
+    changeToFolder: function() {
+      // 文件转换成文件夹时，必定处于 *激活状态与打开状态*
+      if (!this.isFolder) {
+        this._fileToFolder()
+        this._addChild()
+        this._openTheFolder()
+      }
+      this._add()
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

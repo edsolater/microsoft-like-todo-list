@@ -6,8 +6,8 @@
 
     #需要传参props: 
       （必须）title: 'some title',  // 关系到一行文字title
-      （class）iscurent: false  // 关系到是否激活 ".iscurrent"
-      （class）isopen: false  // 关系到是否打开
+      （class）isActive: false  // 关系到是否激活 ".isActive"
+      （class）isOpen: false  // 关系到是否打开
 
     # named slot：
       leader-icon(代表本条目) ———— default: <font-awesome-icon> 绑定item中的iconName
@@ -16,16 +16,16 @@
     # 效果：
       :hover   ————透明黑色背景
       :active   ————3d 按下去的交互
-      .iscurrent   ————左侧一条粗border、更重的透明黑色背景
+      .isActive   ————左侧一条粗border、更重的透明黑色背景
 
     # CSS变量： 5个(可缺省)
       --hover-background-color
       --active-background-color
-      --iscurrent-background-color
+      --isActive-background-color
       --primary-color-1
       --secondary-color-1
 
-  .BaseEditableTab(:class="{iscurrent,isopen}")
+  .BaseEditableTab(:class="{isActive,isOpen}")
     .LeaderIcon
       slot(name="leader-icon")
         | ▶
@@ -41,13 +41,14 @@ export default {
   props: {
     title: {
       type: String,
-      default: `haven't title`
+      default: `haven't props:title`,
+      required: true
     },
-    iscurrent: {
+    isActive: {
       type: Boolean,
       default: false
     },
-    isopen: {
+    isOpen: {
       type: Boolean,
       default: false
     }
@@ -63,6 +64,7 @@ export default {
   transition: all 0.2s ease, background-color 1s ease;
   transform: perspective(8rem) translateZ(0rem);
   display: flex;
+  align-items: center;
 }
 .BaseEditableTab::before {
   content: "";
@@ -90,11 +92,11 @@ export default {
   left: 0;
   background-color: var(--active-background-color, rgba(0, 0, 0, 0.274));
 }
-.BaseEditableTab.iscurrent {
+.BaseEditableTab.isActive {
   font-weight: bold;
-  background: var(--iscurrent-background-color, rgba(0, 0, 0, 0.103));
+  background: var(--isActive-background-color, rgba(0, 0, 0, 0.103));
 }
-.BaseEditableTab.iscurrent::before {
+.BaseEditableTab.isActive::before {
   height: 100%;
   opacity: 1;
 }
@@ -109,6 +111,9 @@ export default {
   font-weight: inherit;
   transition: all 100ms;
   pointer-events: none;
+  height:auto;
+  padding:0;
+  margin:0;
 }
 .BaseEditableTab:hover > .Title {
   margin-left: 0.5rem;
@@ -123,14 +128,14 @@ export default {
   margin-right: 1rem;
 }
 .BaseEditableTab:hover .LeaderIcon,
-.BaseEditableTab.isopen .LeaderIcon,
-.BaseEditableTab.iscurrent .LeaderIcon {
+.BaseEditableTab.isOpen .LeaderIcon,
+.BaseEditableTab.isActive .LeaderIcon {
   opacity: 1;
 }
-.BaseEditableTab.isopen .LeaderIcon {
+.BaseEditableTab.isOpen .LeaderIcon {
   transform: rotate(90deg);
 }
-.BaseEditableTab.iscurrent .LeaderIcon {
+.BaseEditableTab.isActive .LeaderIcon {
   color: var(--primary-color-1, rgb(26, 100, 173));
 }
 

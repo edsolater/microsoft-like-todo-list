@@ -26,19 +26,22 @@ export default {
         }
       ]
     },
-    currentPath: ''
+    /**
+     * 为了更清晰的逻辑，为了动态遍历，引入 “层级” 的概念
+     * 使用数组为路径保存形式，天然地， “层级” 就是 数组index
+     */
+    currentPath: [] // 路径以数组形式保存，能重复调用数组的方法，逻辑比用字符串更清晰
   },
   mutations: {
-    UPDATE_PATH(state, { mode, id }) {
-      console.log(mode, id)
+    UPDATE_PATH(state, { mode, id, level, abovePath }) {
+      // console.log(mode, id)
+      // 预处理：每次更改地址前删除（包含本层级在内的）下级的所有地址项
+      state.currentPath.splice(level)
       if (mode === 'add') {
-        state.currentPath += `/${id}`
+        state.currentPath = abovePath.concat(id)
       }
       if (mode === 'remove') {
-        console.log('start to remove')
-        const index = state.currentPath.indexOf(id)
-        console.log(`index:`, index)
-        state.currentPath = state.currentPath.slice(0, index - 1) //  "-1" 是因为要去除路径的 "/"
+        // 无需进一步删除什么
       }
     }
   },
