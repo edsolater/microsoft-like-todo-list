@@ -1,30 +1,31 @@
 <template lang="pug">
   //-
-    BaseTab--editable (无依赖)
-    # 组成：
+    Tab-style (style-component) *无依赖*
+    #组成：
       一直显示的图标LeaderIcon(slot) + 一行文字Title + hover显示的图标TailerIcon(slot)
 
-    #需要传参props: 
-      title: 'some title',  // 关系到一行文字title
-      iscurent: false  // 关系到是否激活 ".iscurrent"
+    **需要传参props: 
+      （必须）title: 'some title' ———— 关系到一行文字title
+      （class）isActive: false ———— 关系到是否激活 ".isActive"
+      （class）isOpen: false ———— 关系到是否打开
 
-    # named slot：
+    **named slot：
       leader-icon(代表本条目) ———— default: <font-awesome-icon> 绑定item中的iconName
       tailer-icon(取消图标) ———— default: <font-awesome-icon-times>
 
-    # 效果：
-      :hover   ————透明黑色背景
-      :active   ————3d 按下去的交互
-      .iscurrent   ————左侧一条粗border、更重的透明黑色背景
+    #效果：
+      :hover   ———— 透明黑色背景
+      :active   ———— 3d 按下去的交互
+      .isActive   ———— 左侧一条粗border、更重的透明黑色背景
 
-    # CSS变量： 5个(可缺省)
+    #CSS变量： 5个(可缺省)
       --hover-background-color
       --active-background-color
-      --iscurrent-background-color
+      --isActive-background-color
       --primary-color-1
       --secondary-color-1
 
-  .BaseEditableTab(:class="{iscurrent}")
+  .EditableTab(:class="{isActive,isOpen}")
     .LeaderIcon
       slot(name="leader-icon")
         | ▶
@@ -40,10 +41,14 @@ export default {
   props: {
     title: {
       type: String,
-      default: `haven't title`
+      default: `haven't props:title`,
     },
-    iscurrent: {
-      type: String,
+    isActive: {
+      type: Boolean,
+      default: false
+    },
+    isOpen: {
+      type: Boolean,
       default: false
     }
   }
@@ -52,14 +57,15 @@ export default {
 
 <style scoped>
 /* 本体 */
-.BaseEditableTab {
+.EditableTab {
   border-radius: 2px;
   overflow: hidden;
   transition: all 0.2s ease, background-color 1s ease;
   transform: perspective(8rem) translateZ(0rem);
   display: flex;
+  align-items: center;
 }
-.BaseEditableTab::before {
+.EditableTab::before {
   content: "";
   opacity: 0;
   position: absolute;
@@ -69,14 +75,14 @@ export default {
   background-color: var(--primary-color-1, dodgerblue);
   transition: all 0.1s ease;
 }
-.BaseEditableTab:hover {
+.EditableTab:hover {
   background-color: var(--hover-background-color, rgba(32, 32, 68, 0.03));
   transition: all 0.2s ease, background-color 0;
 }
-.BaseEditableTab:active {
+.EditableTab:active {
   transform: perspective(20rem) translateZ(-0.1rem);
 }
-.BaseEditableTab:active::after {
+.EditableTab:active::after {
   content: "";
   width: 100%;
   height: 100%;
@@ -85,11 +91,11 @@ export default {
   left: 0;
   background-color: var(--active-background-color, rgba(0, 0, 0, 0.274));
 }
-.BaseEditableTab.iscurrent {
+.EditableTab.isActive {
   font-weight: bold;
-  background: var(--iscurrent-background-color, rgba(0, 0, 0, 0.103));
+  background: var(--isActive-background-color, rgba(0, 0, 0, 0.103));
 }
-.BaseEditableTab.iscurrent::before {
+.EditableTab.isActive::before {
   height: 100%;
   opacity: 1;
 }
@@ -104,8 +110,11 @@ export default {
   font-weight: inherit;
   transition: all 100ms;
   pointer-events: none;
+  height:auto;
+  padding:0;
+  margin:0;
 }
-.BaseEditableTab:hover > .Title {
+.EditableTab:hover > .Title {
   margin-left: 0.5rem;
 }
 
@@ -117,10 +126,18 @@ export default {
   margin-left: 1rem;
   margin-right: 1rem;
 }
-.BaseEditableTab:hover .LeaderIcon,
-.BaseEditableTab.iscurrent .LeaderIcon {
+.EditableTab:hover .LeaderIcon,
+.EditableTab.isOpen .LeaderIcon,
+.EditableTab.isActive .LeaderIcon {
   opacity: 1;
 }
+.EditableTab.isOpen .LeaderIcon {
+  transform: rotate(90deg);
+}
+.EditableTab.isActive .LeaderIcon {
+  color: var(--primary-color-1, rgb(26, 100, 173));
+}
+
 
 /* tailer-icon */
 .TailerIcon {
@@ -130,7 +147,7 @@ export default {
   right: 0;
   display: none;
 }
-.BaseEditableTab:hover > .TailerIcon {
+.EditableTab:hover > .TailerIcon {
   display: inline;
 }
 .TailerIcon:hover {

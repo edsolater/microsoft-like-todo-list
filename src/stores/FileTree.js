@@ -1,26 +1,27 @@
+import Vue from 'vue'
 export default {
   state: {
     treeData: {
       id: '1000',
-      name: 'My Tree',
+      titleName: 'My Tree',
       children: [
-        { id: '1', name: 'hello' },
-        { id: '2', name: 'world' },
+        { id: '1', titleName: 'hello' },
+        { id: '2', titleName: 'world' },
         {
           id: '3',
-          name: 'this',
+          titleName: 'this',
           children: [
             {
               id: '4',
-              name: 'is',
-              children: [{ id: '5', name: 'edsolater' }, { id: '6', name: 'from' }]
+              titleName: 'is',
+              children: [{ id: '5', titleName: 'edsolater' }, { id: '6', titleName: 'from' }]
             },
-            { id: '7', name: 'local' },
-            { id: '8', name: 'host' },
+            { id: '7', titleName: 'local' },
+            { id: '8', titleName: 'host' },
             {
               id: '9',
-              name: 'I',
-              children: [{ id: '10', name: 'hate' }, { id: '11', name: 'money' }]
+              titleName: 'I',
+              children: [{ id: '10', titleName: 'hate' }, { id: '11', titleName: 'money' }]
             }
           ]
         }
@@ -43,6 +44,9 @@ export default {
       if (mode === 'remove') {
         // 无需进一步删除什么
       }
+    },
+    CREATE_CHILDREN(state, {currentItem}){
+      Vue.set(currentItem, 'children', [])
     }
   },
   actions: {}
