@@ -11,21 +11,23 @@ import Sprite from './FontsBackground__Sprite'
 export default {
   components: {
     Sprite
-  },
+  }
 }
 </script>
 
 
 <style scoped>
 #UnicodeBackground {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow-wrap: break-word;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(28, 5rem);
+  grid-auto-rows: 5rem;
   mix-blend-mode: color;
-  opacity: 0.3;
+  justify-items: center;
+  align-items: center;
+  position: fixed;
+  top:0;
+  z-index: -1;
+  pointer-events: none;
+  background: aliceblue;
 }
 </style>

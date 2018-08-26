@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    <img src="../assets/logo.png">
-    <p>this is my house COMEON!</p>
+  <div class="Home">
   </div>
 </template>
 

@@ -12,26 +12,28 @@ export default {
     return {
       style: {
         // 需要动态变化的放这里，静态的放stylesheet里
-        fontSize: `${this._fn.random(0, 5, 2)}em`,
+        fontSize: this._.random(2, 6) + 'rem',
+        fontWeight: 'lighter',
         color: randomColor({
-          luminosity: 'ligkht',
+          luminosity: 'light',
           hue: 'green',
           format: 'rgba'
         }),
-        transform: `rotate(${this._.random(90)}deg) translate(${this._.random(-2,2)}rem, ${this._.random(-2,2)}rem)`
+        opacity: this._.random(3, 8) / 10,
+        // transform: `rotate(${this._.random(90)}deg)`
+        transform: `rotate(${this._.random(90)}deg) translate(${this._.random(-2, 2)}rem, ${this._.random(-2, 2)}rem)`
       },
-      contents: ['≈', '≡', '＝', '≒']
+      contents: ['＋', '－', '×', '÷']
     }
   },
-  computed:{
-    content: vm => vm.contents[vm._.random(vm.contents.length)]  // 从可选字符中随机选取一个
+  computed: {
+    content: vm => vm.contents[vm._.random(vm.contents.length)] // 从可选字符中随机选取一个
   }
 }
 </script>
 
-<style >
+<style lang="scss" scoped>
 .Sprite {
-  display: inline-block;
   user-select: none;
 }
 </style>

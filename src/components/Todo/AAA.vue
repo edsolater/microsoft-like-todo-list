@@ -26,11 +26,9 @@
 
 <script>
 import BaseBtn from './BaseBtn--upload'
-// .Panel
 import Profiles from './Profiles'
 import SearchBtn from './SearchBtn'
 import Tabs from './Tabs'
-// .Workspace
 import Header from './Header'
 import Todos from './Todos'
 import { mapMutations } from 'vuex'

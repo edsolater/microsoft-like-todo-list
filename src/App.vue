@@ -2,16 +2,18 @@
   #app
     #nav
       router-link(to="/")  Home 
-      | | 
+      | |
       router-link(to="/todo")  Todo 
       | |
       router-link(to="/file-tree") FileTree
+      | |
+      router-link(to="/book") Book
     router-view
-    FontsBackground(style="z-index:-1;")
+    FontsBackground
 </template>
 
 <script>
-import FontsBackground from '@/components/FontsBackground'
+import FontsBackground from './components/FontsBackground'
 export default {
   components:{
     FontsBackground
@@ -59,7 +61,11 @@ export default {
 
 /* rules above are for easier layout */
 
+body {
+  margin: 0;
+  padding: 0;
 
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

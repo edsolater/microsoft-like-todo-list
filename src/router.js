@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Todo from './views/Todo.vue'
 import FileTree from './views/FileTree.vue'
+import Book from './views/Book.vue';
 
 Vue.use(Router)
 
@@ -26,5 +27,10 @@ export default new Router({
       name: 'file-tree',
       component: FileTree
     },
+    {
+      path: '/book',
+      name: 'book',
+      component: Book
+    }
   ]
 })

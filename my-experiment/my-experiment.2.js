@@ -1,36 +1,34 @@
-const test = 876863
+function parseMolecule(atoms) {
+  function analysis(atoms, weight = 1) {
+    const regex = /((?:[A-Z][a-z]*|\([^\(\)]*?\)|\[[^\[\]]*?\]|\{[^\{\}]*?\}))(\d*)/g  // "Mg" / "Mg3" / "(OH)2"/ "[ON(SO3)2]2" / "{Be4C5[BCo3(CO2)3]2}4"
+    let result = null
+    let counter = {}
 
-function formatDuration(timeNumber) {
-  // at beining
-  if (timeNumber === 0) return "now"
-  let timeString = []
-  let remainingSeconds = timeNumber
-  // parse timeNumber
-  const seconds = remainingSeconds % 60
-  remainingSeconds = parseInt(remainingSeconds / 60)
-  timeString.unshift(seconds)
-  if (remainingSeconds > 0) {
-    const minutes = remainingSeconds % 60
-    remainingSeconds = parseInt(remainingSeconds / 60)
-    timeString.unshift(minutes)
-    if (remainingSeconds > 0) {
-      const hours = remainingSeconds % 60
-      remainingSeconds = parseInt(remainingSeconds / 60)
-      timeString.unshift(hours)
-      if (remainingSeconds > 0) {
-        const days = remainingSeconds % 24
-        remainingSeconds = parseInt(remainingSeconds / 24)
-        timeString.unshift(days)
-        if (remainingSeconds > 0) {
-          const years = remainingSeconds % 365
-          remainingSeconds = parseInt(remainingSeconds / 365)
-          timeString.unshift(years)
+    while ((result = regex.exec(atoms))) {
+      let { 1:content, 2:number} = result
+      if (!number) number = 1 
+      if (content.startsWith('(') || content.startsWith('[') || content.startsWith('{')) {
+        const childCounter = analysis(content.slice(1, -1), number)
+        for (const [content, number] of Object.entries(childCounter)) {
+          if (counter[content]) {
+            counter[content] += +number * weight
+          } else {
+            counter[content] = number * weight
+          }
+        }
+      } else {
+        if (counter[content]) {
+          counter[content] += +number * weight
+        } else {
+          counter[content] = number * weight
         }
       }
     }
+    return counter
   }
-  // parse timeString
-  return timeString
+  return analysis(atoms)
 }
 
-console.log(formatDuration(test))
+// test
+var water = ' As2{Be4C5[BCo3(CO2)3]2}4Cu5'
+console.log(parseMolecule(water)) // return {H: 2, O: 1}
