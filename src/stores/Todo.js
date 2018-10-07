@@ -158,9 +158,12 @@ export default {
      *  一次加载所有数据
      */
     download_data({ commit }) {
-      fetch(`//localhost:3000/all`)
-        // .get('/bd.json')
+      fetch(`//localhost:3000/article`)
         .then(res => res.json())
+        .then(info => {
+          console.log(info)
+          return info
+        })
         .then(data => {
           for (let property in data) {
             commit('SET_DATA', {
@@ -186,7 +189,7 @@ export default {
         .then(() => alert('success'))
         .catch(error => alert('wrong', error))
     },
-    
+
     delete_tab({ state, commit }, { tab }) {
       const index = _fn.showIndex(state.tabs, tab)
       if (index <= state.selectedIndex) {

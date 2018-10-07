@@ -19,7 +19,7 @@
       enter-active-class="animated fast fadeIn"
       leave-active-class="animated fast fadeOut"
     )
-      Dropdown2.Dropdown2(v-show="$store.state.Todo.hasDropdown2")
+      //- Dropdown2.Dropdown2(v-show="$store.state.Todo.hasDropdown2")
 </template>
 
 <script>
